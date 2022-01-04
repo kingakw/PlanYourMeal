@@ -10,7 +10,7 @@
   align-items: center;
 
   .newsletter-title {
-    font-size: 3rem;
+    font-size: $base-font-size*3.42;
     font-family: $font-open-sans;
     color: $bg-color;
   }
@@ -34,8 +34,9 @@
       height: 100%;
       border: 0;
       width: 165px;
-      font-size: 20px;
+      font-size: $base-font-size*1.42;
       padding: 6px 10px;
+      font-weight: bold;
       background-color: $button-color;
 
       a {
