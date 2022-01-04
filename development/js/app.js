@@ -8,3 +8,17 @@ for (let i = 0; i < menuItems.length; i++) {
         this.className += " menu__item--active";
     });
 }
+
+//Changing window for recipe widget
+const widgetRecipe = document.getElementById("widget_recipe");
+widgetRecipe.addEventListener("click", function (){
+    window.location = "./recipes.html"
+})
+
+//Changing window for plan widget
+const widgetPlan = document.getElementById("widget_plan");
+widgetPlan.addEventListener("click", function (){
+    window.location = "./schedules.html"
+})
+
+

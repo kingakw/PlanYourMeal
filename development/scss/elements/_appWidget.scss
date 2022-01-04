@@ -1,0 +1,34 @@
+.widget__container {
+  padding-bottom: 0.75vw;
+  display: flex;
+
+  .widget {
+    margin: 0.75vw;
+    width: 14vw;
+    height: 12vw;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dotted $msg-success-color;
+    background-color: $bg-color;
+
+    .fa-plus-square{
+      padding: 0.8vw;
+      font-size: 4.5rem;
+    }
+
+    .widget__text {
+      font-size: 1.6rem;
+      font-family: $font-open-sans;
+      font-weight: bold;
+    }
+
+  }
+  .color_green {
+    color: $msg-success-color;
+  }
+}
+
+
