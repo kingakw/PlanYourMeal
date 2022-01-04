@@ -5,7 +5,8 @@ h1 {
 }
 
 header {
-  background-color: #292F32;
+ font-family: $font-open-sans ;
+  background-color: $secondary-color;
   width: 100vw;
   display: flex;
   height: 70px;
@@ -56,7 +57,5 @@ header {
       }
     }
   }
-
-
 }
 

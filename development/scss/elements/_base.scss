@@ -1,0 +1,17 @@
+.container {
+  width: 1200px;
+  margin: 0 auto;}
+
+html{
+  margin: 0 auto;
+}
+* {
+  box-sizing: border-box;
+  max-width: 1440px;
+  font-size: 14px;
+  font-family: $font-open-sans;
+}
+body {
+  background-color: $bg-color;
+  margin: 0 auto;
+}

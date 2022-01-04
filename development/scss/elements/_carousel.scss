@@ -1,0 +1,49 @@
+.slider-container {
+  height: 400px;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+
+  .slide {
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    transition: .4s ease;
+    z-index: 1;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .arrow {
+    position: absolute;
+    background-color: transparent;
+    color: $button-color;
+    padding: 20px;
+    border: none;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &.left-arrow {
+      z-index: 1;
+      left: calc(5vw - 65px);
+
+    }
+
+    &.right-arrow {
+      z-index: 1;
+      right: calc(5vw - 65px);
+    }
+  }
+}
+
+

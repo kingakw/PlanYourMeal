@@ -1,0 +1,40 @@
+.cta {
+  position: relative;
+  min-height: 250px;
+  width: 100%;
+  background-color: $secondary-color;
+  color: $bg-color;
+  display: flex;
+  align-items: center;
+
+
+  h3 {
+
+    font-size: $base-font-size*2.5;
+    justify-content: flex-end;
+  }
+
+  p {
+    padding: $base-font-size;
+    font-size: $base-font-size*1.8;
+    padding-left: 0px;
+    margin-right: 200px;
+  }
+
+  button {
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    transform: translate(-50%, -50%);
+    //height: 100%;
+    float: right;
+    border: none;
+    background-color: $button-color;
+    padding: $base-font-size $base-font-size*2;
+    color: $bg-color;
+    a{
+      text-decoration: none;
+      color: $bg-color;
+    }
+  }
+}
