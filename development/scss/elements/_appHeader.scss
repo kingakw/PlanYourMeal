@@ -1,0 +1,18 @@
+.user {
+  height: 100%;
+  display: flex;
+  padding: 5%;
+  justify-content: center;
+  align-content: center;
+
+  .userText {
+    color: $bg-color;
+  }
+
+  .userAvatar {
+    background: transparent;
+    border: none;
+    color: $button-color;
+  }
+
+}
