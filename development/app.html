@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Zaplanuj Jedzonko</title>
-    <link rel="stylesheet" href="./css/main.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Hello App!</h1>
-    </header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./css/main.css"/>
 
-    <script src="./js/app.js"></script>
-  </body>
+</head>
+<body>
+<header class="app__header">
+    <div class="logo">
+        <h1>
+            <span id="first">Zaplanuj</span>
+            <span id="second">Jedzonko</span>
+        </h1>
+    </div>
+    <div class="user">
+        <span class="user__text" id="name">Imię</span>
+        <button class="user__avatar" id="userAvatar">
+            <i class="far fa-user-circle fa-2x"></i>
+        </button>
+    </div>
+</header>
+<main class="app__main">
+    <div class="section__menu" id="sectionMenu">
+        <li class="menu__item menu__item--active"><span id="desktop">Pulpit</span> <i class="fas fa-chevron-right fa-1x"></i></li>
+        <li class="menu__item" ><span id="recipes">Przepisy</span><i class="fas fa-chevron-right fa-1x"></i></li>
+        <li class="menu__item" ><span id="plans">Plany</span><i class="fas fa-chevron-right fa-1x"></i></li>
+    </div>
+    <div class="section__main" id="mainSection">
+        jakieś guano
+    </div>
+</main>
+<script src="./js/app.js"></script>
+</body>
 </html>

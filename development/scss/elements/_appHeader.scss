@@ -1,0 +1,47 @@
+.app__header {.user {
+  height: 100%;
+  display: flex;
+  padding: 10px;
+  margin-right: 50px;
+  justify-content: center;
+
+  .user__text {
+    font-family: $font-open-sans;
+    align-self: center;
+    color: $bg-color;
+  }
+
+  .user__avatar {
+    align-self: center;
+    background: transparent;
+    border: none;
+    color: $button-color;
+  }
+
+}
+
+  height: 10vh;
+
+  .user {
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    margin-right: 50px;
+    justify-content: center;
+
+    .user__text {
+      font-family: $font-open-sans;
+      align-self: center;
+      color: $bg-color;
+    }
+
+    .user__avatar {
+      align-self: center;
+      background: transparent;
+      border: none;
+      color: $button-color;
+    }
+
+  }
+
+}
