@@ -1,0 +1,62 @@
+h1 {
+  font-family: $font-charmonman;
+  font-size: $base-font-size*2;
+  padding: $base-font-size*2;
+}
+
+header {
+  background-color: #292F32;
+  width: 100vw;
+  display: flex;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+
+
+  #first {
+    font-weight: 100;
+    color: white;
+  }
+
+  #second {
+    color: #E58A20;
+    font-weight: 700;
+  }
+
+  .nav {
+    height: 100%;
+
+    a {
+      text-decoration: none;
+      color: $bg-color;
+    }
+
+    ul {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+
+      .nav-list {
+        list-style-type: none;
+        text-decoration: none;
+        text-transform: uppercase;
+        height: 100%;
+        padding: $base-font-size*2;
+
+        &.active {
+          color: #E58A20;
+        }
+        &:hover{
+          color: #E58A20;
+        }
+        &:focus {
+          outline: none;
+
+        }
+      }
+    }
+  }
+
+
+}
+
