@@ -1,0 +1,26 @@
+.about-author {
+  font-family: $font-open-sans;
+  display: flex;
+  justify-content: center;
+  margin: 80px 10px;
+
+  .author__image-container {
+    width: 300px;
+    height: 300px;
+    background-color: $primary-color;
+    margin-right: 10%;
+  }
+
+  .author__text-container {
+    width: 50%;
+
+    .author__text-title {
+      font-size: $base-font-size*2.5;
+      margin-bottom: 20px;
+    }
+
+    .author__text-description {
+      font-size: $base-font-size*1.7;
+    }
+  }
+}
