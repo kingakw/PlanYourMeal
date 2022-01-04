@@ -3,13 +3,13 @@
   justify-content: space-between;
 
   i {
-    font-size: $base-font-size*3;
+    font-size: $base-font-size*4;
     color: rgb(161, 161, 148);
 
   }
 
   .card-container {
-    width: 300px;
+    width: 350px;
     padding: 50px 0;
     display: flex;
     align-items: center;
@@ -19,6 +19,7 @@
 
   .card-tittle {
     color: $secondary-color;
+
     padding: 10px 0;
     font-size: 2rem;
     text-align: center;
@@ -29,6 +30,7 @@
 
   .card-description {
     text-align: center;
+    width: 90%;
     color: $secondary-color;
     font-size: 24px;
     font-family: $font-open-sans;
