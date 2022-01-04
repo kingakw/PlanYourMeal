@@ -1,0 +1,15 @@
+footer {
+  background-color: #464646;
+  padding: 20px 10px;
+  text-align: center;
+  .copyright {
+    font-family: $font-open-sans;
+    font-size: $base-font-size*1.4;
+    color: $bg-color;
+
+    span {
+      color: $button-color;
+    }
+  }
+}
+
