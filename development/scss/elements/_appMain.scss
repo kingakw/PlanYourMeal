@@ -7,6 +7,7 @@
     background: $primary-color;
     width: 20vw;
 
+
     .menu__item {
       list-style-type: none;
       margin: 0;
@@ -17,14 +18,16 @@
       cursor: pointer;
       display: flex;
       justify-content: space-between;
-      .fas{
+
+      .fas {
         display: none;
       }
     }
 
-    .menu__item--active{
+    .menu__item--active {
       border-left: 5px solid $button-color;
-      .fas{
+
+      .fas {
         display: block;
         color: $button-color;
       }
@@ -33,6 +36,7 @@
 
   .section__main {
     width: 80vw;
-    background-image: url("../images/appBG.png");
+    background-image: url("../../images/appBG.png");
+    padding: 2% 3%;
   }
 }
