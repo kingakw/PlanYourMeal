@@ -28,21 +28,76 @@
 </header>
 <main class="app__main">
     <div class="section__menu" id="sectionMenu">
-        <li class="menu__item menu__item--active"><span id="desktop">Pulpit</span> <i class="fas fa-chevron-right fa-1x"></i></li>
-        <li class="menu__item" ><span id="recipes">Przepisy</span><i class="fas fa-chevron-right fa-1x"></i></li>
-        <li class="menu__item" ><span id="plans">Plany</span><i class="fas fa-chevron-right fa-1x"></i></li>
+        <li class="menu__item menu__item--active"><span id="desktop">Pulpit</span> <i
+                class="fas fa-chevron-right fa-1x"></i></li>
+        <li class="menu__item"><span id="recipes">Przepisy</span><i class="fas fa-chevron-right fa-1x"></i></li>
+        <li class="menu__item"><span id="plans">Plany</span><i class="fas fa-chevron-right fa-1x"></i></li>
     </div>
+
     <div class="section__main" id="mainSection">
-        <div class="widget__container">
-            <div class="widget color_green" id="widget_recipe">
-                <i class="far fa-plus-square"></i>
-                <p class="widget__text">dodaj przepis</p>
+
+        <!-- pulpit active  -->
+        <section class="container__pulpit">
+
+            <!-- widget recipe & plan  -->
+            <div class="widget__container1">
+
+                <div class="widget" id="widget_recipe">
+                    <i class="far fa-plus-square"></i>
+                    <p class="widget__text">dodaj przepis</p>
+                </div>
+
+                <div class="widget" id="widget_plan">
+                    <i class="far fa-plus-square"></i>
+                    <p class="widget__text">dodaj plan</p>
+                </div>
+
+                <!-- widget info & success & warning -->
+
+                <div class="widget__container2">
+                    <div class="widget__info" id="widget_info">
+                        <div class="widget__info__container">
+                            <i class="fas fa-info-circle"></i>
+                            <p class="widget__info__text">Masz już <span> 99 <span> przepisów, nieźle!</p>
+                        </div>
+                        <i class="fas fa-window-close"></i>
+                    </div>
+
+                    <div class="widget__warning" id="widget_warning">
+                        <div class="widget__warning__container">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p class="widget__warning__text">Pamiętaj, aby dodać plan!</p>
+                        </div>
+                        <i class="fas fa-window-close"></i>
+                    </div>
+
+                        <div class="widget__success" id="widget_success">
+                            <div class="widget__success__container">
+                                <i class="fas fa-check-circle"></i>
+                                <p class="widget__success__text">Świetnie że jesteś! Udanego planowania i smaczego! :)</p>
+                            </div>
+                            <i class="fas fa-window-close"></i>
+                        </div>
+
+                </div>
             </div>
-            <div class="widget color_green" id="widget_plan">
-                <i class="far fa-plus-square"></i>
-                <p class="widget__text">dodaj plan</p>
+
+            <div class="schedule">
+
             </div>
-        </div>
+
+        </section>
+
+        <!-- add recipe  -->
+        <section class="container__recipe nonActive">
+
+        </section>
+
+        <!-- add schedule  -->
+        <section class="container__schedule nonActive">
+
+        </section>
+
     </div>
 </main>
 <script src="./js/app.js"></script>
