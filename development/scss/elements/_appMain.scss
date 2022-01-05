@@ -34,5 +34,13 @@
   .section__main {
     width: 80vw;
     background-image: url("../images/appBG.png");
+    padding: 2% 3%;
+
+    .box{
+      display: none;
+    }
+    .active{
+      display: block;
+    }
   }
 }
