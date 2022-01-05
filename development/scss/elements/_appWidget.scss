@@ -2,12 +2,11 @@
 .container__pulpit {
 
   .widget__container1 {
-    padding-bottom: 0.75vw;
     display: flex;
 
     .widget {
-      margin: 0.75vw;
-      width: 14vw;
+      margin-right: 1vw;
+      width: 18vw;
       height: 12vw;
       cursor: pointer;
       display: flex;
@@ -36,9 +35,9 @@
       width: 60vw;
 
       .widget__info {
-        margin: 0.5vw;
+        margin-bottom: 0.5vw;
         width: 100%;
-        height: 3.3rem;
+        height: 3rem;
         cursor: pointer;
         display: inline-flex;
         justify-content: space-between;
@@ -72,9 +71,8 @@
       }
 
       .widget__success {
-        margin: 0.5vw;
         width: 100%;
-        height: 3.3rem;
+        height: 3rem;
         cursor: pointer;
         display: inline-flex;
         justify-content: space-between;
@@ -109,9 +107,9 @@
 
 
       .widget__warning {
-        margin: 0.5vw;
+        margin-bottom: 0.5vw;
         width: 100%;
-        height: 3.3rem;
+        height: 3rem;
         cursor: pointer;
         display: inline-flex;
         justify-content: space-between;
