@@ -13,21 +13,8 @@ for (let i = 0; i < menuItems.length; i++) {
             document.getElementById("containerPulpit").className += " active";
         } else if (i === 1) {
             document.getElementById("containerRecipes").className += " active";
-
-            //Skrypty dla strony recipes html ponizej
-
-            const addRecip = document.getElementById("btnPlus");
-            addRecip.addEventListener("click", function () {
-                addRecipe()
-            })
-            // KONIEC skryptow *******************************************************
         } else {
             document.getElementById("containerSchedules").className += " active";
-            //Skrypty dla strony schedules html ponizej
-
-
-            // KONIEC skryptow *******************************************************
-
         }
     });
 }
@@ -94,3 +81,11 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
 
 //************************************************************
 
+
+const delayscript = function () {
+    const addRecip = document.getElementById("btnPlus");
+    addRecip.addEventListener("click", function () {
+        addRecipe()
+    })
+};
+setTimeout(delayscript, 500);
