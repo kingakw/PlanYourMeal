@@ -83,9 +83,14 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
 
 
 const delayscript = function () {
+    // ------------------- TUTAJ DODAJEMY SKRYPTY DLA ZEWNETRZNYCH HTML Opoznienie potrzebne do zaladowania tych html
+
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
         addRecipe()
     })
+
+
+    // -------------- Koniec miejsca na skrypty zewnetrzne
 };
 setTimeout(delayscript, 500);
