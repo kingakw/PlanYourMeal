@@ -6,7 +6,9 @@
   background-color: $bg-color;
   border: 1px dotted black;
   display: none;
-
+&.active{
+  display:block;
+}
   //Kontener wewnętrzny karty
   .container__addRecipe {
     position: relative;
