@@ -115,18 +115,35 @@ widgetPlan.addEventListener("click", function (){
     recipeWindow.classList.remove("nonActive");
 })
 
-//New User window display
+//Checking if new User and display new user input form
 const newUserWindow = document.getElementById("newUserContainer");
+const userName = document.getElementById("name");
 
 function newUserCheck () {
     if (localStorage.name === undefined) {
         newUserWindow.classList.add("newUser");
-        newUserWindow.classList.remove("nonActive");
-        desktopActive.classList.remove("active")
         desktopActive.classList.add("nonActive");
+        desktopActive.classList.remove("active")
+    } else {
+        userName.innerText = localStorage.name;
     }
 }
-
 document.addEventListener("DOMContentLoaded", newUserCheck);
+
+//Saving user name in localstorage and go to desktop view
+const submitUserName = document.getElementById("submitUserName");
+const userNameInput = document.getElementById("userName");
+
+submitUserName.addEventListener("click", function () {
+    const userNameValue = userNameInput.value;
+    localStorage.setItem("name", userNameValue);
+    userName.innerText = localStorage.name;
+    newUserWindow.classList.remove("newUser");
+    desktopActive.classList.remove("nonActive");
+    desktopActive.classList.add("active");
+})
+
+
+
 
 
