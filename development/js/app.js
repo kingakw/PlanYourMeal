@@ -98,13 +98,13 @@ const delayscript = function () {
 setTimeout(delayscript, 500);
 
 //Changing window for recipe view
-    const widgetRecipe = document.getElementById("widget_recipe");
-    const desktopActive = document.querySelector(".container__pulpit");
-    const recipeWindow = document.querySelector(".container__recipe");
+const widgetRecipe = document.getElementById("widget_recipe");
+const desktopActive = document.querySelector(".container__pulpit");
+const recipeWindow = document.querySelector(".container__recipe");
 
-    widgetRecipe.addEventListener("click", function () {
-        desktopActive.classList.remove("active");
-        recipeWindow.classList.add("active");
+widgetRecipe.addEventListener("click", function () {
+    desktopActive.classList.remove("active");
+    recipeWindow.classList.add("active");
 });
 
 //Changing window for plan view
