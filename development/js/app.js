@@ -21,6 +21,7 @@ for (let i = 0; i < menuItems.length; i++) {
 //******************************************
 
 
+
 //Funkcja wciagajaca inny HTML do DIVA
 function includeHTML() {
     let z, i, elmnt, file, xhttp;
@@ -114,5 +115,18 @@ widgetPlan.addEventListener("click", function (){
     recipeWindow.classList.remove("nonActive");
 })
 
+//New User window display
+const newUserWindow = document.getElementById("newUserContainer");
+
+function newUserCheck () {
+    if (localStorage.name === undefined) {
+        newUserWindow.classList.add("newUser");
+        newUserWindow.classList.remove("nonActive");
+        desktopActive.classList.remove("active")
+        desktopActive.classList.add("nonActive");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", newUserCheck);
 
 
