@@ -112,19 +112,15 @@ widgetPlan.addEventListener("click", function () {
     recipeWindow.classList.remove("nonActive");
 })
 
-
+//Konstruktor uzytkownika
 class User {
     constructor(name) {
         this.name = name;
         this.recipList = [];
         this.schedulesList = [];
     }
-
-    addRecipe(recipe) {
-        this.recipList.push(recipe)
-    }
 }
-
+//Konstruktor przepisu
 class Recipe {
     constructor(name, desc) {
         this.name = name;
@@ -133,32 +129,85 @@ class Recipe {
         this.ingredients = [];
     }
 }
+//Zmienne
+let userName = document.getElementById("name").innerText;
 
-const Zbyszek = new User("Zbyszek");
-document.getElementById("name").innerText = Zbyszek.name;
-window.localStorage.setItem(Zbyszek.name, JSON.stringify(Zbyszek));
+//Zmienne pomocnicze pamietajace wprowadzane dane
+let recipeInstructions = [];
+let recipeIngredients = [];
+
+
+
+//PRZENIESC DO PRZYCISKU ZAPISUJACEGO IMIE
+//Stworzenie obiektu uzytkownika
+const uzytkownik = new User(userName);
+//Wyslanie uzytkownika
+localStorage.setItem(uzytkownik.name, JSON.stringify(uzytkownik));
+// KONIEC PRZENOSZENIA
+
+
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
 document.getElementById("btnNewRecipe").addEventListener("click", function () {
     //Wylacz contener AddRecipe
     document.getElementById("containerAddRecipe").style.display = "none"
     //Pobierz klucz uzytkownika
-    let userName = document.getElementById("name").innerText;
+    // let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
-    let currentUser = JSON.parse(window.localStorage.getItem(userName));
+    let currentUser = JSON.parse(localStorage.getItem(userName));
     //Pobierz dane z formularza nowego przepisu
     let recipeName = document.getElementById("recipe__name").value;
     let recipeDesc = document.getElementById("recipe__description").value;
     //Stworz obiekt z nowym przepisem
     let newRecip = new Recipe(recipeName, recipeDesc);
-    //Wyslij nowy przepis na liste html
-    currentUser.addRecipe(newRecip);
+    newRecip.instructions.push(recipeInstructions)
+    newRecip.ingredients.push(recipeIngredients)
+   //Wyslij nowy przepis na liste html
+    currentUser.recipList.push(newRecip);
     //dodaj nowy przepis uzytkownikowi
     addRecipe(recipeName, recipeDesc);
     // zaktualizuj uzytkownika
-    window.localStorage.setItem(userName, JSON.stringify(currentUser));
-    //wyzeruj formularz
+    console.log("Uzytkownik nazwa: "+ userName)
+    console.log("obiekt uzytkownika: ")
+    console.log(currentUser)
+    localStorage.setItem(userName, JSON.stringify(currentUser));
+    //wyzeruj dane
     document.getElementById("recipe__name").value = null;
     document.getElementById("recipe__description").value = null;
+    document.getElementById('instructionList').innerHTML = "";
+    document.getElementById('ingredientList').innerHTML = "";
+    recipeInstructions = []
+    recipeIngredients = []
+})
+
+//Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
+document.getElementById("instruction__btn").addEventListener("click", function (){
+    //Pobierz dane z pola tekstowego
+    let instructionField = document.getElementById("instructionField").value;
+    //Wypchnij dane do tablicy tymczasowej
+    recipeInstructions.push(instructionField);
+    //Wyzeruj pole tekstowe
+    document.getElementById("instructionField").value = null;
+    //Wypisz dodany skladnik w liscie
+    const list = document.getElementById('instructionList');
+    const entry = document.createElement('li');
+    entry.classList.add("instruction__list")
+    entry.appendChild(document.createTextNode(instructionField));
+    list.appendChild(entry);
+})
+
+document.getElementById("ingredient__btn").addEventListener("click", function (){
+    //Pobierz dane z pola tekstowego
+    let ingredientField = document.getElementById("ingredientField").value;
+    //Wypchnij dane do tablicy tymczasowej
+    recipeIngredients.push(ingredientField);
+    //Wyzeruj pole tekstowe
+    document.getElementById("ingredientField").value = null;
+    //Wypisz dodany skladnik w liscie
+    const list = document.getElementById('ingredientList');
+    const entry = document.createElement('li');
+    entry.classList.add("ingredient__list")
+    entry.appendChild(document.createTextNode(ingredientField));
+    list.appendChild(entry);
 })
 
