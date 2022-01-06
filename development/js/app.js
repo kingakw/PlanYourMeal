@@ -87,7 +87,8 @@ const delayscript = function () {
 
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
-        addRecipe()
+        addRecipe();
+        document.getElementById("containerAddRecipe").style.display = "block"
     })
 
 
@@ -116,3 +117,9 @@ widgetPlan.addEventListener("click", function (){
 
 
 
+
+
+//Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
+document.getElementById("btnNewRecipe").addEventListener("click",function (){
+    document.getElementById("containerAddRecipe").style.display = "none"
+})
