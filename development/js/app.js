@@ -87,7 +87,9 @@ const delayscript = function () {
     //Wyswietlenie okna z dodaj przepis
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
-        document.getElementById("containerAddRecipe").style.display = "block"
+
+        // recipeWindow.classList.add("active");
+        // document.querySelector('.recipes__container').classList.remove('active');
     })
     createRecipListFromLocalStorage()
 
@@ -173,7 +175,12 @@ let recipeIngredients = [];
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
 document.getElementById("btnNewRecipe").addEventListener("click", function () {
     //Wylacz contener AddRecipe
-    document.getElementById("containerAddRecipe").style.display = "none"
+
+
+    recipeWindow.classList.remove("active");
+    desktopActive.classList.add("active");
+
+
     //Pobierz klucz uzytkownika
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
