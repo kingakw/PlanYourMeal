@@ -87,8 +87,11 @@ const delayscript = function () {
     //Wyswietlenie okna z dodaj przepis
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
-
-        // recipeWindow.classList.add("active");
+        document.getElementById("containerRecipes").className = "box";
+        let currentMenu = document.getElementsByClassName(" menu__item--active");
+        currentMenu[0].className = currentMenu[0].className.replace(" menu__item--active", "");
+        document.getElementById("sectionMenu").firstElementChild.className += " menu__item--active";
+        recipeWindow.classList.add("active");
         // document.querySelector('.recipes__container').classList.remove('active');
     })
     createRecipListFromLocalStorage()
@@ -210,7 +213,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     recipeIngredients = []
 })
 
-//Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
+//Event dla przycisku Dodaj Instrukcje z obszaru dodaj przepis
 document.getElementById("instruction__btn").addEventListener("click", function () {
     //Pobierz dane z pola tekstowego
     let instructionField = document.getElementById("instructionField").value;
@@ -228,6 +231,7 @@ document.getElementById("instruction__btn").addEventListener("click", function (
     list.lastElementChild.innerHTML = `${instructionField} ${buttons}`
 })
 
+//Event dla przycisku Dodaj Skladnik z obszaru dodaj przepis
 document.getElementById("ingredient__btn").addEventListener("click", function () {
     //Pobierz dane z pola tekstowego
     let ingredientField = document.getElementById("ingredientField").value;
