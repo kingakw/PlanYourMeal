@@ -1,23 +1,31 @@
 //Kontener główny
 
 .container__recipe {
-  height: 100%;
-  width: 100%;
+  height: 97%;
+  width: 95%;
   background-color: $bg-color;
   border: 1px dotted black;
   z-index: 9999;
   display: none;
-  &.active{
-    display:block;
+  //margin: 2% 0% 0% 3%;
+
+  &.active {
+    display: block;
+    position: absolute;
+    top: 2%;
+    left: 3%;
+
   }
+
   //Kontener wewnętrzny karty
   .container__addRecipe {
-    position: relative;
+
     height: 100%;
     width: 100%;
     padding: 2% 3%;
     z-index: 9999;
     overflow: hidden;
+
 
     .addRecipe__newRecipe {
       display: flex;

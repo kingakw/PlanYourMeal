@@ -2,7 +2,9 @@
 const appMenu = document.getElementById("sectionMenu");
 const menuItems = appMenu.getElementsByClassName("menu__item");
 for (let i = 0; i < menuItems.length; i++) {
+
     menuItems[i].addEventListener("click", function () {
+        document.querySelector(".container__recipe").classList.remove("active");
         let currentMenu = document.getElementsByClassName(" menu__item--active");
         currentMenu[0].className = currentMenu[0].className.replace(" menu__item--active", "");
         this.className += " menu__item--active";
@@ -65,7 +67,8 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
                         <td class="recipe__name">${recipeName}</td>
                         <td class="recipe__description">${recipeDesc}</td>
                         <td class="recipe__action">
-                            <button class="btn btn__edit">
+                            <button class="btn btn__
+                            edit">
                                 <i class="far fa-edit fa-1x"></i>
                             </button>
                             <button class="btn btn__trash">
@@ -87,10 +90,10 @@ const delayscript = function () {
     //Wyswietlenie okna z dodaj przepis
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
-        document.getElementById("containerRecipes").className = "box";
-        let currentMenu = document.getElementsByClassName(" menu__item--active");
-        currentMenu[0].className = currentMenu[0].className.replace(" menu__item--active", "");
-        document.getElementById("sectionMenu").firstElementChild.className += " menu__item--active";
+        // document.getElementById("containerRecipes").className = "box";
+        // let currentMenu = document.getElementsByClassName(" menu__item--active");
+        // currentMenu[0].className = currentMenu[0].className.replace(" menu__item--active", "");
+        // document.getElementById("sectionMenu").firstElementChild.className += " menu__item--active";
         recipeWindow.classList.add("active");
         // document.querySelector('.recipes__container').classList.remove('active');
     })
@@ -107,7 +110,7 @@ const desktopActive = document.querySelector(".container__pulpit");
 const recipeWindow = document.querySelector(".container__recipe");
 
 widgetRecipe.addEventListener("click", function () {
-    desktopActive.classList.remove("active");
+    // desktopActive.classList.remove("active");
     recipeWindow.classList.add("active");
 });
 
@@ -181,7 +184,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
 
 
     recipeWindow.classList.remove("active");
-    desktopActive.classList.add("active");
+    // desktopActive.classList.add("active");
 
 
     //Pobierz klucz uzytkownika
