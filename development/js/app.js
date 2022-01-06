@@ -6,7 +6,6 @@ for (let i = 0; i < menuItems.length; i++) {
         let currentMenu = document.getElementsByClassName(" menu__item--active");
         currentMenu[0].className = currentMenu[0].className.replace(" menu__item--active", "");
         this.className += " menu__item--active";
-
         let currentSection = document.getElementsByClassName(" active");
         currentSection[0].className = currentSection[0].className.replace(" active", "")
         if (i === 0) {
@@ -54,7 +53,6 @@ function includeHTML() {
     }
 };
 includeHTML();
-
 //*****************************************
 
 
@@ -87,7 +85,6 @@ const delayscript = function () {
 
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
-        addRecipe();
         document.getElementById("containerAddRecipe").style.display = "block"
     })
 
@@ -97,29 +94,71 @@ const delayscript = function () {
 setTimeout(delayscript, 500);
 
 //Changing window for recipe view
-    const widgetRecipe = document.getElementById("widget_recipe");
-    const desktopActive = document.querySelector(".container__pulpit");
-    const recipeWindow = document.querySelector(".container__recipe");
+const widgetRecipe = document.getElementById("widget_recipe");
+const desktopActive = document.querySelector(".container__pulpit");
+const recipeWindow = document.querySelector(".container__recipe");
 
-    widgetRecipe.addEventListener("click", function () {
-        desktopActive.classList.add("nonActive");
-        recipeWindow.classList.remove("nonActive");
+widgetRecipe.addEventListener("click", function () {
+    desktopActive.classList.add("nonActive");
+    recipeWindow.classList.remove("nonActive");
 });
 
 //Changing window for plan view
 const widgetPlan = document.getElementById("widget_plan");
 const recipeSchedule = document.querySelector(".container__schedule");
 
-widgetPlan.addEventListener("click", function (){
+widgetPlan.addEventListener("click", function () {
     desktopActive.classList.add("nonActive");
     recipeWindow.classList.remove("nonActive");
 })
 
 
+class User {
+    constructor(name) {
+        this.name = name;
+        this.recipList = [];
+        this.schedulesList = [];
+    }
 
+    addRecipe(recipe) {
+        this.recipList.push(recipe)
+    }
+}
 
+class Recipe {
+    constructor(name, desc) {
+        this.name = name;
+        this.desc = desc;
+        this.instructions = [];
+        this.ingredients = [];
+    }
+}
+
+const Zbyszek = new User("Zbyszek");
+document.getElementById("name").innerText = Zbyszek.name;
+window.localStorage.setItem(Zbyszek.name, JSON.stringify(Zbyszek));
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
-document.getElementById("btnNewRecipe").addEventListener("click",function (){
+document.getElementById("btnNewRecipe").addEventListener("click", function () {
+    //Wylacz contener AddRecipe
     document.getElementById("containerAddRecipe").style.display = "none"
+    //Pobierz klucz uzytkownika
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(window.localStorage.getItem(userName));
+    //Pobierz dane z formularza nowego przepisu
+    let recipeName = document.getElementById("recipe__name").value;
+    let recipeDesc = document.getElementById("recipe__description").value;
+    //Stworz obiekt z nowym przepisem
+    let newRecip = new Recipe(recipeName, recipeDesc);
+    //Wyslij nowy przepis na liste html
+    currentUser.addRecipe(newRecip);
+    //dodaj nowy przepis uzytkownikowi
+    addRecipe(recipeName, recipeDesc);
+    // zaktualizuj uzytkownika
+    window.localStorage.setItem(userName, JSON.stringify(currentUser));
+    //wyzeruj formularz
+    document.getElementById("recipe__name").value = null;
+    document.getElementById("recipe__description").value = null;
 })
+
