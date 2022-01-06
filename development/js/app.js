@@ -108,7 +108,7 @@ setTimeout(delayscript, 500);
 
 //Changing window for plan view
 const widgetPlan = document.getElementById("widget_plan");
-const planWindow = document.querySelector(".container__schedule");
+const planWindow = document.querySelector(".container__addSchedule");
 
 widgetPlan.addEventListener("click", function (){
     desktopActive.classList.remove("active");

@@ -1,181 +1,139 @@
 //Kontener główny
-
 .container__schedule {
   height: 100%;
   width: 100%;
+  padding: 2% 3%;
   background: $bg-color;
   border: 1px dotted black;
   display: none;
-/*&.active{
-  display:block;*/
+
+  &.active {
+    display: block;
+  }
 }
-  //Kontener wewnętrzny karty
-  .container__addSchedule {
-    position: absolute;
-    left: 28.45vw;
-    top: 13vh;
-    background: $bg-color;
-    height: 85vh;
-    width: 58.5vw;
-    padding: 2% 3%;
-    overflow: hidden;
 
-    /*.addRecipe__newRecipe {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      padding-bottom: 5px;
-      border-bottom: 1px solid $primary-color;
+//Kontener dodania planu
+.container__addSchedule {
+  height: 100%;
+  width: 100%;
+  padding: 2% 3%;
+  background: $bg-color;
+  border: 1px dotted $secondary-color;
+  display: none;
+  &.active {
+    display: block;
+  }
 
-      .newRecipe__title {
-        color: $button-color;
-        font-size: $base-font-size * 1.71;
-        text-transform: uppercase;
-        font-family: $font-open-sans;
-        font-weight: bold;
-      }
+  .addSchedule__new {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding-bottom: 5px;
+    border-bottom: 2px solid $table-text-color;
 
-      .newRecipe__btn {
-        &:focus {
-          outline: none;
-        }
-
-        padding: 6px 10px;
-        font-size: 16px;
-        background-color: $button-color;
-        color: $bg-color;
-        border: none;
-        font-weight: bold;
-      }
+    .newSchedule__title {
+      color: $button-color;
+      font-size: $base-font-size * 1.71;
+      text-transform: uppercase;
+      font-family: $font-open-sans;
+      font-weight: bold;
     }
 
-    .addRecipe__properties {
-      width: 100%;
-
-      .properties {
-        display: flex;
-
-        padding: 10px;
-        width: 100%;
-
-        #recipe__description {
-          height: 50px;
-        }
-
-        .recipe__data {
-          font-size: $base-font-size *1.71;
-          color: $primary-color;
-          width: 20%;
-        }
-
-        .properties__input {
-          margin-left: 10px;
-          width: 700px
-        }
+    .newSchedule__btn {
+      &:focus {
+        outline: none;
       }
-    }
-
-    .addRecipe__basic {
-      width: 100%;
-      height: 75%;
-      display: flex;
-      justify-content: space-between;
-
-      .basic__data {
-        width: 48%;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-
-        .data__title {
-          text-transform: uppercase;
-          color: $primary-color;
-          font-size: $base-font-size*1.71;
-          border-bottom: 1px solid $primary-color;
-          margin-bottom: 10px;
-        }
-
-        label {
-          width: 100%;
-
-          .properties__input {
-            width: 90%;
-          }
-
-          .add__btn {
-            background-color: transparent;
-            border: none;
-            color: $msg-success-color;
-
-            &:focus {
-              outline: none;
-            }
-          }
-
-        }
-
-        .box__list {
-          margin-top: 30px;
-          height: 65%;
-          overflow-y: auto;
-          width: 95%;
-          margin-bottom: 30px;
-
-          ol {
-            counter-reset: custom-list-counter;
-            list-style-type: none;
-          }
-
-          p {
-            padding-left: 24px;
-          }
-
-          li {
-            line-height: $base-font-size*1.3;
-            font-size: 16px;
-            font-family: $font-open-sans;
-            padding-bottom: 5px;
-          }
-
-
-          .instruction__list {
-            &::before {
-              counter-increment: custom-list-counter;
-              content: counter(custom-list-counter) '.';
-              white-space: nowrap;
-              text-align: left !important;
-              width: 1rem;
-              float: left;
-            }
-
-          }
-
-          .ingredient__list {
-            &::before {
-              content: '\2022';
-              white-space: nowrap;
-              text-align: left !important;
-              width: 1rem;
-              float: left;
-            }
-          }
-
-          .far.fa-edit {
-            cursor: pointer;
-            margin-left: 10px;
-            color: $msg-warning-color;
-          }
-
-          .fas.fa-trash-alt {
-            cursor: pointer;
-            color: $bin-icon-color;
-
-          }
-           }
-        }
-      }*/
+      padding: 6px 10px;
+      font-size: 16px;
+      background-color: $button-color;
+      color: $bg-color;
+      border: none;
+      font-weight: bold;
     }
   }
 
+  .addSchedule__properties {
+    width: 92%;
+    /*border: 1px solid red;*/
+    padding-top: 10px;
+
+    .properties {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      /* width: 100%;*/
+
+      .schedule__data {
+        font-size: $base-font-size *1.5;
+        color: $primary-color;
+      }
+
+      .properties__input {
+        width: 720px;
+        margin-right:0 ;
+      }
+
+      .properties__nr {
+        margin-right: 680px;
+        width: 40px;
+      }
+
+    }
+  }
+
+   .scheduleCard {
+      background-color: $bg-color;
+     height: 60%;
+     /* border: 1px solid red;*/
+      width: 92%;
+      font-family: $font-open-sans;
+      display: flex;
+    /*  justify-content: space-evenly;*/
+
+      .schedule__table {
+        width: 100%;
+
+        thead {
+          font-size: $base-font-size *1.4;
+          font-weight: bold;
+          color: $primary-color;
+
+          tr {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid $table-text-color;
+            border-bottom: 1px solid $table-text-color;
+          }
+          th{
+            padding: 5px 10px;
+            width: 16.7%;
+            line-height: 30px;
+            /*border: 1px solid red;*/
+            align-self: center;
+            vertical-align: middle;
+          }
+        }
+
+        tbody{
+          font-size: $base-font-size *1.3;
+          font-weight: bold;
+          color: $primary-color;
+          align-items: center;
+
+          tr{
+            border-bottom: 1px solid $table-text-color;
+            align-self: center;
+            th,td {
+              padding: 5px;
+              /*border: 1px solid red;*/
+              width: 16.7%;
+              align-self: center;
+            }
+          }
+
+        }
+      }
+    }
+
+  }
 
