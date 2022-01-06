@@ -21,6 +21,7 @@ for (let i = 0; i < menuItems.length; i++) {
 //******************************************
 
 
+
 //Funkcja wciagajaca inny HTML do DIVA
 function includeHTML() {
     let z, i, elmnt, file, xhttp;
@@ -114,6 +115,36 @@ widgetPlan.addEventListener("click", function (){
     desktopActive.classList.remove("active");
     planWindow.classList.add("active");
 })
+
+//Checking if new User and display new user input form
+const newUserWindow = document.getElementById("newUserContainer");
+const userName = document.getElementById("name");
+
+function newUserCheck () {
+    if (localStorage.name === undefined) {
+        newUserWindow.classList.add("newUser");
+        desktopActive.classList.add("nonActive");
+        desktopActive.classList.remove("active")
+    } else {
+        userName.innerText = localStorage.name;
+    }
+}
+document.addEventListener("DOMContentLoaded", newUserCheck);
+
+//Saving user name in localstorage and go to desktop view
+const submitUserName = document.getElementById("submitUserName");
+const userNameInput = document.getElementById("userName");
+
+submitUserName.addEventListener("click", function () {
+    const userNameValue = userNameInput.value;
+    localStorage.setItem("name", userNameValue);
+    userName.innerText = localStorage.name;
+    newUserWindow.classList.remove("newUser");
+    desktopActive.classList.remove("nonActive");
+    desktopActive.classList.add("active");
+})
+
+
 
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis

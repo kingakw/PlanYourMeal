@@ -1,0 +1,59 @@
+.newUser__container {
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: $bg-color;
+  display: none;
+  justify-content: center;
+  text-align: center;
+  padding: 10%;
+  font-family: $font-open-sans;
+  color: $primary-color;
+  border: 1px dashed $primary-color;
+
+  .newUser__form {
+    width: 50%;
+
+    .newUser__welcomeTitle {
+      font-size: $base-font-size*2.6;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .newUser__welcomeText {
+      font-size: $base-font-size*1.7;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .newUser__name,
+    .newUser__nameSubmit {
+      display: block;
+      margin: 0 auto 15px;
+    }
+    .newUser__name {
+      width: 70%;
+      padding: 5px;
+      border: 1px solid #c8c8c8;
+    }
+
+    .newUser__nameSubmit {
+      border: none;
+      background-color: $button-color;
+      color: #ffffff;
+      padding: 8px 20px;
+      font-weight: 700;
+      font-size: $base-font-size*1.4;
+    }
+
+    .newUser__endingText {
+      font-size: $base-font-size*1.4;
+      font-weight: bold;
+    }
+  }
+
+}
+
+.newUser {
+  display: flex;
+}
