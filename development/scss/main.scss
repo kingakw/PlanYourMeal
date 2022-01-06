@@ -10,12 +10,14 @@
 @import "elements/newsletter";
 @import "elements/aboutauthor";
 @import "elements/footer";
-@import "elements/appWidget";
+
 
 //App
 @import "elements/appHeader";
 @import "elements/appMain";
 @import "elements/appNewRecipe";
+@import "elements/appWidget";
+@import "elements/appNewSchedule";
 
 //Recipes HTML
 @import "elements/recipes";

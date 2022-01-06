@@ -102,21 +102,18 @@ setTimeout(delayscript, 500);
     const recipeWindow = document.querySelector(".container__recipe");
 
     widgetRecipe.addEventListener("click", function () {
-        desktopActive.classList.add("nonActive");
-        recipeWindow.classList.remove("nonActive");
+        desktopActive.classList.remove("active");
+        recipeWindow.classList.add("active");
 });
 
 //Changing window for plan view
 const widgetPlan = document.getElementById("widget_plan");
-const recipeSchedule = document.querySelector(".container__schedule");
+const planWindow = document.querySelector(".container__schedule");
 
 widgetPlan.addEventListener("click", function (){
-    desktopActive.classList.add("nonActive");
-    recipeWindow.classList.remove("nonActive");
+    desktopActive.classList.remove("active");
+    planWindow.classList.add("active");
 })
-
-
-
 
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis

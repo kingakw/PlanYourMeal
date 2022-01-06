@@ -1,27 +1,26 @@
 //Kontener główny
 
-.container__recipe {
+.container__schedule {
   height: 100%;
   width: 100%;
-  background-color: $bg-color;
+  background: $bg-color;
   border: 1px dotted black;
   display: none;
-&.active{
-  display:block;
+/*&.active{
+  display:block;*/
 }
   //Kontener wewnętrzny karty
-  .container__addRecipe {
+  .container__addSchedule {
     position: absolute;
     left: 28.45vw;
     top: 13vh;
     background: $bg-color;
-    //position: relative;
     height: 85vh;
     width: 58.5vw;
     padding: 2% 3%;
     overflow: hidden;
 
-    .addRecipe__newRecipe {
+    /*.addRecipe__newRecipe {
       display: flex;
       justify-content: space-between;
       align-items: end;
@@ -173,9 +172,10 @@
             color: $bin-icon-color;
 
           }
+           }
         }
-      }
+      }*/
     }
   }
-}
+
 
