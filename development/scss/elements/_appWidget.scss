@@ -3,11 +3,11 @@
 
   .widget__container1 {
     display: flex;
-
+    justify-content: space-between;
     .widget {
-      margin-right: 1vw;
-      width: 18vw;
-      height: 12vw;
+      margin-right: 1%;
+      width: 17%;
+      align-self: stretch;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -32,7 +32,7 @@
     .widget__container2 {
       flex-direction: column;
       align-items: flex-end;
-      width: 60vw;
+      width: 64%;
 
       .widget__info {
         margin-bottom: 0.5vw;
