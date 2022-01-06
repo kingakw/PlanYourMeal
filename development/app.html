@@ -20,7 +20,7 @@
         </h1>
     </div>
     <div class="user">
-        <span class="user__text" id="name">Imię</span>
+        <span class="user__text" id="name">Imie</span>
         <button class="user__avatar" id="userAvatar">
             <i class="far fa-user-circle fa-2x"></i>
         </button>
@@ -168,11 +168,13 @@
         </section>
 
         <!-- add recipe  -->
-        <section class="box container__recipe" id="containerRecipes">
+        <section class="box" id="containerRecipes">
 
             <div w3-include-html="recipes.html"></div>
+        </section>
 
             <!--SEKCJA DODAJ PRZEPIS-->
+            <div class="container__recipe ">
             <div class="container__addRecipe" id="containerAddRecipe">
 
                 <div class="addRecipe__newRecipe">
@@ -204,7 +206,7 @@
                         <div class="box__main">
                             <h3 class="data__title">Instrukcje</h3>
                             <label>
-                                <textarea class="properties__input" placeholder=" "></textarea>
+                                <textarea class="properties__input" placeholder=" " id="instructionField"></textarea>
                                 <button class="add__btn left-list" id="instruction__btn">
                                     <i class="fas fa-plus-square fa-2x"></i>
                                 </button>
@@ -212,14 +214,13 @@
                         </div>
 
                         <div class="box__list">
-                            <ol>
-                                <li class="instruction__list"><p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Asperiores, expedita.<i class="far fa-edit"></i><i
-                                            class="fas fa-trash-alt"></i></p></li>
-                                <li class="instruction__list"><p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Asperiores, expedita.<i class="far fa-edit"></i><i
-                                            class="fas fa-trash-alt"></i></p></li>
-
+                            <ol id="instructionList">
+<!--                                <li class="instruction__list"><p>Lorem ipsum dolor sit amet, consectetur adipisicing-->
+<!--                                    elit. Asperiores, expedita.<i class="far fa-edit"></i><i-->
+<!--                                            class="fas fa-trash-alt"></i></p></li>-->
+<!--                                <li class="instruction__list"><p>Lorem ipsum dolor sit amet, consectetur adipisicing-->
+<!--                                    elit. Asperiores, expedita.<i class="far fa-edit"></i><i-->
+<!--                                            class="fas fa-trash-alt"></i></p></li>-->
                             </ol>
                         </div>
 
@@ -230,24 +231,25 @@
                             <h3 class="data__title">Składniki</h3>
 
                             <label>
-                                <textarea class="properties__input" placeholder=" "></textarea>
+                                <textarea class="properties__input" placeholder=" " id="ingredientField"></textarea>
                                 <button class="add__btn right-list" id="ingredient__btn">
                                     <i class="fas fa-plus-square fa-2x"></i>
                                 </button>
                             </label></div>
 
                         <div class="box__list">
-                            <ol>
-                                <li class="ingredient__list"><p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. A debitis quas repellendus unde ut, vel?<i class="far fa-edit"></i><i
-                                            class="fas fa-trash-alt"></i></p></li>
+                            <ol id="ingredientList">
+<!--                                <li class="ingredient__list"><p>Lorem ipsum dolor sit amet, consectetur adipisicing-->
+<!--                                    elit. A debitis quas repellendus unde ut, vel?<i class="far fa-edit"></i><i-->
+<!--                                            class="fas fa-trash-alt"></i></p></li>-->
                             </ol>
                         </div>
                     </div>
                 </div>
 
             </div>
-        </section>
+            </div>
+
 
         <!-- add schedule  -->
         <section class="box container__schedule" id="containerSchedules">
