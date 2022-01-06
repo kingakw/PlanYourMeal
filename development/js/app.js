@@ -53,6 +53,7 @@ function includeHTML() {
     }
 };
 includeHTML();
+
 //*****************************************
 
 
@@ -83,15 +84,17 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
 const delayscript = function () {
     // ------------------- TUTAJ DODAJEMY SKRYPTY DLA ZEWNETRZNYCH HTML Opoznienie potrzebne do zaladowania tych html
 
+    //Wyswietlenie okna z dodaj przepis
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
         document.getElementById("containerAddRecipe").style.display = "block"
     })
+    createRecipListFromLocalStorage()
 
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
 };
-setTimeout(delayscript, 500);
+setTimeout(delayscript, 1000);
 
 //Changing window for recipe view
 const widgetRecipe = document.getElementById("widget_recipe");
@@ -99,18 +102,38 @@ const desktopActive = document.querySelector(".container__pulpit");
 const recipeWindow = document.querySelector(".container__recipe");
 
 widgetRecipe.addEventListener("click", function () {
-    desktopActive.classList.add("nonActive");
-    recipeWindow.classList.remove("nonActive");
+    desktopActive.classList.remove("active");
+    recipeWindow.classList.add("active");
 });
 
 //Changing window for plan view
 const widgetPlan = document.getElementById("widget_plan");
-const recipeSchedule = document.querySelector(".container__schedule");
+const planWindow = document.querySelector(".container__schedule");
 
 widgetPlan.addEventListener("click", function () {
-    desktopActive.classList.add("nonActive");
-    recipeWindow.classList.remove("nonActive");
+    desktopActive.classList.remove("active");
+    planWindow.classList.add("active");
 })
+
+//Checking if new User and display new user input form
+const newUserWindow = document.getElementById("newUserContainer");
+const userName = document.getElementById("name");
+
+function newUserCheck() {
+    if (localStorage.name === undefined) {
+        newUserWindow.classList.add("newUser");
+        desktopActive.classList.add("nonActive");
+        desktopActive.classList.remove("active")
+    } else {
+        userName.innerText = localStorage.name;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", newUserCheck);
+
+//Saving user name in localstorage and go to desktop view
+const submitUserName = document.getElementById("submitUserName");
+const userNameInput = document.getElementById("userName");
 
 //Konstruktor uzytkownika
 class User {
@@ -120,6 +143,7 @@ class User {
         this.schedulesList = [];
     }
 }
+
 //Konstruktor przepisu
 class Recipe {
     constructor(name, desc) {
@@ -129,30 +153,29 @@ class Recipe {
         this.ingredients = [];
     }
 }
-//Zmienne
-let userName = document.getElementById("name").innerText;
+
+submitUserName.addEventListener("click", function () {
+    const userNameValue = userNameInput.value;
+    localStorage.setItem("name", userNameValue);
+    userName.innerText = localStorage.name;
+    newUserWindow.classList.remove("newUser");
+    desktopActive.classList.remove("nonActive");
+    desktopActive.classList.add("active");
+//Creating User database
+    const userObject = new User(userNameValue);
+    localStorage.setItem(userObject.name, JSON.stringify(userObject));
+})
 
 //Zmienne pomocnicze pamietajace wprowadzane dane
 let recipeInstructions = [];
 let recipeIngredients = [];
-
-
-
-//PRZENIESC DO PRZYCISKU ZAPISUJACEGO IMIE
-//Stworzenie obiektu uzytkownika
-const uzytkownik = new User(userName);
-//Wyslanie uzytkownika
-localStorage.setItem(uzytkownik.name, JSON.stringify(uzytkownik));
-// KONIEC PRZENOSZENIA
-
-
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
 document.getElementById("btnNewRecipe").addEventListener("click", function () {
     //Wylacz contener AddRecipe
     document.getElementById("containerAddRecipe").style.display = "none"
     //Pobierz klucz uzytkownika
-    // let userName = document.getElementById("name").innerText;
+    let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
     //Pobierz dane z formularza nowego przepisu
@@ -162,12 +185,12 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     let newRecip = new Recipe(recipeName, recipeDesc);
     newRecip.instructions.push(recipeInstructions)
     newRecip.ingredients.push(recipeIngredients)
-   //Wyslij nowy przepis na liste html
+    //Wyslij nowy przepis na liste html
     currentUser.recipList.push(newRecip);
     //dodaj nowy przepis uzytkownikowi
     addRecipe(recipeName, recipeDesc);
     // zaktualizuj uzytkownika
-    console.log("Uzytkownik nazwa: "+ userName)
+    console.log("Uzytkownik nazwa: " + userName)
     console.log("obiekt uzytkownika: ")
     console.log(currentUser)
     localStorage.setItem(userName, JSON.stringify(currentUser));
@@ -181,7 +204,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
 })
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
-document.getElementById("instruction__btn").addEventListener("click", function (){
+document.getElementById("instruction__btn").addEventListener("click", function () {
     //Pobierz dane z pola tekstowego
     let instructionField = document.getElementById("instructionField").value;
     //Wypchnij dane do tablicy tymczasowej
@@ -189,14 +212,16 @@ document.getElementById("instruction__btn").addEventListener("click", function (
     //Wyzeruj pole tekstowe
     document.getElementById("instructionField").value = null;
     //Wypisz dodany skladnik w liscie
+    let buttons = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>"
     const list = document.getElementById('instructionList');
     const entry = document.createElement('li');
     entry.classList.add("instruction__list")
     entry.appendChild(document.createTextNode(instructionField));
     list.appendChild(entry);
+    list.lastElementChild.innerHTML = `${instructionField} ${buttons}`
 })
 
-document.getElementById("ingredient__btn").addEventListener("click", function (){
+document.getElementById("ingredient__btn").addEventListener("click", function () {
     //Pobierz dane z pola tekstowego
     let ingredientField = document.getElementById("ingredientField").value;
     //Wypchnij dane do tablicy tymczasowej
@@ -204,10 +229,25 @@ document.getElementById("ingredient__btn").addEventListener("click", function ()
     //Wyzeruj pole tekstowe
     document.getElementById("ingredientField").value = null;
     //Wypisz dodany skladnik w liscie
+    let buttons = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>"
     const list = document.getElementById('ingredientList');
     const entry = document.createElement('li');
     entry.classList.add("ingredient__list")
     entry.appendChild(document.createTextNode(ingredientField));
     list.appendChild(entry);
+    list.lastElementChild.innerHTML = `${ingredientField} ${buttons}`
 })
+
+//Uzupelnienie listy przepisow z pamieci localStorage
+function createRecipListFromLocalStorage() {
+    let userName = document.getElementById("name").innerText;
+    if (userName === "Imie"){
+        console.log("New user, nothing to do")
+    } else {
+        let currentUser = JSON.parse(localStorage.getItem(userName));
+        for (let i = 0; i < currentUser.recipList.length; i++) {
+            addRecipe(currentUser.recipList[i].name, currentUser.recipList[i].desc)
+        }
+    }
+}
 

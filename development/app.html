@@ -35,7 +35,16 @@
     </div>
 
     <div class="section__main" id="mainSection">
-
+        <!-- nev user box  -->
+        <section class="newUser__container" id="newUserContainer">
+            <div class="newUser__form">
+                <h2 class="newUser__welcomeTitle">Witaj,</h2>
+                <p class="newUser__welcomeText">wyglada na to że jesteś tutaj pierszy raz!</p>
+                <input type="text" class="newUser__name" id="userName" placeholder="tutaj wpisz jak masz na imię">
+                <button class="newUser__nameSubmit" id="submitUserName">Gotowe!</button>
+                <p class="newUser__endingText">Podaj nam swoje imie, a my zorganizujemy dla Ciebie naszą aplikację :)</p>
+            </div>
+        </section>
         <!-- pulpit active  -->
         <section class="box container__pulpit active" id="containerPulpit">
 
@@ -242,6 +251,11 @@
         <!-- add schedule  -->
         <section class="box container__schedule" id="containerSchedules">
             <div w3-include-html="schedules.html"></div>
+            <!--SEKCJA DODAJ PLAN-->
+            <div class="container__addSchedule " id="containerAddSchedule">
+            </div>
+
+
         </section>
 
     </div>
