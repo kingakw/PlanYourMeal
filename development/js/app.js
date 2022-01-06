@@ -8,3 +8,9 @@ for (let i = 0; i < menuItems.length; i++) {
         this.className += " menu__item--active";
     });
 }
+
+
+//Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
+document.getElementById("btnNewRecipe").addEventListener("click",function (){
+    document.getElementById("containerAddRecipe").style.display = "none"
+})
