@@ -83,6 +83,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
 
 //************************************************************
 
+//
 
 const delayscript = function () {
     // ------------------- TUTAJ DODAJEMY SKRYPTY DLA ZEWNETRZNYCH HTML Opoznienie potrzebne do zaladowania tych html
@@ -162,6 +163,24 @@ class Recipe {
     }
 }
 
+//Konstruktor planu
+class Schedule {
+    constructor(weekNr, planName, planDesc) {
+        this.weekNr = weekNr;
+        this.planName = planName;
+        this.planDesc = planDesc;
+        this.scheduleObj = {
+            pon: null,
+            wt: null,
+            sr: null,
+            czw: null,
+            pt: null,
+            sb: null,
+            nd: null
+        }
+    }
+}
+
 submitUserName.addEventListener("click", function () {
     const userNameValue = userNameInput.value;
     localStorage.setItem("name", userNameValue);
@@ -214,6 +233,57 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     document.getElementById('ingredientList').innerHTML = "";
     recipeInstructions = []
     recipeIngredients = []
+})
+
+//tablica z nr tygodni
+let weekNumbersList = [];
+
+//Event dla przycisku Zapisz i zamknij z obszaru dodaj plan
+document.querySelector(".newSchedule__btn").addEventListener("click", function () {
+    //Wylacz contener addschedule
+    planWindow.classList.remove("active");
+    desktopActive.classList.add("active");
+    // desktopActive.classList.add("active");
+
+
+    //Pobierz klucz uzytkownika
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    //Pobierz dane z formularza nowego planu
+    let plaName = document.getElementById("schedule__name").value;
+    let plaDesc = document.getElementById("schedule__description").value;
+    let nrTygodnia = document.getElementById("schedule__nr").value;
+    const sniadania = document.querySelectorAll(".sniadanie");
+    const dSniadania = document.querySelectorAll(".drugieSnadanie");
+    const zupy = document.querySelectorAll(".zupa");
+    const dDania = document.querySelectorAll(".drugieDanie");
+    const kolacje = document.querySelectorAll(".kolacja");
+
+    //Stworz obiekt z nowym planem
+    let newPlan = new Schedule(nrTygodnia, plaName, plaDesc);
+    const dayNames = ["pon", "wt", "sr", "czw", "pt", "sb", "nd"];
+    for (let i = 0; i < dayNames; i++) {
+        console.log(newPlan.scheduleObj[dayNames[i]]);
+        newPlan.scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
+    }
+    //newPlan.scheduleObj.pon = [sniadania[0].value, dSniadania[0].value, zupy[0].value, dDania[0].value, kolacje[0].value]
+    currentUser.schedulesList.push(newPlan);
+    weekNumbersList.push(nrTygodnia);
+    console.log(weekNumbersList);
+    //Wyslij nowy plan na liste html
+
+    //dodaj nowy plan uzytkownikowi
+
+    // zaktualizuj uzytkownika
+    console.log("Uzytkownik nazwa: " + userName)
+    console.log("obiekt uzytkownika: ")
+    console.log(currentUser)
+    localStorage.setItem(userName, JSON.stringify(currentUser));
+    //wyzeruj dane
+    plaName = null;
+    plaDesc = null;
+    nrTygodnia = null;
 })
 
 //Event dla przycisku Dodaj Instrukcje z obszaru dodaj przepis
