@@ -6,7 +6,6 @@
   background: $bg-color;
   border: 1px dotted black;
   display: none;
-
   &.active {
     display: block;
   }
@@ -20,7 +19,118 @@
   background: $bg-color;
   border: 1px dotted $secondary-color;
   display: none;
+
   &.active {
     display: block;
   }
+
+  .addSchedule__new {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding-bottom: 5px;
+    border-bottom: 2px solid $table-text-color;
+
+    .newSchedule__title {
+      color: $button-color;
+      font-size: $base-font-size * 1.71;
+      text-transform: uppercase;
+      font-family: $font-open-sans;
+      font-weight: bold;
+    }
+
+    .newSchedule__btn {
+      &:focus {
+        outline: none;
+      }
+
+      padding: 6px 10px;
+      font-size: 16px;
+      background-color: $button-color;
+      color: $bg-color;
+      border: none;
+      font-weight: bold;
+    }
+  }
+
+  .addSchedule__properties {
+    width: 92%;
+  /*   border: 1px solid red;*/
+    padding-top: 10px;
+
+    .properties {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      /* width: 100%;*/
+
+      .schedule__data {
+        font-size: $base-font-size *1.5;
+        color: $primary-color;
+      }
+
+      .properties__input {
+        width: 720px;
+        margin-right: 0;
+      }
+
+      .properties__nr {
+        margin-right: 680px;
+        width: 40px;
+      }
+
+    }
+  }
+
+  .scheduleCard {
+    background-color: $bg-color;
+    height: 60%;
+   /* border: 1px solid red;*/
+    width: 92%;
+    font-family: $font-open-sans;
+    display: flex;
+
+
+    .schedule__table {
+      width: 100%;
+
+      thead {
+        font-size: $base-font-size *1.4;
+        font-weight: bold;
+        color: $primary-color;
+
+        tr {
+          text-align: center;
+          border-top: 1px solid $table-text-color;
+          border-bottom: 1px solid $table-text-color;
+        }
+
+        th {
+          padding: 5px 10px;
+          width: 16.7%;
+          line-height: 30px;
+        /*  border: 1px solid red;*/
+          vertical-align: middle;
+        }
+      }
+
+      tbody {
+        font-size: $base-font-size *1.3;
+        font-weight: bold;
+        color: $primary-color;
+        align-items: center;
+
+        tr {
+          border-bottom: 1px solid $table-text-color;
+
+          th, td {
+            padding: 5px;
+            /*border: 1px solid red;*/
+            width: 16.7%;
+          }
+        }
+      }
+    }
+  }
 }
+
