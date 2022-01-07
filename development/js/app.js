@@ -80,6 +80,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
     let newRow = tableRef.insertRow(tableRef.rows.length);
     newRow.innerHTML = myHtmlContent;
 }
+
 function napierdalamPlany (weekNR){
     //Pobierz klucz uzytkownika
     let userName = document.getElementById("name").innerText;
@@ -103,7 +104,7 @@ function napierdalamPlany (weekNR){
             nd.push(currentUser.schedulesList[i].scheduleObj.nd);
         }
     }
-    console.log(pn)
+    console.log(currentUser.schedulesList[0])
     let myHtml = `<tr>
                         <td>${pn[0][0]}</td>
                         <td>${wt[0][0]}</td>
@@ -426,6 +427,17 @@ previousSchedule.addEventListener('click', ()=>{
     setActivePlan()
 })
 nextSchedule.addEventListener('click', ()=>{
+    let numertygodnia = document.getElementById("qupa").innerHTML
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    for (let i = 0; i < currentUser.schedulesList.length; i++) {
+        if(currentUser.schedulesList[i].weekNr>numertygodnia){
+            napierdalamPlany(currentUser.schedulesList[i].weekNr)
+        }
+    }
+
+
     activePlan--
     if (activePlan < numberOfWeek.length - 1) {
         activePlan = 1;
@@ -433,6 +445,8 @@ nextSchedule.addEventListener('click', ()=>{
     console.log('działa dalej')
 
     setActivePlan()
+
+
 })
 function setActivePlan(){
 //Pobierz klucz uzytkownika
