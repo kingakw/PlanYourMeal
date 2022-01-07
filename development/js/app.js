@@ -68,8 +68,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description", re
                         <td class="recipe__name">${recipeName}</td>
                         <td class="recipe__description">${recipeDesc}</td>
                         <td class="recipe__action">
-                            <button class="btn btn__
-                            edit">
+                            <button class="btn btn__edit" onclick="editRecipButton(${trId})">
                                 <i class="far fa-edit fa-1x"></i>
                             </button>
                             <button class="btn btn__trash" onclick="delRecipButton(${trId})">
@@ -92,16 +91,9 @@ const delayscript = function () {
     //Wyswietlenie okna z dodaj przepis
     const addRecip = document.getElementById("btnPlus");
     addRecip.addEventListener("click", function () {
-        // document.getElementById("containerRecipes").className = "box";
-        // let currentMenu = document.getElementsByClassName(" menu__item--active");
-        // currentMenu[0].className = currentMenu[0].className.replace(" menu__item--active", "");
-        // document.getElementById("sectionMenu").firstElementChild.className += " menu__item--active";
         recipeWindow.classList.add("active");
-        // document.querySelector('.recipes__container').classList.remove('active');
     })
     createRecipListFromLocalStorage()
-    // funkcjonalnosc usuwania wpisu
-    // delRecipButton()
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
 };
@@ -113,7 +105,6 @@ const desktopActive = document.querySelector(".container__pulpit");
 const recipeWindow = document.querySelector(".container__recipe");
 
 widgetRecipe.addEventListener("click", function () {
-    // desktopActive.classList.remove("active");
     recipeWindow.classList.add("active");
 });
 
@@ -182,43 +173,58 @@ submitUserName.addEventListener("click", function () {
 //Zmienne pomocnicze pamietajace wprowadzane dane
 let recipeInstructions = [];
 let recipeIngredients = [];
+let recipeIndex = null;
+let recipeId = null;
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
 document.getElementById("btnNewRecipe").addEventListener("click", function () {
     //Wylacz contener AddRecipe
-
-
     recipeWindow.classList.remove("active");
-    // desktopActive.classList.add("active");
-
-
     //Pobierz klucz uzytkownika
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
-    let lastRecipeId = JSON.parse(localStorage.getItem("lastUsedRecipeId"))
-    //Pobierz dane z formularza nowego przepisu
+    //Sprawdzenie wersji okna
+    let windowVer = document.getElementById("newRecipeTitle").innerText;
+//Pobierz dane z formularza nowego przepisu
     let recipeName = document.getElementById("recipe__name").value;
     let recipeDesc = document.getElementById("recipe__description").value;
-    //Stworz obiekt z nowym przepisem
-    let newRecip = new Recipe(recipeName, recipeDesc);
-    newRecip.id = lastRecipeId;
-    newRecip.instructions.push(recipeInstructions)
-    newRecip.ingredients.push(recipeIngredients)
-    //Wyslij nowy przepis na liste html
-    currentUser.recipList.push(newRecip);
-    //dodaj nowy przepis uzytkownikowi
-    console.log(newRecip.id)
-    addRecipe(recipeName, recipeDesc, newRecip.id);
-    // zaktualizuj uzytkownika
-    console.log("Uzytkownik nazwa: " + userName)
+
+    if (windowVer === "Nowy przepis") {
+        console.log("New recip active");
+        let lastRecipeId = JSON.parse(localStorage.getItem("lastUsedRecipeId"))
+        //Stworz obiekt z nowym przepisem
+        let newRecip = new Recipe(recipeName, recipeDesc);
+        newRecip.id = lastRecipeId;
+        newRecip.instructions.push(recipeInstructions)
+        newRecip.ingredients.push(recipeIngredients)
+        //Wyslij nowy przepis na liste html
+        currentUser.recipList.push(newRecip);
+        //dodaj nowy przepis uzytkownikowi
+        console.log(newRecip.id)
+        addRecipe(recipeName, recipeDesc, newRecip.id);
+        // zaktualizuj uzytkownika
+
+        lastRecipeId++;
+        localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
+    } else {
+        console.log("Edit recip active")
+        currentUser.recipList[recipeIndex].name = recipeName;
+        document.getElementById(`recipeTrId${recipeId}`).children[1].innerHTML = recipeName;
+        currentUser.recipList[recipeIndex].desc = recipeDesc;
+        document.getElementById(`recipeTrId${recipeId}`).children[2].innerHTML = recipeDesc;
+        currentUser.recipList[recipeIndex].instructions[0] = [];
+        for (let i = 0; i < document.getElementById("instructionList").children.length; i++) {
+            currentUser.recipList[recipeIndex].instructions[0].push(document.getElementById("instructionList").children[i].innerText)
+        }
+        currentUser.recipList[recipeIndex].ingredients[0] = [];
+        for (let i = 0; i < document.getElementById("ingredientList").children.length; i++) {
+            currentUser.recipList[recipeIndex].ingredients[0].push(document.getElementById("ingredientList").children[i].innerText)
+        }
+    }
+    localStorage.setItem(userName, JSON.stringify(currentUser));
     console.log("obiekt uzytkownika: ")
     console.log(currentUser)
-    localStorage.setItem(userName, JSON.stringify(currentUser));
-    localStorage.setItem(userName, JSON.stringify(currentUser));
-    lastRecipeId++;
-    localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
-
     //wyzeruj dane
     document.getElementById("recipe__name").value = null;
     document.getElementById("recipe__description").value = null;
@@ -227,7 +233,43 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     recipeInstructions = []
     recipeIngredients = []
 
+    document.getElementById("newRecipeTitle").innerText = "Nowy przepis"
 })
+
+function editRecipButton(trRecipeId) {
+    document.getElementById("newRecipeTitle").innerText = "Edytuj przepis"
+    recipeWindow.classList.add("active");
+    let userName = document.getElementById("name").innerText;
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    recipeId = trRecipeId.id.replace(/^\D+/g, '');
+    recipeIndex = null;
+    for (let i = 0; i < currentUser.recipList.length; i++) {
+        if (currentUser.recipList[i].id === parseInt(recipeId)) {
+            recipeIndex = i;
+        }
+    }
+    let userDB = currentUser.recipList[recipeIndex];
+    document.getElementById("recipe__name").value = userDB.name;
+    document.getElementById("recipe__description").value = userDB.desc;
+    for (let i = 0; i < userDB.instructions[0].length; i++) {
+        let btn = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>";
+        const list = document.getElementById('instructionList');
+        const entry = document.createElement('li');
+        entry.classList.add("instruction__list")
+        entry.appendChild(document.createTextNode(userDB.instructions[0][i]));
+        list.appendChild(entry);
+        list.lastElementChild.innerHTML = `${userDB.instructions[0][i]} ${btn}`
+    }
+    for (let i = 0; i < userDB.ingredients[0].length; i++) {
+        let btn = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>";
+        const list = document.getElementById('ingredientList');
+        const entry = document.createElement('li');
+        entry.classList.add("ingredient__list")
+        entry.appendChild(document.createTextNode(userDB.ingredients[0][i]));
+        list.appendChild(entry);
+        list.lastElementChild.innerHTML = `${userDB.ingredients[0][i]} ${btn}`
+    }
+}
 
 //Event dla przycisku Dodaj Instrukcje z obszaru dodaj przepis
 document.getElementById("instruction__btn").addEventListener("click", function () {
@@ -292,7 +334,7 @@ function delRecipButton(trRecipeId) {
     //Szukanie indexu po id
     for (let i = 0; i < currentUser.recipList.length; i++) {
         if (currentUser.recipList[i].id === parseInt(recipeId)) {
-            recipeIndex=i;
+            recipeIndex = i;
         }
     }
     // usuniecie z tablicy elementu o odszukanym index
