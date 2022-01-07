@@ -63,7 +63,7 @@ includeHTML();
 function addRecipe(recipeName = "test name", recipeDesc = "test description", recipeId) {
     let recipeID = document.getElementsByClassName("recipe__id");
     let newID = recipeID.length + 1;
-    let recipeNr = "" + recipeId;
+    let trId = "recipeTrId" + recipeId;
     let myHtmlContent = `<td class="recipe__id">${newID}</td>
                         <td class="recipe__name">${recipeName}</td>
                         <td class="recipe__description">${recipeDesc}</td>
@@ -72,14 +72,14 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description", re
                             edit">
                                 <i class="far fa-edit fa-1x"></i>
                             </button>
-                            <button class="btn btn__trash" onclick="delRecipButton(${recipeNr})">
+                            <button class="btn btn__trash" onclick="delRecipButton(${trId})">
                                 <i class="far fa-trash-alt fa-1x"></i>
                             </button>
                         </td>`
 
     let tableRef = document.getElementById("recipe__list");
     let newRow = tableRef.insertRow(tableRef.rows.length);
-    newRow.id = `${recipeNr}`
+    newRow.id = `${trId}`
     newRow.innerHTML = myHtmlContent;
 }
 
@@ -216,7 +216,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     console.log(currentUser)
     localStorage.setItem(userName, JSON.stringify(currentUser));
     localStorage.setItem(userName, JSON.stringify(currentUser));
-    lastRecipeId ++;
+    lastRecipeId++;
     localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
 
     //wyzeruj dane
@@ -278,16 +278,25 @@ function createRecipListFromLocalStorage() {
     }
 }
 
-function delRecipButton(kurwa) {
+function delRecipButton(trRecipeId) {
     //Pobierz klucz uzytkownika
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
-    const deleteRecipe = document.getElementById(`recipeNr${kurwa}`)
-    console.log(deleteRecipe)
-    console.log(kurwa)
+    let deleteRecipe = document.getElementById(`${trRecipeId.id}`);
+    //Usun z HTML
+    deleteRecipe.parentElement.removeChild(deleteRecipe);
+    //Wyciagnij czyste id
+    let recipeId = trRecipeId.id.replace(/^\D+/g, '');
+    let recipeIndex = null;
+    //Szukanie indexu po id
+    for (let i = 0; i < currentUser.recipList.length; i++) {
+        if (currentUser.recipList[i].id === parseInt(recipeId)) {
+            recipeIndex=i;
+        }
+    }
     // usuniecie z tablicy elementu o odszukanym index
-    // currentUser.recipList.splice(recipeIndex, 1);
+    currentUser.recipList.splice(recipeIndex, 1);
     // aktualizacja localStorage uzytkownika
     localStorage.setItem(userName, JSON.stringify(currentUser));
 }
