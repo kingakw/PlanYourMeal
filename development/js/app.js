@@ -60,9 +60,10 @@ includeHTML();
 
 
 // Dodawanie pozycji w tabeli z przepisami. Podajemy Nazwe przepisu i opis jak wykonac. ID wyciaga samo
-function addRecipe(recipeName = "test name", recipeDesc = "test description") {
+function addRecipe(recipeName = "test name", recipeDesc = "test description", recipeId) {
     let recipeID = document.getElementsByClassName("recipe__id");
     let newID = recipeID.length + 1;
+    let recipeNr = "" + recipeId;
     let myHtmlContent = `<td class="recipe__id">${newID}</td>
                         <td class="recipe__name">${recipeName}</td>
                         <td class="recipe__description">${recipeDesc}</td>
@@ -71,13 +72,14 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
                             edit">
                                 <i class="far fa-edit fa-1x"></i>
                             </button>
-                            <button class="btn btn__trash" onclick="delRecipButton()">
+                            <button class="btn btn__trash" onclick="delRecipButton(${recipeNr})">
                                 <i class="far fa-trash-alt fa-1x"></i>
                             </button>
                         </td>`
 
     let tableRef = document.getElementById("recipe__list");
     let newRow = tableRef.insertRow(tableRef.rows.length);
+    newRow.id = `${recipeNr}`
     newRow.innerHTML = myHtmlContent;
 }
 
@@ -160,6 +162,7 @@ class Recipe {
         this.desc = desc;
         this.instructions = [];
         this.ingredients = [];
+        this.id = null;
     }
 }
 
@@ -173,6 +176,7 @@ submitUserName.addEventListener("click", function () {
 //Creating User database
     const userObject = new User(userNameValue);
     localStorage.setItem(userObject.name, JSON.stringify(userObject));
+    localStorage.setItem("lastUsedRecipeId", JSON.stringify(0));
 })
 
 //Zmienne pomocnicze pamietajace wprowadzane dane
@@ -192,22 +196,29 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
+    let lastRecipeId = JSON.parse(localStorage.getItem("lastUsedRecipeId"))
     //Pobierz dane z formularza nowego przepisu
     let recipeName = document.getElementById("recipe__name").value;
     let recipeDesc = document.getElementById("recipe__description").value;
     //Stworz obiekt z nowym przepisem
     let newRecip = new Recipe(recipeName, recipeDesc);
+    newRecip.id = lastRecipeId;
     newRecip.instructions.push(recipeInstructions)
     newRecip.ingredients.push(recipeIngredients)
     //Wyslij nowy przepis na liste html
     currentUser.recipList.push(newRecip);
     //dodaj nowy przepis uzytkownikowi
-    addRecipe(recipeName, recipeDesc);
+    console.log(newRecip.id)
+    addRecipe(recipeName, recipeDesc, newRecip.id);
     // zaktualizuj uzytkownika
     console.log("Uzytkownik nazwa: " + userName)
     console.log("obiekt uzytkownika: ")
     console.log(currentUser)
     localStorage.setItem(userName, JSON.stringify(currentUser));
+    localStorage.setItem(userName, JSON.stringify(currentUser));
+    lastRecipeId ++;
+    localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
+
     //wyzeruj dane
     document.getElementById("recipe__name").value = null;
     document.getElementById("recipe__description").value = null;
@@ -262,41 +273,21 @@ function createRecipListFromLocalStorage() {
     } else {
         let currentUser = JSON.parse(localStorage.getItem(userName));
         for (let i = 0; i < currentUser.recipList.length; i++) {
-            addRecipe(currentUser.recipList[i].name, currentUser.recipList[i].desc)
+            addRecipe(currentUser.recipList[i].name, currentUser.recipList[i].desc, currentUser.recipList[i].id)
         }
     }
 }
 
-function delRecipButton() {
-    const trashButtons = document.getElementsByClassName("btn__trash");
-    for (let trashButton of trashButtons) {
-        trashButton.addEventListener("click", function () {
-            //Pobierz klucz uzytkownika
-            let userName = document.getElementById("name").innerText;
-            //Zaciagnij dane uzytkownika
-            let currentUser = JSON.parse(localStorage.getItem(userName));
-            //Usuwanie z struktury HTML
-            let idNum = trashButton.parentElement.parentElement.firstElementChild.innerHTML;
-            let recipeName = trashButton.parentElement.parentElement.children[1].innerHTML;
-            let recipeListHtml = document.getElementById("recipe__list");
-            recipeListHtml.removeChild(recipeListHtml.children[idNum - 1])
-            for (let i = 0; i < recipeListHtml.children.length; i++) {
-                recipeListHtml.children[i].firstElementChild.innerHTML = i + 1;
-            }
-            //Usuwanie z localStorage
-            //zmienna na Index usuwanego elementu
-            let recipeIndex = null;
-            // poszukiwanie elementu
-            for (let i = 0; i < currentUser.recipList.length; i++) {
-                if (currentUser.recipList[i].name === recipeName) {
-                    //przypisanie indexu
-                    recipeIndex = i;
-                }
-            }
-            // usuniecie z tablicy elementu o odszukanym index
-            currentUser.recipList.splice(recipeIndex, 1);
-            // aktualizacja localStorage uzytkownika
-            localStorage.setItem(userName, JSON.stringify(currentUser));
-        })
-    }
+function delRecipButton(kurwa) {
+    //Pobierz klucz uzytkownika
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    const deleteRecipe = document.getElementById(`recipeNr${kurwa}`)
+    console.log(deleteRecipe)
+    console.log(kurwa)
+    // usuniecie z tablicy elementu o odszukanym index
+    // currentUser.recipList.splice(recipeIndex, 1);
+    // aktualizacja localStorage uzytkownika
+    localStorage.setItem(userName, JSON.stringify(currentUser));
 }
