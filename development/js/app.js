@@ -263,7 +263,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     //Stworz obiekt z nowym planem
     let newPlan = new Schedule(nrTygodnia, plaName, plaDesc);
     const dayNames = ["pon", "wt", "sr", "czw", "pt", "sb", "nd"];
-    for (let i = 0; i < dayNames; i++) {
+    for (let i = 0; i < dayNames.length; i++) {
         console.log(newPlan.scheduleObj[dayNames[i]]);
         newPlan.scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
     }
