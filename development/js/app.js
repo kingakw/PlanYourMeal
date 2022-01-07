@@ -67,8 +67,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
                         <td class="recipe__name">${recipeName}</td>
                         <td class="recipe__description">${recipeDesc}</td>
                         <td class="recipe__action">
-                            <button class="btn btn__
-                            edit">
+                            <button class="btn btn__edit">
                                 <i class="far fa-edit fa-1x"></i>
                             </button>
                             <button class="btn btn__trash">
@@ -224,11 +223,11 @@ document.getElementById("instruction__btn").addEventListener("click", function (
     recipeInstructions.push(instructionField);
     //Wyzeruj pole tekstowe
     document.getElementById("instructionField").value = null;
-    //Wypisz dodany skladnik w liscie
-    let buttons = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>"
+    //Wypisz dodana instrukcje w liscie
+    let buttons = "<i class=\"far fa-edit\" onclick='editInstructionBtn()'></i><i class=\"fas fa-trash-alt\" onclick='delInstructionBtn()'></i>"
     const list = document.getElementById('instructionList');
     const entry = document.createElement('li');
-    entry.classList.add("instruction__list")
+    entry.classList.add("instruction__list");
     entry.appendChild(document.createTextNode(instructionField));
     list.appendChild(entry);
     list.lastElementChild.innerHTML = `${instructionField} ${buttons}`
@@ -243,7 +242,7 @@ document.getElementById("ingredient__btn").addEventListener("click", function ()
     //Wyzeruj pole tekstowe
     document.getElementById("ingredientField").value = null;
     //Wypisz dodany skladnik w liscie
-    let buttons = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>"
+    let buttons = "<i class=\"far fa-edit\" onclick='editIngredientBtn()'></i><i class=\"fas fa-trash-alt\" onclick='delIngredientBtn()'></i>"
     const list = document.getElementById('ingredientList');
     const entry = document.createElement('li');
     entry.classList.add("ingredient__list")
@@ -262,6 +261,56 @@ function createRecipListFromLocalStorage() {
         for (let i = 0; i < currentUser.recipList.length; i++) {
             addRecipe(currentUser.recipList[i].name, currentUser.recipList[i].desc)
         }
+    }
+}
+
+//Edycja poszczególnych instrukcji przepisow w trybie edycji okna przepisów
+
+function editInstructionBtn() {
+    const editInstructions = document.getElementsByClassName("instruction__list");
+    for (let editInstruction of editInstructions) {
+        editInstruction.addEventListener("click", function () {
+      /*      //Powiększ przycisk
+            editInstruction.style.transform = "scale(1.05)";*/
+            //Pobierz wartośc wpisu
+            editInstruction.style.fontStyle = "italic";
+            let instructionText = editInstruction.innerText;
+            //przypisz wartość do pola teksowego
+            let edittextArea = document.getElementById("instructionField");
+            edittextArea.value = instructionText;
+        })
+    }
+}
+
+//zmień kolor przycisku edytowanego
+
+/*    //zapis po edycji uzytkownika i Wypchnij dane do tablicy tymczasowej
+    recipeInstructions.push(edittextArea.value);
+    //Wyzeruj pole tekstowe
+    document.getElementById("instructionField").value = null;
+    //Nadpisz dodana instrukcje w liscie
+    instructionText = edittextArea.value;*/
+
+
+//Usuwanie poszczególnych instrukcji przepisow w trybie edycji okna przepisów
+function delInstructionBtn() {
+    const delInstructions = document.getElementsByClassName("instruction__list");
+    for (let delInstruction of delInstructions) {
+        delInstruction.addEventListener("click", function () {
+            //Usun wpis
+            delInstruction.remove();
+        })
+    }
+}
+
+//Usuwanie poszczególnych składników w trybie edycji okna przepisów
+function delIngredientBtn() {
+    const delIngredients = document.getElementsByClassName("ingredient__list");
+    for (let delIngredient of delIngredients) {
+        delIngredient.addEventListener("click", function () {
+            //Usun składnik
+            delIngredient.remove();
+        })
     }
 }
 
