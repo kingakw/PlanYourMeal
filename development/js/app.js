@@ -193,6 +193,32 @@ submitUserName.addEventListener("click", function () {
     localStorage.setItem(userObject.name, JSON.stringify(userObject));
 })
 
+function addScheduleTableSelectOptions () {
+    let userName = document.getElementById("name").innerText;
+    if (userName === "Imie"){
+        console.log("New user, nothing to do")
+    } else {
+        let currentUser = JSON.parse(localStorage.getItem(userName));
+        let recipNameList = [];
+
+        for (const element of currentUser.recipList) {
+            recipNameList.push(element.name);
+        }
+        console.log(recipNameList);
+        const selectList = document.querySelectorAll(".scheduleCard tbody select");
+        console.log(selectList);
+        for (const selectListElement of selectList) {
+            for (const element of recipNameList) {
+                let meal = document.createElement("option");
+                selectListElement.appendChild(meal);
+                meal.innerText = element;
+            }
+        }
+    }
+}
+document.addEventListener("DOMContentLoaded", addScheduleTableSelectOptions);
+
+
 //Zmienne pomocnicze pamietajace wprowadzane dane
 let recipeInstructions = [];
 let recipeIngredients = [];
@@ -226,6 +252,15 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     console.log("obiekt uzytkownika: ")
     console.log(currentUser)
     localStorage.setItem(userName, JSON.stringify(currentUser));
+
+    //zaktualizuj liste selectów w html
+    const selectList = document.querySelectorAll(".scheduleCard tbody select");
+    for (const selectListElement of selectList) {
+        let meal = document.createElement("option");
+        selectListElement.appendChild(meal);
+        meal.innerText = recipeName;
+    }
+
     //wyzeruj dane
     document.getElementById("recipe__name").value = null;
     document.getElementById("recipe__description").value = null;
@@ -236,6 +271,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
 })
 
 //tablica z nr tygodni
+
 let weekNumbersList = [];
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj plan
@@ -250,6 +286,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
+
     //Pobierz dane z formularza nowego planu
     let plaName = document.getElementById("schedule__name").value;
     let plaDesc = document.getElementById("schedule__description").value;
@@ -281,9 +318,13 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     console.log(currentUser)
     localStorage.setItem(userName, JSON.stringify(currentUser));
     //wyzeruj dane
-    plaName = null;
-    plaDesc = null;
-    nrTygodnia = null;
+    document.getElementById("schedule__name").value = "";
+    document.getElementById("schedule__description").value = "";
+    document.getElementById("schedule__nr").value = "";
+    const selectList = document.querySelectorAll(".scheduleCard tbody select");
+    for (const selectListElement of selectList) {
+        selectListElement.value = "wybierz danie";
+    }
 })
 
 //Event dla przycisku Dodaj Instrukcje z obszaru dodaj przepis
