@@ -2,6 +2,7 @@
   box-sizing: border-box;
   display: flex;
   height: 90vh;
+  position: relative;
 
   .section__menu {
     background: $primary-color;
@@ -36,8 +37,9 @@
   }
 
   .section__main {
+    position: relative;
     width: 80vw;
-    background-image: url("../images/appBG.png");
+    background-image: url("../../images/appBG.png");
     padding: 2% 3%;
 
     .box{
