@@ -20,6 +20,7 @@
   background: $bg-color;
   border: 1px dotted $secondary-color;
   display: none;
+
   &.active {
     display: block;
   }
@@ -43,6 +44,7 @@
       &:focus {
         outline: none;
       }
+
       padding: 6px 10px;
       font-size: 16px;
       background-color: $button-color;
@@ -54,7 +56,7 @@
 
   .addSchedule__properties {
     width: 92%;
-    /*border: 1px solid red;*/
+    /* border: 1px solid red;*/
     padding-top: 10px;
 
     .properties {
@@ -70,7 +72,7 @@
 
       .properties__input {
         width: 720px;
-        margin-right:0 ;
+        margin-right: 0;
       }
 
       .properties__nr {
@@ -81,59 +83,58 @@
     }
   }
 
-   .scheduleCard {
-      background-color: $bg-color;
-     height: 60%;
-     /* border: 1px solid red;*/
-      width: 92%;
-      font-family: $font-open-sans;
-      display: flex;
-    /*  justify-content: space-evenly;*/
+  .scheduleCard {
+    background-color: $bg-color;
+    height: 60%;
+    /*border: 1px solid red;*/
+    width: 92%;
+    font-family: $font-open-sans;
+    display: flex;
 
-      .schedule__table {
-        width: 100%;
 
-        thead {
-          font-size: $base-font-size *1.4;
-          font-weight: bold;
-          color: $primary-color;
+    .schedule__table {
+      width: 100%;
 
-          tr {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid $table-text-color;
-            border-bottom: 1px solid $table-text-color;
-          }
-          th{
-            padding: 5px 10px;
-            width: 16.7%;
-            line-height: 30px;
-            /*border: 1px solid red;*/
-            align-self: center;
-            vertical-align: middle;
-          }
+      thead {
+        font-size: $base-font-size *1.4;
+        font-weight: bold;
+        color: $primary-color;
+
+        tr {
+          text-align: center;
+          border-top: 1px solid $table-text-color;
+          border-bottom: 1px solid $table-text-color;
         }
 
-        tbody{
-          font-size: $base-font-size *1.3;
-          font-weight: bold;
-          color: $primary-color;
-          align-items: center;
-
-          tr{
-            border-bottom: 1px solid $table-text-color;
-            align-self: center;
-            th,td {
-              padding: 5px;
-              /*border: 1px solid red;*/
-              width: 16.7%;
-              align-self: center;
-            }
-          }
-
+        th {
+          padding: 5px 10px;
+          width: 16.7%;
+          line-height: 30px;
+          /*border: 1px solid red;*/
+          vertical-align: middle;
         }
       }
-    }
 
+      tbody {
+        font-size: $base-font-size *1.3;
+        font-weight: bold;
+        color: $primary-color;
+        align-items: center;
+
+        tr {
+          border-bottom: 1px solid $table-text-color;
+          align-self: center;
+
+          th, td {
+            padding: 5px;
+            /*border: 1px solid red;*/
+            width: 16.7%;
+          }
+        }
+
+      }
+    }
   }
+
+}
 
