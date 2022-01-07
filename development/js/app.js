@@ -71,7 +71,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
                             edit">
                                 <i class="far fa-edit fa-1x"></i>
                             </button>
-                            <button class="btn btn__trash">
+                            <button class="btn btn__trash" onclick="delRecipButton()">
                                 <i class="far fa-trash-alt fa-1x"></i>
                             </button>
                         </td>`
@@ -98,8 +98,8 @@ const delayscript = function () {
         // document.querySelector('.recipes__container').classList.remove('active');
     })
     createRecipListFromLocalStorage()
-    delRecipButton()
-
+    // funkcjonalnosc usuwania wpisu
+    // delRecipButton()
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
 };
@@ -215,6 +215,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     document.getElementById('ingredientList').innerHTML = "";
     recipeInstructions = []
     recipeIngredients = []
+
 })
 
 //Event dla przycisku Dodaj Instrukcje z obszaru dodaj przepis
