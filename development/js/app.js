@@ -98,6 +98,7 @@ const delayscript = function () {
         // document.querySelector('.recipes__container').classList.remove('active');
     })
     createRecipListFromLocalStorage()
+    delRecipButton()
 
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
@@ -255,7 +256,7 @@ document.getElementById("ingredient__btn").addEventListener("click", function ()
 //Uzupelnienie listy przepisow z pamieci localStorage
 function createRecipListFromLocalStorage() {
     let userName = document.getElementById("name").innerText;
-    if (userName === "Imie"){
+    if (userName === "Imie") {
         console.log("New user, nothing to do")
     } else {
         let currentUser = JSON.parse(localStorage.getItem(userName));
@@ -265,3 +266,36 @@ function createRecipListFromLocalStorage() {
     }
 }
 
+function delRecipButton() {
+    const trashButtons = document.getElementsByClassName("btn__trash");
+    for (let trashButton of trashButtons) {
+        trashButton.addEventListener("click", function () {
+            //Pobierz klucz uzytkownika
+            let userName = document.getElementById("name").innerText;
+            //Zaciagnij dane uzytkownika
+            let currentUser = JSON.parse(localStorage.getItem(userName));
+            //Usuwanie z struktury HTML
+            let idNum = trashButton.parentElement.parentElement.firstElementChild.innerHTML;
+            let recipeName = trashButton.parentElement.parentElement.children[1].innerHTML;
+            let recipeListHtml = document.getElementById("recipe__list");
+            recipeListHtml.removeChild(recipeListHtml.children[idNum - 1])
+            for (let i = 0; i < recipeListHtml.children.length; i++) {
+                recipeListHtml.children[i].firstElementChild.innerHTML = i + 1;
+            }
+            //Usuwanie z localStorage
+            //zmienna na Index usuwanego elementu
+            let recipeIndex = null;
+            // poszukiwanie elementu
+            for (let i = 0; i < currentUser.recipList.length; i++) {
+                if (currentUser.recipList[i].name === recipeName) {
+                    //przypisanie indexu
+                    recipeIndex = i;
+                }
+            }
+            // usuniecie z tablicy elementu o odszukanym index
+            currentUser.recipList.splice(recipeIndex, 1);
+            // aktualizacja localStorage uzytkownika
+            localStorage.setItem(userName, JSON.stringify(currentUser));
+        })
+    }
+}
