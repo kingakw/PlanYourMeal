@@ -80,7 +80,79 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
     let newRow = tableRef.insertRow(tableRef.rows.length);
     newRow.innerHTML = myHtmlContent;
 }
-
+function napierdalamPlany (weekNR){
+    //Pobierz klucz uzytkownika
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    let pn = [];
+    let wt = [];
+    let sr = [];
+    let cz = [];
+    let pt = [];
+    let sb = [];
+    let nd = [];
+    for (let i = 0; i < currentUser.schedulesList.length; i++) {
+        if (currentUser.schedulesList[i].weekNr === weekNR){
+            pn.push(currentUser.schedulesList[i].scheduleObj.pon);
+            wt.push(currentUser.schedulesList[i].scheduleObj.wt);
+            sr.push(currentUser.schedulesList[i].scheduleObj.sr);
+            cz.push(currentUser.schedulesList[i].scheduleObj.czw);
+            pt.push(currentUser.schedulesList[i].scheduleObj.pt);
+            sb.push(currentUser.schedulesList[i].scheduleObj.sb);
+            nd.push(currentUser.schedulesList[i].scheduleObj.nd);
+        }
+    }
+    console.log(pn)
+    let myHtml = `<tr>
+                        <td>${pn[0][0]}</td>
+                        <td>${wt[0][0]}</td>
+                        <td>${sr[0][0]}</td>
+                        <td>${cz[0][0]}</td>
+                        <td>${pt[0][0]}</td>
+                        <td>${sb[0][0]}</td>
+                        <td>${nd[0][0]}</td>
+                    </tr>
+                    <tr>
+                        <td>${pn[0][1]}</td>
+                        <td>${wt[0][1]}</td>
+                        <td>${sr[0][1]}</td>
+                        <td>${cz[0][1]}</td>
+                        <td>${pt[0][1]}</td>
+                        <td>${sb[0][1]}</td>
+                        <td>${nd[0][1]}</td>
+                    </tr>
+                    <tr>
+                        <td>${pn[0][2]}</td>
+                        <td>${wt[0][2]}</td>
+                        <td>${sr[0][2]}</td>
+                        <td>${cz[0][2]}</td>
+                        <td>${pt[0][2]}</td>
+                        <td>${sb[0][2]}</td>
+                        <td>${nd[0][2]}</td>
+                    </tr>
+                    <tr>
+                        <td>${pn[0][3]}</td>
+                        <td>${wt[0][3]}</td>
+                        <td>${sr[0][3]}</td>
+                        <td>${cz[0][3]}</td>
+                        <td>${pt[0][3]}</td>
+                        <td>${sb[0][3]}</td>
+                        <td>${nd[0][3]}</td>
+                    </tr>
+                    <tr>
+                        <td>${pn[0][4]}</td>
+                        <td>${wt[0][4]}</td>
+                        <td>${sr[0][4]}</td>
+                        <td>${cz[0][4]}</td>
+                        <td>${pt[0][4]}</td>
+                        <td>${sb[0][4]}</td>
+                        <td>${nd[0][4]}</td>
+                    </tr>`
+    let tableRef = document.getElementById("kupa");
+    tableRef.innerHTML = myHtml;
+    document.getElementById("qupa").innerHTML = weekNR;
+}
 //************************************************************
 
 //
@@ -332,6 +404,51 @@ function createRecipListFromLocalStorage() {
         for (let i = 0; i < currentUser.recipList.length; i++) {
             addRecipe(currentUser.recipList[i].name, currentUser.recipList[i].desc)
         }
+
     }
 }
 
+// SKRYPT DLA ZMIEN PLAN
+const previousSchedule = document.querySelector('.schedule__previous ')
+const nextSchedule= document.querySelector('.schedule__next')
+const numberOfWeek = document.querySelector('.week_number').innerText;
+
+let activePlan = 1;
+
+previousSchedule.addEventListener('click', ()=>{
+    activePlan++
+    if (activePlan > numberOfWeek.length - 1) {
+        activePlan = 1;
+    }
+    console.log('działa wstecz')
+
+
+    setActivePlan()
+})
+nextSchedule.addEventListener('click', ()=>{
+    activePlan--
+    if (activePlan < numberOfWeek.length - 1) {
+        activePlan = 1;
+    }
+    console.log('działa dalej')
+
+    setActivePlan()
+})
+function setActivePlan(){
+//Pobierz klucz uzytkownika
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    let lista = currentUser.schedulesList;
+}
+
+
+Date.prototype.getWeek = function() {
+    var onejan = new Date(this.getFullYear(),0,1);
+    var today = new Date(this.getFullYear(),this.getMonth(),this.getDate());
+    var dayOfYear = ((today - onejan + 86400000)/86400000);
+    return Math.ceil(dayOfYear/7)
+};
+var today = new Date();
+var currentWeekNumber = today.getWeek();
+document.getElementById("qupa").innerHTML=currentWeekNumber;
