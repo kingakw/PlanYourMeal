@@ -1,22 +1,59 @@
-//Kontener główny
+.schedule {
+  background-color: $bg-color;
+  border: 1px dotted $primary-color;
+  margin-top: 30px;
+  padding: 1%;
+  font-family: $font-open-sans;
 
-.container__schedule {
-  height: 100%;
-  width: 100%;
-  background: $bg-color;
-  border: 1px dotted black;
-  display: none;
-  /*&.active{
-    display:block;*/
-}
-//Kontener wewnętrzny karty
-.container__addSchedule {
-  position: absolute;
-  left: 28.45vw;
-  top: 13vh;
-  background: $bg-color;
-  height: 85vh;
-  width: 58.5vw;
-  padding: 2% 3%;
-  overflow: hidden;
+  .schedule__title {
+    font-size: $base-font-size*1.4;
+    color: $button-color;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px 0 15px 0;
+  }
+
+  .schedule__table {
+    width: 95%;
+    margin: 0 auto;
+
+    td,
+    th {
+      padding: 13px 10px;
+    }
+
+    tr {
+      border-bottom: 1px solid 	#cbcbcb;
+    }
+    tr:first-child {
+      border-top: 1px solid 	#cbcbcb;
+    }
+
+    thead {
+      font-weight: bold;
+      font-size: $base-font-size*1.7;
+      color: $primary-color;
+      text-align: left;
+    }
+
+    tbody {
+      font-size: $base-font-size*1.4;
+      color: $table-text-color;
+    }
+  }
+  .schedule__change {
+    color: $button-color;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-top: 20px;
+
+    p {
+      padding: 3px 8px;
+    }
+    .change__box {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
