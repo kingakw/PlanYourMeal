@@ -421,7 +421,7 @@ previousSchedule.addEventListener('click', ()=>{
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
-
+    currentUser.schedulesList.sort((a,b)=> a.weekNr - b.weekNr)
     activePlan--
     if (activePlan < 0 ) {
         activePlan = currentUser.schedulesList.length - 1;
@@ -445,6 +445,7 @@ nextSchedule.addEventListener('click', ()=>{
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
 
+    currentUser.schedulesList.sort((a,b)=> a.weekNr - b.weekNr)
     if (activePlan > currentUser.schedulesList.length - 1) {
         activePlan = 0;
     }
