@@ -584,6 +584,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
         }
 
         document.getElementById("newScheduleTitle").innerText = "Nowy plan";
+        window.location.reload(true);
     }
 
 
@@ -765,56 +766,31 @@ function delRecipButton(trRecipeId) {
 const previousSchedule = document.querySelector('.schedule__previous ')
 const nextSchedule = document.querySelector('.schedule__next')
 
-
-//let activePlan = 0;
-let activePlanPlus = `0`;
-let activePlanMinus = `0`;
-previousSchedule.addEventListener('click', () => {
-    console.log(activePlanMinus);
+function returnActualWeek(){
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
+    let arrayWeeks = []
+    let newSortedArray = arrayWeeks.sort((a, b) => a - b)
+    for (const item of currentUser.schedulesList) {
 
-    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
-    activePlanMinus--;
-    console.log(activePlanMinus);
-    if (activePlanMinus < 0) {
-        activePlanMinus = currentUser.schedulesList.length - 1;
-    }
-    schuldeSlider(currentUser.schedulesList[activePlanMinus].weekNr)
-    activePlanPlus = activePlanMinus + 1;
+        arrayWeeks.push(item.weekNr)
 
-
-    console.log('działa wstecz')
-
-
-})
-
-
-nextSchedule.addEventListener('click', () => {
-
-
-
-    console.log(activePlanPlus);
-    let userName = document.getElementById("name").innerText;
-    //Zaciagnij dane uzytkownika
-    let currentUser = JSON.parse(localStorage.getItem(userName));
-
-    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
-
-    if (activePlanPlus > currentUser.schedulesList.length - 1) {
-        activePlanPlus = 0;
     }
 
-    schuldeSlider(currentUser.schedulesList[activePlanPlus].weekNr);
-    activePlanPlus++
-    activePlanMinus = activePlanPlus - 1;
 
-    console.log('działa dalej')
-    console.log(activePlanPlus);
+    let counts = newSortedArray
+    goal = currentWeekNumber;
+
+    let closest = counts.reduce(function(prev, curr) {
+        return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+    });
+    arrayWeeks.sort((a, b) => a - b)
+
+    return closest
+}
 
 
-})
 
 
 Date.prototype.getWeek = function () {
@@ -827,26 +803,56 @@ let today = new Date();
 let currentWeekNumber = today.getWeek();
 document.querySelector(".week_number").innerHTML = currentWeekNumber;
 
+
+
+
 window.addEventListener('DOMContentLoaded',() =>{
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
+
+    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
+
     let arrayWeeks = []
+
     for (const item of currentUser.schedulesList) {
 
         arrayWeeks.push(item.weekNr)
 
     }
+    let newSortedArray = arrayWeeks.sort((a, b) => a - b);
+    let activeSlide = newSortedArray.indexOf(returnActualWeek());
 
 
-    let counts = arrayWeeks
-       goal = currentWeekNumber;
+    previousSchedule.addEventListener('click', () => {
 
-    let closest = counts.reduce(function(prev, curr) {
-        return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
-    });
 
-    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
+        activeSlide--
 
-    schuldeSlider(`${closest}`)
+        if(activeSlide<0 ){
+            activeSlide = String(newSortedArray.length -1)
+        }
+
+        schuldeSlider(`${newSortedArray[activeSlide]}`)
+
+
+        console.log('działa wstecz')
+
+
+    })
+
+
+    nextSchedule.addEventListener('click', () => {
+
+        activeSlide++
+
+        if(activeSlide>newSortedArray.length -1 ){
+            activeSlide = '0'
+        }
+        schuldeSlider(`${newSortedArray[activeSlide]}`)
+
+
+    })
+
+    schuldeSlider(`${returnActualWeek()}`)
 })
