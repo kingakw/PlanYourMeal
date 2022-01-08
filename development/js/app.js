@@ -373,7 +373,7 @@ function editRecipButton(trRecipeId) {
     document.getElementById("recipe__name").value = userDB.name;
     document.getElementById("recipe__description").value = userDB.desc;
     for (let i = 0; i < userDB.instructions[0].length; i++) {
-        let btn = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>";
+        let btn = "<i class=\"far fa-edit\" onclick='editInstructionBtn()' ></i><i class=\"fas fa-trash-alt\"  onclick='delInstructionBtn()' ></i>";
         const list = document.getElementById('instructionList');
         const entry = document.createElement('li');
         entry.classList.add("instruction__list")
@@ -382,7 +382,7 @@ function editRecipButton(trRecipeId) {
         list.lastElementChild.innerHTML = `${userDB.instructions[0][i]} ${btn}`
     }
     for (let i = 0; i < userDB.ingredients[0].length; i++) {
-        let btn = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>";
+        let btn = "<i class=\"far fa-edit\"  onclick='editIngredientBtn()' ></i><i class=\"fas fa-trash-alt\" onclick='delIngredientBtn()'></i>";
         const list = document.getElementById('ingredientList');
         const entry = document.createElement('li');
         entry.classList.add("ingredient__list")
@@ -449,41 +449,133 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     }
 })
 
+let editMemory = 0;
 //Event dla przycisku Dodaj Instrukcje z obszaru dodaj przepis
 document.getElementById("instruction__btn").addEventListener("click", function () {
-    //Pobierz dane z pola tekstowego
-    let instructionField = document.getElementById("instructionField").value;
-    //Wypchnij dane do tablicy tymczasowej
-    recipeInstructions.push(instructionField);
-    //Wyzeruj pole tekstowe
-    document.getElementById("instructionField").value = null;
-    //Wypisz dodany skladnik w liscie
-    let buttons = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>"
-    const list = document.getElementById('instructionList');
-    const entry = document.createElement('li');
-    entry.classList.add("instruction__list")
-    entry.appendChild(document.createTextNode(instructionField));
-    list.appendChild(entry);
-    list.lastElementChild.innerHTML = `${ instructionField } ${ buttons }`
+    if (editMemory === 0) {
+        //Pobierz dane z pola tekstowego
+        let instructionField = document.getElementById("instructionField").value;
+        //Wypchnij dane do tablicy tymczasowej
+        recipeInstructions.push(instructionField);
+        //Wyzeruj pole tekstowe
+        document.getElementById("instructionField").value = null;
+        //Wypisz dodana instrukcje w liscie
+        let buttons = "<i class=\"far fa-edit\" onclick='editInstructionBtn()'></i><i class=\"fas fa-trash-alt\" onclick='delInstructionBtn()'></i>"
+        const list = document.getElementById('instructionList');
+        const entry = document.createElement('li');
+        entry.classList.add("instruction__list");
+        entry.appendChild(document.createTextNode(instructionField));
+        list.appendChild(entry);
+        list.lastElementChild.innerHTML = `${instructionField} ${buttons}`
+    } else {
+        //zapis po edycji uzytkownika
+        let instructionFieldEdited = document.getElementById("instructionField").value;
+        //Wypchnij dane do tablicy tymczasowej
+        recipeInstructions.push(instructionFieldEdited);
+        //Wyzeruj pole tekstowe
+        document.getElementById("instructionField").value = null;
+        //Nadpisz dodana instrukcje w liscie
+        let buttons = "<i class=\"far fa-edit\" onclick='editInstructionBtn()'></i><i class=\"fas fa-trash-alt\" onclick='delInstructionBtn()'></i>"
+        instructionToBeEdited.style.fontStyle = "normal"
+        instructionToBeEdited.innerHTML = instructionFieldEdited + buttons;
+        editMemory = 0;
+    }
 })
 
+//Edycja poszczególnych instrukcji przepisow w trybie edycji okna przepisów
+let instructionToBeEdited = 0;
+
+function editInstructionBtn() {
+    editMemory = 1;
+    const editInstructions = document.getElementsByClassName("instruction__list");
+    for (let editInstruction of editInstructions) {
+        editInstruction.addEventListener("click", function () {
+            instructionToBeEdited = editInstruction;
+            //zmien na kursywe edytowany tekst
+            instructionToBeEdited.style.fontStyle = "italic";
+            //Pobierz wartośc wpisu
+            //przypisz wartość do pola teksowego
+            let edittextArea = document.getElementById("instructionField");
+            edittextArea.value = instructionToBeEdited.innerText;
+        })
+    }
+}
+
+//Usuwanie poszczególnych instrukcji przepisow w trybie edycji okna przepisów
+function delInstructionBtn() {
+    const delInstructions = document.getElementsByClassName("instruction__list");
+    for (let delInstruction of delInstructions) {
+        delInstruction.addEventListener("click", function () {
+            //Usun wpis
+            delInstruction.remove();
+            document.getElementById("instructionField").value = null;
+        })
+    }
+}
+
+let editMemoryIngredient = 0;
 //Event dla przycisku Dodaj Skladnik z obszaru dodaj przepis
 document.getElementById("ingredient__btn").addEventListener("click", function () {
-    //Pobierz dane z pola tekstowego
-    let ingredientField = document.getElementById("ingredientField").value;
-    //Wypchnij dane do tablicy tymczasowej
-    recipeIngredients.push(ingredientField);
-    //Wyzeruj pole tekstowe
-    document.getElementById("ingredientField").value = null;
-    //Wypisz dodany skladnik w liscie
-    let buttons = "<i class=\"far fa-edit\"></i><i class=\"fas fa-trash-alt\"></i>"
-    const list = document.getElementById('ingredientList');
-    const entry = document.createElement('li');
-    entry.classList.add("ingredient__list")
-    entry.appendChild(document.createTextNode(ingredientField));
-    list.appendChild(entry);
-    list.lastElementChild.innerHTML = `${ ingredientField } ${ buttons }`
+    if (editMemoryIngredient === 0) {
+        //Pobierz dane z pola tekstowego
+        let ingredientField = document.getElementById("ingredientField").value;
+        //Wypchnij dane do tablicy tymczasowej
+        recipeIngredients.push(ingredientField);
+        //Wyzeruj pole tekstowe
+        document.getElementById("ingredientField").value = null;
+        //Wypisz dodany skladnik w liscie
+        let buttons = "<i class=\"far fa-edit\" onclick='editIngredientBtn()'></i><i class=\"fas fa-trash-alt\" onclick='delIngredientBtn()'></i>"
+        const list = document.getElementById('ingredientList');
+        const entry = document.createElement('li');
+        entry.classList.add("ingredient__list")
+        entry.appendChild(document.createTextNode(ingredientField));
+        list.appendChild(entry);
+        list.lastElementChild.innerHTML = `${ingredientField} ${buttons}`
+    } else {
+        //zapis po edycji uzytkownika
+        let ingredientFieldEdited = document.getElementById("ingredientField").value;
+        //Wypchnij dane do tablicy tymczasowej
+        recipeIngredients.push(ingredientFieldEdited);
+        //Wyzeruj pole tekstowe
+        document.getElementById("ingredientField").value = null;
+        //Nadpisz dodana instrukcje w liscie
+        let buttons = "<i class=\"far fa-edit\" onclick='editIngredientBtn()'></i><i class=\"fas fa-trash-alt\" onclick='delIngredientBtn()'></i>"
+        ingredientToBeEdited.style.fontStyle = "normal"
+        ingredientToBeEdited.innerHTML = ingredientFieldEdited + buttons;
+        editMemoryIngredient = 0;
+    }
 })
+
+//Edycja poszczególnych instrukcji skłądników w trybie edycji okna przepisów
+let ingredientToBeEdited = 0;
+
+function editIngredientBtn() {
+    editMemoryIngredient = 1;
+    const editIngredients = document.getElementsByClassName("ingredient__list");
+    for (let editIngredient of editIngredients) {
+        editIngredient.addEventListener("click", function () {
+            ingredientToBeEdited = editIngredient;
+            //zmien na kursywe edytowany tekst
+            ingredientToBeEdited.style.fontStyle = "italic";
+            //Pobierz wartośc wpisu
+            //przypisz wartość do pola teksowego
+            let edittextArea = document.getElementById("ingredientField");
+            edittextArea.value = ingredientToBeEdited.innerText;
+        })
+    }
+}
+
+//Usuwanie poszczególnych składników w trybie edycji okna przepisów
+function delIngredientBtn() {
+    const delIngredients = document.getElementsByClassName("ingredient__list");
+    for (let delIngredient of delIngredients) {
+        delIngredient.addEventListener("click", function () {
+            //Usun składnik
+            delIngredient.remove();
+            document.getElementById("ingredientField").value = null;
+        })
+    }
+}
 
 //Uzupelnienie listy przepisow z pamieci localStorage
 function createRecipListFromLocalStorage() {
