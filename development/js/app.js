@@ -414,47 +414,70 @@ const previousSchedule = document.querySelector('.schedule__previous ')
 const nextSchedule= document.querySelector('.schedule__next')
 const numberOfWeek = document.querySelector('.week_number').innerText;
 
-let activePlan = 1;
+let activePlan = 0;
 
 previousSchedule.addEventListener('click', ()=>{
-    activePlan++
-    if (activePlan > numberOfWeek.length - 1) {
-        activePlan = 1;
+    let numertygodnia = document.getElementById("qupa").innerHTML
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+
+    activePlan--
+    if (activePlan < 0 ) {
+        activePlan = currentUser.schedulesList.length - 1;
     }
+    napierdalamPlany(currentUser.schedulesList[activePlan].weekNr)
+
+    // if (activePlan > numberOfWeek.length - 1) {
+    //     activePlan = 1;
+    // }
     console.log('działa wstecz')
 
 
-    setActivePlan()
+    // setActivePlan()
 })
+
+
+
 nextSchedule.addEventListener('click', ()=>{
     let numertygodnia = document.getElementById("qupa").innerHTML
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
-    for (let i = 0; i < currentUser.schedulesList.length; i++) {
-        if(currentUser.schedulesList[i].weekNr>numertygodnia){
-            napierdalamPlany(currentUser.schedulesList[i].weekNr)
-        }
+
+    if (activePlan > currentUser.schedulesList.length - 1) {
+        activePlan = 0;
     }
 
 
-    activePlan--
-    if (activePlan < numberOfWeek.length - 1) {
-        activePlan = 1;
-    }
+
+
+    napierdalamPlany(currentUser.schedulesList[activePlan].weekNr)
+
+    // for (let i = 0; i < currentUser.schedulesList.length; i++) {
+    //     if(currentUser.schedulesList[i].weekNr>numertygodnia){
+    //         napierdalamPlany(currentUser.schedulesList[i].weekNr)
+    //     }
+    // }
+    activePlan++
+
+    // activePlan--
+    // if (activePlan < numberOfWeek.length - 1) {
+    //     activePlan = 1;
+    // }
     console.log('działa dalej')
-
-    setActivePlan()
+    //
+    // setActivePlan()
 
 
 })
-function setActivePlan(){
-//Pobierz klucz uzytkownika
-    let userName = document.getElementById("name").innerText;
-    //Zaciagnij dane uzytkownika
-    let currentUser = JSON.parse(localStorage.getItem(userName));
-    let lista = currentUser.schedulesList;
-}
+// function setActivePlan(){
+// //Pobierz klucz uzytkownika
+//     let userName = document.getElementById("name").innerText;
+//     //Zaciagnij dane uzytkownika
+//     let currentUser = JSON.parse(localStorage.getItem(userName));
+//     let lista = currentUser.schedulesList;
+// }
 
 
 Date.prototype.getWeek = function() {
