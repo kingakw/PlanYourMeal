@@ -82,7 +82,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description", re
     newRow.innerHTML = myHtmlContent;
 }
 
-function napierdalamPlany(weekNR) {
+function schuldeSlider(weekNR) {
     //Pobierz klucz uzytkownika
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
@@ -151,9 +151,9 @@ function napierdalamPlany(weekNR) {
                         <td>${ sb[0][4] }</td>
                         <td>${ nd[0][4] }</td>
                     </tr>`
-    let tableRef = document.getElementById("kupa");
+    let tableRef = document.getElementById("scheduleTableTbody");
     tableRef.innerHTML = myHtml;
-    document.getElementById("qupa").innerHTML = weekNR;
+    document.querySelector(".week_number").textContent = weekNR;
 }
 
 //************************************************************
@@ -546,7 +546,7 @@ previousSchedule.addEventListener('click', () => {
     if (activePlan < 0) {
         activePlan = currentUser.schedulesList.length - 1;
     }
-    napierdalamPlany(currentUser.schedulesList[activePlan].weekNr)
+    schuldeSlider(currentUser.schedulesList[activePlan].weekNr)
 
 
     console.log('działa wstecz')
@@ -566,7 +566,7 @@ nextSchedule.addEventListener('click', () => {
         activePlan = 0;
     }
 
-    napierdalamPlany(currentUser.schedulesList[activePlan].weekNr);
+    schuldeSlider(currentUser.schedulesList[activePlan].weekNr);
 
      activePlan++
 
@@ -584,4 +584,4 @@ Date.prototype.getWeek = function () {
 };
 let today = new Date();
 let currentWeekNumber = today.getWeek();
-document.getElementById("qupa").innerHTML = currentWeekNumber;
+document.querySelector(".week_number").innerHTML = currentWeekNumber;
