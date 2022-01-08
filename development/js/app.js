@@ -13,12 +13,15 @@ for (let i = 0; i < menuItems.length; i++) {
         if (i === 0) {
             document.getElementById("containerPulpit").className += " active";
             document.querySelector(".schedules__container").classList.remove("active");
+            document.querySelector(".container__addSchedule ").classList.remove("active");
         } else if (i === 1) {
             document.getElementById("containerRecipes").className += " active";
             document.querySelector(".schedules__container").classList.remove("active");
+            document.querySelector(".container__addSchedule ").classList.remove("active");
         } else {
             document.getElementById("containerSchedules").className += " active";
-            // document.querySelector(".schedules__container").classList.add('active')
+            document.querySelector(".schedules__container").classList.remove("active");
+            document.querySelector(".container__addSchedule ").classList.remove("active");
 
         }
     });
