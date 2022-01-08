@@ -43,3 +43,10 @@ function setActiveSlide() {
     })
     slides[activeSlide].classList.add('active')
 }
+// Dodanie WIADOMOSCI ZAPISAŁES SIE DO NEWSLETTERA
+
+const newsletterbtn = document.querySelector('.newsletterbtn');
+newsletterbtn.addEventListener('click', (e)=>{
+    e.defaultPrevented
+    alert(`Zapisałeś się do newslettera. Dziękujemy!`)
+})
