@@ -338,63 +338,74 @@ let recipeId = null;
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj przepis
 document.getElementById("btnNewRecipe").addEventListener("click", function () {
-    //Wylacz contener AddRecipe
-    recipeWindow.classList.remove("active");
-    //Pobierz klucz uzytkownika
-    let userName = document.getElementById("name").innerText;
-    //Zaciagnij dane uzytkownika
-    let currentUser = JSON.parse(localStorage.getItem(userName));
-    //Sprawdzenie wersji okna
-    let windowVer = document.getElementById("newRecipeTitle").innerText;
+
 //Pobierz dane z formularza nowego przepisu
     let recipeName = document.getElementById("recipe__name").value;
-    let recipeDesc = document.getElementById("recipe__description").value;
 
-    if (windowVer === "Nowy przepis") {
-        console.log("New recip active");
-        let lastRecipeId = JSON.parse(localStorage.getItem("lastUsedRecipeId"))
-        //Stworz obiekt z nowym przepisem
-        let newRecip = new Recipe(recipeName, recipeDesc);
-        newRecip.id = lastRecipeId;
-        newRecip.instructions.push(recipeInstructions)
-        newRecip.ingredients.push(recipeIngredients)
-        //Wyslij nowy przepis na liste html
-        currentUser.recipList.push(newRecip);
-        //dodaj nowy przepis uzytkownikowi
-        console.log(newRecip.id)
-        addRecipe(recipeName, recipeDesc, newRecip.id);
-        // zaktualizuj uzytkownika
 
-        lastRecipeId++;
-        localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
+    if(!recipeName){
+        alert(`Nie masz wpisanej nazwy przepisu :)`)
     } else {
-        console.log("Edit recip active")
-        currentUser.recipList[recipeIndex].name = recipeName;
-        document.getElementById(`recipeTrId${recipeId}`).children[1].innerHTML = recipeName;
-        currentUser.recipList[recipeIndex].desc = recipeDesc;
-        document.getElementById(`recipeTrId${recipeId}`).children[2].innerHTML = recipeDesc;
-        currentUser.recipList[recipeIndex].instructions[0] = [];
-        for (let i = 0; i < document.getElementById("instructionList").children.length; i++) {
-            currentUser.recipList[recipeIndex].instructions[0].push(document.getElementById("instructionList").children[i].innerText)
+        //Wylacz contener AddRecipe
+        recipeWindow.classList.remove("active");
+        //Pobierz klucz uzytkownika
+        let userName = document.getElementById("name").innerText;
+        //Zaciagnij dane uzytkownika
+        let currentUser = JSON.parse(localStorage.getItem(userName));
+        //Sprawdzenie wersji okna
+        let windowVer = document.getElementById("newRecipeTitle").innerText;
+//Pobierz dane z formularza nowego przepisu
+        let recipeName = document.getElementById("recipe__name").value;
+        let recipeDesc = document.getElementById("recipe__description").value;
+
+        if (windowVer === "Nowy przepis") {
+            console.log("New recip active");
+            let lastRecipeId = JSON.parse(localStorage.getItem("lastUsedRecipeId"))
+            //Stworz obiekt z nowym przepisem
+            let newRecip = new Recipe(recipeName, recipeDesc);
+            newRecip.id = lastRecipeId;
+            newRecip.instructions.push(recipeInstructions)
+            newRecip.ingredients.push(recipeIngredients)
+            //Wyslij nowy przepis na liste html
+            currentUser.recipList.push(newRecip);
+            //dodaj nowy przepis uzytkownikowi
+            console.log(newRecip.id)
+            addRecipe(recipeName, recipeDesc, newRecip.id);
+            // zaktualizuj uzytkownika
+
+            lastRecipeId++;
+            localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
+        } else {
+            console.log("Edit recip active")
+            currentUser.recipList[recipeIndex].name = recipeName;
+            document.getElementById(`recipeTrId${recipeId}`).children[1].innerHTML = recipeName;
+            currentUser.recipList[recipeIndex].desc = recipeDesc;
+            document.getElementById(`recipeTrId${recipeId}`).children[2].innerHTML = recipeDesc;
+            currentUser.recipList[recipeIndex].instructions[0] = [];
+            for (let i = 0; i < document.getElementById("instructionList").children.length; i++) {
+                currentUser.recipList[recipeIndex].instructions[0].push(document.getElementById("instructionList").children[i].innerText)
+            }
+            currentUser.recipList[recipeIndex].ingredients[0] = [];
+            for (let i = 0; i < document.getElementById("ingredientList").children.length; i++) {
+                currentUser.recipList[recipeIndex].ingredients[0].push(document.getElementById("ingredientList").children[i].innerText)
+            }
         }
-        currentUser.recipList[recipeIndex].ingredients[0] = [];
-        for (let i = 0; i < document.getElementById("ingredientList").children.length; i++) {
-            currentUser.recipList[recipeIndex].ingredients[0].push(document.getElementById("ingredientList").children[i].innerText)
-        }
+        console.log("obiekt uzytkownika: ")
+        console.log(currentUser)
+        localStorage.setItem(userName, JSON.stringify(currentUser));
+
+        //wyzeruj dane
+        document.getElementById("recipe__name").value = null;
+        document.getElementById("recipe__description").value = null;
+        document.getElementById('instructionList').innerHTML = "";
+        document.getElementById('ingredientList').innerHTML = "";
+        recipeInstructions = []
+        recipeIngredients = []
+
+        document.getElementById("newRecipeTitle").innerText = "Nowy przepis"
+
     }
-    console.log("obiekt uzytkownika: ")
-    console.log(currentUser)
-    localStorage.setItem(userName, JSON.stringify(currentUser));
 
-    //wyzeruj dane
-    document.getElementById("recipe__name").value = null;
-    document.getElementById("recipe__description").value = null;
-    document.getElementById('instructionList').innerHTML = "";
-    document.getElementById('ingredientList').innerHTML = "";
-    recipeInstructions = []
-    recipeIngredients = []
-
-    document.getElementById("newRecipeTitle").innerText = "Nowy przepis"
 })
 
 function editRecipButton(trRecipeId) {
@@ -499,72 +510,81 @@ let weekNumbersList = [];
 
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj plan
 document.querySelector(".newSchedule__btn").addEventListener("click", function () {
-    //Wylacz contener addschedule
-    planWindow.classList.remove("active");
-    // desktopActive.classList.add("active");
-    // desktopActive.classList.add("active");
-
-
-    //Pobierz klucz uzytkownika
-    let userName = document.getElementById("name").innerText;
-    //Zaciagnij dane uzytkownika
-    let currentUser = JSON.parse(localStorage.getItem(userName));
-
-    //Pobierz dane z formularza nowego planu
     let plaName = document.getElementById("schedule__name").value;
-    let plaDesc = document.getElementById("schedule__description").value;
     let nrTygodnia = document.getElementById("schedule__nr").value;
-    const sniadania = document.querySelectorAll(".sniadanie");
-    const dSniadania = document.querySelectorAll(".drugieSnadanie");
-    const zupy = document.querySelectorAll(".zupa");
-    const dDania = document.querySelectorAll(".drugieDanie");
-    const kolacje = document.querySelectorAll(".kolacja");
-    const dayNames = ["pon", "wt", "sr", "czw", "pt", "sb", "nd"];
-
-    if (document.getElementById("newScheduleTitle").innerText === "Nowy plan") {
-        //Stworz obiekt z nowym planem
-        let newPlan = new Schedule(nrTygodnia, plaName, plaDesc);
-        for (let i = 0; i < dayNames.length; i++) {
-            console.log(newPlan.scheduleObj[dayNames[i]]);
-            newPlan.scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
-        }
-        //newPlan.scheduleObj.pon = [sniadania[0].value, dSniadania[0].value, zupy[0].value, dDania[0].value, kolacje[0].value]
-        currentUser.schedulesList.push(newPlan);
-        weekNumbersList.push(nrTygodnia);
-        console.log(weekNumbersList);
-        //Wyslij nowy plan na liste html
-        addScheduleHTML(plaName, plaDesc, nrTygodnia)
-        //dodaj nowy plan uzytkownikowi
+    if(!plaName){
+        alert(`Brak nazwy planu! :)`)
+    }else if(!nrTygodnia || typeof nrTygodnia === 'number' || nrTygodnia <= 0 || nrTygodnia > 52){
+        alert(`Wpisz poprawny numer tygodnia! :)`)
     } else {
-        let htmlContent = document.getElementById(`scheduleTrId${currentUser.schedulesList[scheduleListIndex].weekNr}`);
-        htmlContent.children[1].innerHTML = plaName;
-        htmlContent.children[2].innerHTML = plaDesc;
-        htmlContent.children[3].innerHTML = nrTygodnia;
+        //Wylacz contener addschedule
+        planWindow.classList.remove("active");
+        // desktopActive.classList.add("active");
+        // desktopActive.classList.add("active");
 
-        currentUser.schedulesList[scheduleListIndex].planName = plaName;
-        currentUser.schedulesList[scheduleListIndex].planDesc = plaDesc;
-        currentUser.schedulesList[scheduleListIndex].weekNr = nrTygodnia;
-        for (let i = 0; i < dayNames.length; i++) {
-            currentUser.schedulesList[scheduleListIndex].scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
+
+        //Pobierz klucz uzytkownika
+        let userName = document.getElementById("name").innerText;
+        //Zaciagnij dane uzytkownika
+        let currentUser = JSON.parse(localStorage.getItem(userName));
+
+        //Pobierz dane z formularza nowego planu
+        let plaName = document.getElementById("schedule__name").value;
+        let plaDesc = document.getElementById("schedule__description").value;
+        let nrTygodnia = document.getElementById("schedule__nr").value;
+        const sniadania = document.querySelectorAll(".sniadanie");
+        const dSniadania = document.querySelectorAll(".drugieSnadanie");
+        const zupy = document.querySelectorAll(".zupa");
+        const dDania = document.querySelectorAll(".drugieDanie");
+        const kolacje = document.querySelectorAll(".kolacja");
+        const dayNames = ["pon", "wt", "sr", "czw", "pt", "sb", "nd"];
+
+        if (document.getElementById("newScheduleTitle").innerText === "Nowy plan") {
+            //Stworz obiekt z nowym planem
+            let newPlan = new Schedule(nrTygodnia, plaName, plaDesc);
+            for (let i = 0; i < dayNames.length; i++) {
+                console.log(newPlan.scheduleObj[dayNames[i]]);
+                newPlan.scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
+            }
+            //newPlan.scheduleObj.pon = [sniadania[0].value, dSniadania[0].value, zupy[0].value, dDania[0].value, kolacje[0].value]
+            currentUser.schedulesList.push(newPlan);
+            weekNumbersList.push(nrTygodnia);
+            console.log(weekNumbersList);
+            //Wyslij nowy plan na liste html
+            addScheduleHTML(plaName, plaDesc, nrTygodnia)
+            //dodaj nowy plan uzytkownikowi
+        } else {
+            let htmlContent = document.getElementById(`scheduleTrId${currentUser.schedulesList[scheduleListIndex].weekNr}`);
+            htmlContent.children[1].innerHTML = plaName;
+            htmlContent.children[2].innerHTML = plaDesc;
+            htmlContent.children[3].innerHTML = nrTygodnia;
+
+            currentUser.schedulesList[scheduleListIndex].planName = plaName;
+            currentUser.schedulesList[scheduleListIndex].planDesc = plaDesc;
+            currentUser.schedulesList[scheduleListIndex].weekNr = nrTygodnia;
+            for (let i = 0; i < dayNames.length; i++) {
+                currentUser.schedulesList[scheduleListIndex].scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
+            }
         }
+
+
+        // zaktualizuj uzytkownika
+        console.log("Uzytkownik nazwa: " + userName)
+        console.log("obiekt uzytkownika: ")
+        console.log(currentUser)
+        localStorage.setItem(userName, JSON.stringify(currentUser));
+        //wyzeruj dane
+        document.getElementById("schedule__name").value = "";
+        document.getElementById("schedule__description").value = "";
+        document.getElementById("schedule__nr").value = "";
+        const selectList = document.querySelectorAll(".scheduleCard tbody select");
+        for (const selectListElement of selectList) {
+            selectListElement.value = "wybierz danie";
+        }
+
+        document.getElementById("newScheduleTitle").innerText = "Nowy plan";
     }
 
-
-    // zaktualizuj uzytkownika
-    console.log("Uzytkownik nazwa: " + userName)
-    console.log("obiekt uzytkownika: ")
-    console.log(currentUser)
-    localStorage.setItem(userName, JSON.stringify(currentUser));
-    //wyzeruj dane
-    document.getElementById("schedule__name").value = "";
-    document.getElementById("schedule__description").value = "";
-    document.getElementById("schedule__nr").value = "";
-    const selectList = document.querySelectorAll(".scheduleCard tbody select");
-    for (const selectListElement of selectList) {
-        selectListElement.value = "wybierz danie";
-    }
-
-    document.getElementById("newScheduleTitle").innerText = "Nowy plan";
 
 })
 
