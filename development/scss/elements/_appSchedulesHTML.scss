@@ -1,13 +1,9 @@
-.recipes__container {
+.schedules__container {
   background: $bg-color;
   width: 100%;
   height: 100%;
   padding: 2%;
   z-index: 0;
-  //display: none;
-  //.active{
-  //  display: block;
-  //}
 
   .btn {
     border: none;
@@ -42,13 +38,13 @@
     }
   }
 
-  #table-scroll {
+  .table-scroll {
     height: 74vh;
     overflow: auto;
     margin-top: 20px;
   }
 
-  #table-wrapper table {
+  .table-wrapper table {
     width: 100%;
   }
 
@@ -75,22 +71,26 @@
     text-align: left;
   }
 
-  .recipe__id {
+  .schedule__id {
     padding-left: 15px;
     width: 6%;
   }
 
-  .recipe__name {
+  .schedule__name {
     width: 25%;
   }
 
-  .recipe__description {
-    width: 60%;
+  .schedule__description {
+    width: 51%;
+  }
+
+  .schedule__weekNr{
+    width: 9%
   }
 
   .recipe__action {
     width: 9%;
-   }
+  }
 
 
 }

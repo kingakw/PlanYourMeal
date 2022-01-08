@@ -1,0 +1,92 @@
+.recipes__container {
+  background: $bg-color;
+  width: 100%;
+  height: 100%;
+  padding: 2%;
+  z-index: 0;
+
+  .btn {
+    border: none;
+    background: $bg-color;
+    margin-left: 5px;
+  }
+
+  .btn__plus {
+    color: $msg-success-color;
+  }
+
+  .btn__edit {
+    color: $msg-warning-color;
+  }
+
+  .btn__trash {
+    color: $bin-icon-color;
+  }
+
+  .header__container {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $secondary-color;
+
+    .header__title {
+      align-self: end;
+      font-size: 30px;
+      font-weight: 600;
+      font-family: $font-open-sans;
+      color: $button-color;
+    }
+  }
+
+  .table-scroll {
+    height: 74vh;
+    overflow: auto;
+    margin-top: 20px;
+  }
+
+  .table-wrapper table {
+    width: 100%;
+  }
+
+  tr {
+    border-bottom: 1px solid $primary-color;
+    border-top: 1px solid $primary-color;
+  }
+
+  th {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: $font-open-sans;
+    color: $secondary-color;
+    padding: 15px;
+    text-align: left;
+  }
+
+  td {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: $font-open-sans;
+    color: $primary-color;
+    padding: 7px;
+    text-align: left;
+  }
+
+  .recipe__id {
+    padding-left: 15px;
+    width: 6%;
+  }
+
+  .recipe__name {
+    width: 25%;
+  }
+
+  .recipe__description {
+    width: 60%;
+  }
+
+  .recipe__action {
+    width: 9%;
+  }
+
+
+}
