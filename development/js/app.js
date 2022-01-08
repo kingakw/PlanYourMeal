@@ -1,3 +1,4 @@
+
 //Changing active menu element
 const appMenu = document.getElementById("sectionMenu");
 const menuItems = appMenu.getElementsByClassName("menu__item");
@@ -766,8 +767,8 @@ const nextSchedule = document.querySelector('.schedule__next')
 
 
 //let activePlan = 0;
-let activePlanPlus = 0;
-let activePlanMinus = 0;
+let activePlanPlus = `0`;
+let activePlanMinus = `0`;
 previousSchedule.addEventListener('click', () => {
     console.log(activePlanMinus);
     let userName = document.getElementById("name").innerText;
@@ -791,6 +792,9 @@ previousSchedule.addEventListener('click', () => {
 
 
 nextSchedule.addEventListener('click', () => {
+
+
+
     console.log(activePlanPlus);
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
@@ -809,6 +813,7 @@ nextSchedule.addEventListener('click', () => {
     console.log('działa dalej')
     console.log(activePlanPlus);
 
+
 })
 
 
@@ -821,3 +826,27 @@ Date.prototype.getWeek = function () {
 let today = new Date();
 let currentWeekNumber = today.getWeek();
 document.querySelector(".week_number").innerHTML = currentWeekNumber;
+
+window.addEventListener('DOMContentLoaded',() =>{
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    let arrayWeeks = []
+    for (const item of currentUser.schedulesList) {
+
+        arrayWeeks.push(item.weekNr)
+
+    }
+
+
+    let counts = arrayWeeks
+       goal = currentWeekNumber;
+
+    let closest = counts.reduce(function(prev, curr) {
+        return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+    });
+
+    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
+
+    schuldeSlider(`${closest}`)
+})
