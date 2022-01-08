@@ -14,10 +14,14 @@ for (let i = 0; i < menuItems.length; i++) {
             document.getElementById("containerPulpit").className += " active";
             document.querySelector(".schedules__container").classList.remove("active");
             document.querySelector(".container__addSchedule ").classList.remove("active");
+            document.getElementById("containerSchedules").classList.remove("active")
+
+
         } else if (i === 1) {
             document.getElementById("containerRecipes").className += " active";
             document.querySelector(".schedules__container").classList.remove("active");
             document.querySelector(".container__addSchedule ").classList.remove("active");
+            document.getElementById("containerSchedules").classList.remove("active")
         } else {
             document.getElementById("containerSchedules").className += " active";
             document.querySelector(".schedules__container").classList.remove("active");
