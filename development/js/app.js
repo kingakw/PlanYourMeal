@@ -12,10 +12,14 @@ for (let i = 0; i < menuItems.length; i++) {
         currentSection[0].className = currentSection[0].className.replace(" active", "")
         if (i === 0) {
             document.getElementById("containerPulpit").className += " active";
+            document.querySelector(".schedules__container").classList.remove("active");
         } else if (i === 1) {
             document.getElementById("containerRecipes").className += " active";
+            document.querySelector(".schedules__container").classList.remove("active");
         } else {
             document.getElementById("containerSchedules").className += " active";
+            // document.querySelector(".schedules__container").classList.add('active')
+
         }
     });
 }
@@ -116,6 +120,7 @@ const delayscript = function () {
     })
     const addSchedule = document.getElementById("scheduleBtnPlus");
     addSchedule.addEventListener("click", function () {
+
         planWindow.classList.add("active");
     })
 
@@ -139,7 +144,7 @@ const widgetPlan = document.getElementById("widget_plan");
 const planWindow = document.querySelector(".container__addSchedule");
 
 widgetPlan.addEventListener("click", function () {
-    desktopActive.classList.remove("active");
+    // desktopActive.classList.remove("active");
     planWindow.classList.add("active");
 })
 
@@ -359,7 +364,7 @@ let weekNumbersList = [];
 document.querySelector(".newSchedule__btn").addEventListener("click", function () {
     //Wylacz contener addschedule
     planWindow.classList.remove("active");
-    desktopActive.classList.add("active");
+    // desktopActive.classList.add("active");
     // desktopActive.classList.add("active");
 
 
