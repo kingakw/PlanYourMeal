@@ -89,7 +89,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description", re
     newRow.innerHTML = myHtmlContent;
 }
 
-function addScheduleHTML( scheduleName = "test Name", scheduleDesc = "test desc", weekNr = "999") {
+function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc", weekNr = "999") {
     let scheduleHtmlId = document.getElementsByClassName("schedule__id");
     let newID = scheduleHtmlId.length + 1;
     let myHtmlContent = `<td class="schedule__id">${newID}</td>
@@ -97,7 +97,7 @@ function addScheduleHTML( scheduleName = "test Name", scheduleDesc = "test desc"
                                             <td class="schedule__description">${scheduleDesc}</td>
                                             <td class="schedule__weekNr">${weekNr}</td>
                                             <td class="schedule__action">
-                                                <button class="btn btn__edit">
+                                                <button class="btn btn__edit" onclick="editScheduleButton(${weekNr})">
                                                     <i class="far fa-edit fa-1x"></i>
                                                 </button>
                                                 <button class="btn btn__trash">
@@ -106,6 +106,7 @@ function addScheduleHTML( scheduleName = "test Name", scheduleDesc = "test desc"
                                             </td>`
     let tableRef = document.getElementById("schedule__list");
     let newRow = tableRef.insertRow(tableRef.rows.length);
+    newRow.id = `scheduleTrId${weekNr}`;
     newRow.innerHTML = myHtmlContent;
 }
 
@@ -134,49 +135,49 @@ function schuldeSlider(weekNR) {
     }
     console.log(currentUser.schedulesList[0])
     let myHtml = `<tr>
-                        <td>${ pn[0][0] }</td>
-                        <td>${ wt[0][0] }</td>
-                        <td>${ sr[0][0] }</td>
-                        <td>${ cz[0][0] }</td>
-                        <td>${ pt[0][0] }</td>
-                        <td>${ sb[0][0] }</td>
-                        <td>${ nd[0][0] }</td>
+                        <td>${pn[0][0]}</td>
+                        <td>${wt[0][0]}</td>
+                        <td>${sr[0][0]}</td>
+                        <td>${cz[0][0]}</td>
+                        <td>${pt[0][0]}</td>
+                        <td>${sb[0][0]}</td>
+                        <td>${nd[0][0]}</td>
                     </tr>
                     <tr>
-                        <td>${ pn[0][1] }</td>
-                        <td>${ wt[0][1] }</td>
-                        <td>${ sr[0][1] }</td>
-                        <td>${ cz[0][1] }</td>
-                        <td>${ pt[0][1] }</td>
-                        <td>${ sb[0][1] }</td>
-                        <td>${ nd[0][1] }</td>
+                        <td>${pn[0][1]}</td>
+                        <td>${wt[0][1]}</td>
+                        <td>${sr[0][1]}</td>
+                        <td>${cz[0][1]}</td>
+                        <td>${pt[0][1]}</td>
+                        <td>${sb[0][1]}</td>
+                        <td>${nd[0][1]}</td>
                     </tr>
                     <tr>
-                        <td>${ pn[0][2] }</td>
-                        <td>${ wt[0][2] }</td>
-                        <td>${ sr[0][2] }</td>
-                        <td>${ cz[0][2] }</td>
-                        <td>${ pt[0][2] }</td>
-                        <td>${ sb[0][2] }</td>
-                        <td>${ nd[0][2] }</td>
+                        <td>${pn[0][2]}</td>
+                        <td>${wt[0][2]}</td>
+                        <td>${sr[0][2]}</td>
+                        <td>${cz[0][2]}</td>
+                        <td>${pt[0][2]}</td>
+                        <td>${sb[0][2]}</td>
+                        <td>${nd[0][2]}</td>
                     </tr>
                     <tr>
-                        <td>${ pn[0][3] }</td>
-                        <td>${ wt[0][3] }</td>
-                        <td>${ sr[0][3] }</td>
-                        <td>${ cz[0][3] }</td>
-                        <td>${ pt[0][3] }</td>
-                        <td>${ sb[0][3] }</td>
-                        <td>${ nd[0][3] }</td>
+                        <td>${pn[0][3]}</td>
+                        <td>${wt[0][3]}</td>
+                        <td>${sr[0][3]}</td>
+                        <td>${cz[0][3]}</td>
+                        <td>${pt[0][3]}</td>
+                        <td>${sb[0][3]}</td>
+                        <td>${nd[0][3]}</td>
                     </tr>
                     <tr>
-                        <td>${ pn[0][4] }</td>
-                        <td>${ wt[0][4] }</td>
-                        <td>${ sr[0][4] }</td>
-                        <td>${ cz[0][4] }</td>
-                        <td>${ pt[0][4] }</td>
-                        <td>${ sb[0][4] }</td>
-                        <td>${ nd[0][4] }</td>
+                        <td>${pn[0][4]}</td>
+                        <td>${wt[0][4]}</td>
+                        <td>${sr[0][4]}</td>
+                        <td>${cz[0][4]}</td>
+                        <td>${pt[0][4]}</td>
+                        <td>${sb[0][4]}</td>
+                        <td>${nd[0][4]}</td>
                     </tr>`
     let tableRef = document.getElementById("scheduleTableTbody");
     tableRef.innerHTML = myHtml;
@@ -199,6 +200,7 @@ const delayscript = function () {
     addSchedule.addEventListener("click", function () {
 
         planWindow.classList.add("active");
+
     })
 
     loadHtmlContentFromLocalStorage()
@@ -426,6 +428,67 @@ function editRecipButton(trRecipeId) {
     }
 }
 
+let scheduleListIndex = null;
+
+function editScheduleButton(weekNr) {
+    document.getElementById("newScheduleTitle").innerText = "Edytuj plan";
+    planWindow.classList.add("active");
+    let userName = document.getElementById("name").innerText;
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    for (let i = 0; i < currentUser.schedulesList.length; i++) {
+        if (parseInt(currentUser.schedulesList[i].weekNr) === weekNr) {
+            scheduleListIndex = i;
+        }
+    }
+    document.getElementById("schedule__name").value = currentUser.schedulesList[scheduleListIndex].planName;
+    document.getElementById("schedule__description").value = currentUser.schedulesList[scheduleListIndex].planDesc;
+    document.getElementById("schedule__nr").value = currentUser.schedulesList[scheduleListIndex].weekNr;
+    //Poniedzialek
+    document.querySelectorAll(".sniadanie")[0].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pon[0];
+    document.querySelectorAll(".drugieSnadanie")[0].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pon[1];
+    document.querySelectorAll(".zupa")[0].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pon[2];
+    document.querySelectorAll(".drugieDanie")[0].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pon[3];
+    document.querySelectorAll(".kolacja")[0].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pon[4];
+    //Wtorek
+    document.querySelectorAll(".sniadanie")[1].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.wt[0];
+    document.querySelectorAll(".drugieSnadanie")[1].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.wt[1];
+    document.querySelectorAll(".zupa")[1].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.wt[2];
+    document.querySelectorAll(".drugieDanie")[1].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.wt[3];
+    document.querySelectorAll(".kolacja")[1].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.wt[4];
+    //Sierota
+    document.querySelectorAll(".sniadanie")[2].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sr[0];
+    document.querySelectorAll(".drugieSnadanie")[2].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sr[1];
+    document.querySelectorAll(".zupa")[2].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sr[2];
+    document.querySelectorAll(".drugieDanie")[2].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sr[3];
+    document.querySelectorAll(".kolacja")[2].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sr[4];
+    //Czwartek
+    document.querySelectorAll(".sniadanie")[3].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.czw[0];
+    document.querySelectorAll(".drugieSnadanie")[3].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.czw[1];
+    document.querySelectorAll(".zupa")[3].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.czw[2];
+    document.querySelectorAll(".drugieDanie")[3].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.czw[3];
+    document.querySelectorAll(".kolacja")[3].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.czw[4];
+    //Piatek
+    document.querySelectorAll(".sniadanie")[4].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pt[0];
+    document.querySelectorAll(".drugieSnadanie")[4].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pt[1];
+    document.querySelectorAll(".zupa")[4].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pt[2];
+    document.querySelectorAll(".drugieDanie")[4].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pt[3];
+    document.querySelectorAll(".kolacja")[4].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.pt[4];
+    //Sobota
+    document.querySelectorAll(".sniadanie")[5].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sb[0];
+    document.querySelectorAll(".drugieSnadanie")[5].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sb[1];
+    document.querySelectorAll(".zupa")[5].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sb[2];
+    document.querySelectorAll(".drugieDanie")[5].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sb[3];
+    document.querySelectorAll(".kolacja")[5].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.sb[4];
+    //Niedziela
+    document.querySelectorAll(".sniadanie")[6].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.nd[0];
+    document.querySelectorAll(".drugieSnadanie")[6].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.nd[1];
+    document.querySelectorAll(".zupa")[6].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.nd[2];
+    document.querySelectorAll(".drugieDanie")[6].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.nd[3];
+    document.querySelectorAll(".kolacja")[6].value = currentUser.schedulesList[scheduleListIndex].scheduleObj.nd[4];
+
+
+}
+
 //tablica z nr tygodni
 
 let weekNumbersList = [];
@@ -452,21 +515,36 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     const zupy = document.querySelectorAll(".zupa");
     const dDania = document.querySelectorAll(".drugieDanie");
     const kolacje = document.querySelectorAll(".kolacja");
-
-    //Stworz obiekt z nowym planem
-    let newPlan = new Schedule(nrTygodnia, plaName, plaDesc);
     const dayNames = ["pon", "wt", "sr", "czw", "pt", "sb", "nd"];
-    for (let i = 0; i < dayNames.length; i++) {
-        console.log(newPlan.scheduleObj[dayNames[i]]);
-        newPlan.scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
+
+    if (document.getElementById("newScheduleTitle").innerText === "Nowy plan") {
+        //Stworz obiekt z nowym planem
+        let newPlan = new Schedule(nrTygodnia, plaName, plaDesc);
+        for (let i = 0; i < dayNames.length; i++) {
+            console.log(newPlan.scheduleObj[dayNames[i]]);
+            newPlan.scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
+        }
+        //newPlan.scheduleObj.pon = [sniadania[0].value, dSniadania[0].value, zupy[0].value, dDania[0].value, kolacje[0].value]
+        currentUser.schedulesList.push(newPlan);
+        weekNumbersList.push(nrTygodnia);
+        console.log(weekNumbersList);
+        //Wyslij nowy plan na liste html
+        addScheduleHTML(plaName, plaDesc, nrTygodnia)
+        //dodaj nowy plan uzytkownikowi
+    } else {
+        let htmlContent = document.getElementById(`scheduleTrId${currentUser.schedulesList[scheduleListIndex].weekNr}`);
+        htmlContent.children[1].innerHTML = plaName;
+        htmlContent.children[2].innerHTML = plaDesc;
+        htmlContent.children[3].innerHTML = nrTygodnia;
+
+        currentUser.schedulesList[scheduleListIndex].planName = plaName;
+        currentUser.schedulesList[scheduleListIndex].planDesc = plaDesc;
+        currentUser.schedulesList[scheduleListIndex].weekNr = nrTygodnia;
+        for (let i = 0; i < dayNames.length; i++) {
+            currentUser.schedulesList[scheduleListIndex].scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
+        }
     }
-    //newPlan.scheduleObj.pon = [sniadania[0].value, dSniadania[0].value, zupy[0].value, dDania[0].value, kolacje[0].value]
-    currentUser.schedulesList.push(newPlan);
-    weekNumbersList.push(nrTygodnia);
-    console.log(weekNumbersList);
-    //Wyslij nowy plan na liste html
-    addScheduleHTML(plaName, plaDesc, nrTygodnia)
-    //dodaj nowy plan uzytkownikowi
+
 
     // zaktualizuj uzytkownika
     console.log("Uzytkownik nazwa: " + userName)
@@ -481,6 +559,9 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     for (const selectListElement of selectList) {
         selectListElement.value = "wybierz danie";
     }
+
+    document.getElementById("newScheduleTitle").innerText = "Nowy plan";
+
 })
 
 let editMemory = 0;
@@ -654,6 +735,7 @@ function delRecipButton(trRecipeId) {
     // aktualizacja localStorage uzytkownika
     localStorage.setItem(userName, JSON.stringify(currentUser));
 }
+
 // SKRYPT DLA ZMIEN PLAN
 const previousSchedule = document.querySelector('.schedule__previous ')
 const nextSchedule = document.querySelector('.schedule__next')
