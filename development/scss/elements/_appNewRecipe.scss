@@ -120,15 +120,6 @@
             }
           }
 
-          .far.fa-edit {
-            cursor: pointer;
-            margin-left: 10px;
-            color: $msg-warning-color;
-            display: none;
-            &.active {
-              display: block;
-            }
-
         }
 
         .box__list {
