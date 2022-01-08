@@ -656,20 +656,23 @@ const previousSchedule = document.querySelector('.schedule__previous ')
 const nextSchedule = document.querySelector('.schedule__next')
 
 
-let activePlan = 0;
-
+//let activePlan = 0;
+let activePlanPlus = 0;
+let activePlanMinus = 0;
 previousSchedule.addEventListener('click', () => {
+    console.log(activePlanMinus);
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
 
     currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
-
-    activePlan--
-    if (activePlan < 0) {
-        activePlan = currentUser.schedulesList.length - 1;
+    activePlanMinus--;
+    console.log(activePlanMinus);
+    if (activePlanMinus < 0) {
+        activePlanMinus = currentUser.schedulesList.length - 1;
     }
-    schuldeSlider(currentUser.schedulesList[activePlan].weekNr)
+    schuldeSlider(currentUser.schedulesList[activePlanMinus].weekNr)
+    activePlanPlus = activePlanMinus + 1;
 
 
     console.log('działa wstecz')
@@ -679,22 +682,23 @@ previousSchedule.addEventListener('click', () => {
 
 
 nextSchedule.addEventListener('click', () => {
-
+    console.log(activePlanPlus);
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
 
     currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
-    if (activePlan > currentUser.schedulesList.length - 1) {
-        activePlan = 0;
+
+    if (activePlanPlus > currentUser.schedulesList.length - 1) {
+        activePlanPlus = 0;
     }
 
-    schuldeSlider(currentUser.schedulesList[activePlan].weekNr);
-
-     activePlan++
+    schuldeSlider(currentUser.schedulesList[activePlanPlus].weekNr);
+    activePlanPlus++
+    activePlanMinus = activePlanPlus - 1;
 
     console.log('działa dalej')
-
+    console.log(activePlanPlus);
 
 })
 
