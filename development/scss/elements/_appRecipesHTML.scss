@@ -4,10 +4,6 @@
   height: 100%;
   padding: 2%;
   z-index: 0;
-  //display: none;
-  //.active{
-  //  display: block;
-  //}
 
   .btn {
     border: none;
@@ -42,13 +38,13 @@
     }
   }
 
-  #table-scroll {
+  .table-scroll {
     height: 74vh;
     overflow: auto;
     margin-top: 20px;
   }
 
-  #table-wrapper table {
+  .table-wrapper table {
     width: 100%;
   }
 
@@ -90,7 +86,7 @@
 
   .recipe__action {
     width: 9%;
-   }
+  }
 
 
 }
