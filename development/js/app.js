@@ -278,6 +278,7 @@ function addScheduleTableSelectOptions () {
         const selectList = document.querySelectorAll(".scheduleCard tbody select");
         console.log(selectList);
         for (const selectListElement of selectList) {
+            selectListElement.innerHTML = "<option>wybierz danie</option>";
             for (const element of recipNameList) {
                 let meal = document.createElement("option");
                 selectListElement.appendChild(meal);
@@ -287,7 +288,7 @@ function addScheduleTableSelectOptions () {
     }
 }
 document.addEventListener("DOMContentLoaded", addScheduleTableSelectOptions);
-
+widgetPlan.addEventListener("click", addScheduleTableSelectOptions)
 
 //Zmienne pomocnicze pamietajace wprowadzane dane
 let recipeInstructions = [];
@@ -344,14 +345,6 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     console.log("obiekt uzytkownika: ")
     console.log(currentUser)
     localStorage.setItem(userName, JSON.stringify(currentUser));
-
-    //zaktualizuj liste selectów w html
-    const selectList = document.querySelectorAll(".scheduleCard tbody select");
-    for (const selectListElement of selectList) {
-        let meal = document.createElement("option");
-        selectListElement.appendChild(meal);
-        meal.innerText = recipeName;
-    }
 
     //wyzeruj dane
     document.getElementById("recipe__name").value = null;
