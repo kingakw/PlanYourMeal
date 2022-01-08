@@ -63,9 +63,9 @@ includeHTML();
 function addRecipe(recipeName = "test name", recipeDesc = "test description") {
     let recipeID = document.getElementsByClassName("recipe__id");
     let newID = recipeID.length + 1;
-    let myHtmlContent = `<td class="recipe__id">${newID}</td>
-                        <td class="recipe__name">${recipeName}</td>
-                        <td class="recipe__description">${recipeDesc}</td>
+    let myHtmlContent = `<td class="recipe__id">${ newID }</td>
+                        <td class="recipe__name">${ recipeName }</td>
+                        <td class="recipe__description">${ recipeDesc }</td>
                         <td class="recipe__action">
                             <button class="btn btn__
                             edit">
@@ -81,7 +81,7 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description") {
     newRow.innerHTML = myHtmlContent;
 }
 
-function napierdalamPlany (weekNR){
+function napierdalamPlany(weekNR) {
     //Pobierz klucz uzytkownika
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
@@ -94,7 +94,7 @@ function napierdalamPlany (weekNR){
     let sb = [];
     let nd = [];
     for (let i = 0; i < currentUser.schedulesList.length; i++) {
-        if (currentUser.schedulesList[i].weekNr === weekNR){
+        if (currentUser.schedulesList[i].weekNr === weekNR) {
             pn.push(currentUser.schedulesList[i].scheduleObj.pon);
             wt.push(currentUser.schedulesList[i].scheduleObj.wt);
             sr.push(currentUser.schedulesList[i].scheduleObj.sr);
@@ -106,54 +106,55 @@ function napierdalamPlany (weekNR){
     }
     console.log(currentUser.schedulesList[0])
     let myHtml = `<tr>
-                        <td>${pn[0][0]}</td>
-                        <td>${wt[0][0]}</td>
-                        <td>${sr[0][0]}</td>
-                        <td>${cz[0][0]}</td>
-                        <td>${pt[0][0]}</td>
-                        <td>${sb[0][0]}</td>
-                        <td>${nd[0][0]}</td>
+                        <td>${ pn[0][0] }</td>
+                        <td>${ wt[0][0] }</td>
+                        <td>${ sr[0][0] }</td>
+                        <td>${ cz[0][0] }</td>
+                        <td>${ pt[0][0] }</td>
+                        <td>${ sb[0][0] }</td>
+                        <td>${ nd[0][0] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][1]}</td>
-                        <td>${wt[0][1]}</td>
-                        <td>${sr[0][1]}</td>
-                        <td>${cz[0][1]}</td>
-                        <td>${pt[0][1]}</td>
-                        <td>${sb[0][1]}</td>
-                        <td>${nd[0][1]}</td>
+                        <td>${ pn[0][1] }</td>
+                        <td>${ wt[0][1] }</td>
+                        <td>${ sr[0][1] }</td>
+                        <td>${ cz[0][1] }</td>
+                        <td>${ pt[0][1] }</td>
+                        <td>${ sb[0][1] }</td>
+                        <td>${ nd[0][1] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][2]}</td>
-                        <td>${wt[0][2]}</td>
-                        <td>${sr[0][2]}</td>
-                        <td>${cz[0][2]}</td>
-                        <td>${pt[0][2]}</td>
-                        <td>${sb[0][2]}</td>
-                        <td>${nd[0][2]}</td>
+                        <td>${ pn[0][2] }</td>
+                        <td>${ wt[0][2] }</td>
+                        <td>${ sr[0][2] }</td>
+                        <td>${ cz[0][2] }</td>
+                        <td>${ pt[0][2] }</td>
+                        <td>${ sb[0][2] }</td>
+                        <td>${ nd[0][2] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][3]}</td>
-                        <td>${wt[0][3]}</td>
-                        <td>${sr[0][3]}</td>
-                        <td>${cz[0][3]}</td>
-                        <td>${pt[0][3]}</td>
-                        <td>${sb[0][3]}</td>
-                        <td>${nd[0][3]}</td>
+                        <td>${ pn[0][3] }</td>
+                        <td>${ wt[0][3] }</td>
+                        <td>${ sr[0][3] }</td>
+                        <td>${ cz[0][3] }</td>
+                        <td>${ pt[0][3] }</td>
+                        <td>${ sb[0][3] }</td>
+                        <td>${ nd[0][3] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][4]}</td>
-                        <td>${wt[0][4]}</td>
-                        <td>${sr[0][4]}</td>
-                        <td>${cz[0][4]}</td>
-                        <td>${pt[0][4]}</td>
-                        <td>${sb[0][4]}</td>
-                        <td>${nd[0][4]}</td>
+                        <td>${ pn[0][4] }</td>
+                        <td>${ wt[0][4] }</td>
+                        <td>${ sr[0][4] }</td>
+                        <td>${ cz[0][4] }</td>
+                        <td>${ pt[0][4] }</td>
+                        <td>${ sb[0][4] }</td>
+                        <td>${ nd[0][4] }</td>
                     </tr>`
     let tableRef = document.getElementById("kupa");
     tableRef.innerHTML = myHtml;
     document.getElementById("qupa").innerHTML = weekNR;
 }
+
 //************************************************************
 
 //
@@ -374,7 +375,7 @@ document.getElementById("instruction__btn").addEventListener("click", function (
     entry.classList.add("instruction__list")
     entry.appendChild(document.createTextNode(instructionField));
     list.appendChild(entry);
-    list.lastElementChild.innerHTML = `${instructionField} ${buttons}`
+    list.lastElementChild.innerHTML = `${ instructionField } ${ buttons }`
 })
 
 //Event dla przycisku Dodaj Skladnik z obszaru dodaj przepis
@@ -392,13 +393,13 @@ document.getElementById("ingredient__btn").addEventListener("click", function ()
     entry.classList.add("ingredient__list")
     entry.appendChild(document.createTextNode(ingredientField));
     list.appendChild(entry);
-    list.lastElementChild.innerHTML = `${ingredientField} ${buttons}`
+    list.lastElementChild.innerHTML = `${ ingredientField } ${ buttons }`
 })
 
 //Uzupelnienie listy przepisow z pamieci localStorage
 function createRecipListFromLocalStorage() {
     let userName = document.getElementById("name").innerText;
-    if (userName === "Imie"){
+    if (userName === "Imie") {
         console.log("New user, nothing to do")
     } else {
         let currentUser = JSON.parse(localStorage.getItem(userName));
@@ -411,82 +412,58 @@ function createRecipListFromLocalStorage() {
 
 // SKRYPT DLA ZMIEN PLAN
 const previousSchedule = document.querySelector('.schedule__previous ')
-const nextSchedule= document.querySelector('.schedule__next')
-const numberOfWeek = document.querySelector('.week_number').innerText;
+const nextSchedule = document.querySelector('.schedule__next')
+
 
 let activePlan = 0;
 
-previousSchedule.addEventListener('click', ()=>{
-    let numertygodnia = document.getElementById("qupa").innerHTML
+previousSchedule.addEventListener('click', () => {
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
-    currentUser.schedulesList.sort((a,b)=> a.weekNr - b.weekNr)
+
+    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
+
     activePlan--
-    if (activePlan < 0 ) {
+    if (activePlan < 0) {
         activePlan = currentUser.schedulesList.length - 1;
     }
     napierdalamPlany(currentUser.schedulesList[activePlan].weekNr)
 
-    // if (activePlan > numberOfWeek.length - 1) {
-    //     activePlan = 1;
-    // }
+
     console.log('działa wstecz')
 
 
-    // setActivePlan()
 })
 
 
+nextSchedule.addEventListener('click', () => {
 
-nextSchedule.addEventListener('click', ()=>{
-    let numertygodnia = document.getElementById("qupa").innerHTML
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
 
-    currentUser.schedulesList.sort((a,b)=> a.weekNr - b.weekNr)
+    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
     if (activePlan > currentUser.schedulesList.length - 1) {
         activePlan = 0;
     }
 
+    napierdalamPlany(currentUser.schedulesList[activePlan].weekNr);
 
+     activePlan++
 
-
-    napierdalamPlany(currentUser.schedulesList[activePlan].weekNr)
-
-    // for (let i = 0; i < currentUser.schedulesList.length; i++) {
-    //     if(currentUser.schedulesList[i].weekNr>numertygodnia){
-    //         napierdalamPlany(currentUser.schedulesList[i].weekNr)
-    //     }
-    // }
-    activePlan++
-
-    // activePlan--
-    // if (activePlan < numberOfWeek.length - 1) {
-    //     activePlan = 1;
-    // }
     console.log('działa dalej')
-    //
-    // setActivePlan()
 
 
 })
-// function setActivePlan(){
-// //Pobierz klucz uzytkownika
-//     let userName = document.getElementById("name").innerText;
-//     //Zaciagnij dane uzytkownika
-//     let currentUser = JSON.parse(localStorage.getItem(userName));
-//     let lista = currentUser.schedulesList;
-// }
 
 
-Date.prototype.getWeek = function() {
-    var onejan = new Date(this.getFullYear(),0,1);
-    var today = new Date(this.getFullYear(),this.getMonth(),this.getDate());
-    var dayOfYear = ((today - onejan + 86400000)/86400000);
-    return Math.ceil(dayOfYear/7)
+Date.prototype.getWeek = function () {
+    let onejan = new Date(this.getFullYear(), 0, 1);
+    let today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+    let dayOfYear = ((today - onejan + 86400000) / 86400000);
+    return Math.ceil(dayOfYear / 7)
 };
-var today = new Date();
-var currentWeekNumber = today.getWeek();
-document.getElementById("qupa").innerHTML=currentWeekNumber;
+let today = new Date();
+let currentWeekNumber = today.getWeek();
+document.getElementById("qupa").innerHTML = currentWeekNumber;
