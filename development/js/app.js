@@ -82,6 +82,26 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description", re
     newRow.innerHTML = myHtmlContent;
 }
 
+function addScheduleHTML( scheduleName = "test Name", scheduleDesc = "test desc", weekNr = "999") {
+    let scheduleHtmlId = document.getElementsByClassName("schedule__id");
+    let newID = scheduleHtmlId.length + 1;
+    let myHtmlContent = `<td class="schedule__id">${newID}</td>
+                                            <td class="schedule__name">${scheduleName}</td>
+                                            <td class="schedule__description">${scheduleDesc}</td>
+                                            <td class="schedule__weekNr">${weekNr}</td>
+                                            <td class="schedule__action">
+                                                <button class="btn btn__edit">
+                                                    <i class="far fa-edit fa-1x"></i>
+                                                </button>
+                                                <button class="btn btn__trash">
+                                                    <i class="far fa-trash-alt fa-1x"></i>
+                                                </button>
+                                            </td>`
+    let tableRef = document.getElementById("schedule__list");
+    let newRow = tableRef.insertRow(tableRef.rows.length);
+    newRow.innerHTML = myHtmlContent;
+}
+
 //************************************************************
 
 //
@@ -94,7 +114,12 @@ const delayscript = function () {
     addRecip.addEventListener("click", function () {
         recipeWindow.classList.add("active");
     })
-    createRecipListFromLocalStorage()
+    const addSchedule = document.getElementById("scheduleBtnPlus");
+    addSchedule.addEventListener("click", function () {
+        planWindow.classList.add("active");
+    })
+
+    loadHtmlContentFromLocalStorage()
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
 };
@@ -189,9 +214,9 @@ submitUserName.addEventListener("click", function () {
     localStorage.setItem("lastUsedRecipeId", JSON.stringify(0));
 })
 
-function addScheduleTableSelectOptions () {
+function addScheduleTableSelectOptions() {
     let userName = document.getElementById("name").innerText;
-    if (userName === "Imie"){
+    if (userName === "Imie") {
         console.log("New user, nothing to do")
     } else {
         let currentUser = JSON.parse(localStorage.getItem(userName));
@@ -212,6 +237,7 @@ function addScheduleTableSelectOptions () {
         }
     }
 }
+
 document.addEventListener("DOMContentLoaded", addScheduleTableSelectOptions);
 
 
@@ -364,7 +390,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     weekNumbersList.push(nrTygodnia);
     console.log(weekNumbersList);
     //Wyslij nowy plan na liste html
-
+    addScheduleHTML(plaName, plaDesc, nrTygodnia)
     //dodaj nowy plan uzytkownikowi
 
     // zaktualizuj uzytkownika
@@ -418,18 +444,26 @@ document.getElementById("ingredient__btn").addEventListener("click", function ()
     list.lastElementChild.innerHTML = `${ingredientField} ${buttons}`
 })
 
-//Uzupelnienie listy przepisow z pamieci localStorage
-function createRecipListFromLocalStorage() {
+//Uzupelnienie recipes i schedules HTML z pamieci localStorage
+function loadHtmlContentFromLocalStorage() {
     let userName = document.getElementById("name").innerText;
     if (userName === "Imie") {
         console.log("New user, nothing to do")
     } else {
         let currentUser = JSON.parse(localStorage.getItem(userName));
+        //recipes Html
         for (let i = 0; i < currentUser.recipList.length; i++) {
             addRecipe(currentUser.recipList[i].name, currentUser.recipList[i].desc, currentUser.recipList[i].id)
         }
+        //schedules html
+        for (let i = 0; i < currentUser.schedulesList.length; i++) {
+            addScheduleHTML(currentUser.schedulesList[i].planName, currentUser.schedulesList[i].planDesc, currentUser.schedulesList[i].weekNr)
+        }
+        console.log("Pobrano dane uzytkownika")
+        console.log(currentUser);
     }
 }
+
 
 function delRecipButton(trRecipeId) {
     //Pobierz klucz uzytkownika
