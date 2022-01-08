@@ -513,7 +513,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     let plaName = document.getElementById("schedule__name").value;
     let nrTygodnia = document.getElementById("schedule__nr").value;
     if(!plaName){
-        alert(`Brak nazwy przepisów! :)`)
+        alert(`Brak nazwy planu! :)`)
     }else if(!nrTygodnia || typeof nrTygodnia === 'number' || nrTygodnia <= 0 || nrTygodnia > 52){
         alert(`Wpisz poprawny numer tygodnia! :)`)
     } else {
