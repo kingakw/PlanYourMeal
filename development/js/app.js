@@ -790,6 +790,7 @@ function loadHtmlContentFromLocalStorage() {
             addRecipe(currentUser.recipList[i].name, currentUser.recipList[i].desc, currentUser.recipList[i].id)
         }
         //schedules html
+        currentUser.schedulesList.sort((firstEl, secondEl) => firstEl.weekNr - secondEl.weekNr)
         for (let i = 0; i < currentUser.schedulesList.length; i++) {
             addScheduleHTML(currentUser.schedulesList[i].planName, currentUser.schedulesList[i].planDesc,
                 currentUser.schedulesList[i].weekNr, currentUser.schedulesList[i].id)
@@ -798,7 +799,6 @@ function loadHtmlContentFromLocalStorage() {
         console.log(currentUser);
     }
 }
-
 
 //USUŃ PRZEPIS Z LISTY PLANÓW
 function delRecipButton(trRecipeId) {
