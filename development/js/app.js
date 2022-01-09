@@ -75,33 +75,33 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description", re
     let recipeID = document.getElementsByClassName("recipe__id");
     let newID = recipeID.length + 1;
     let trId = "recipeTrId" + recipeId;
-    let myHtmlContent = `<td class="recipe__id">${newID}</td>
-                        <td class="recipe__name">${recipeName}</td>
-                        <td class="recipe__description">${recipeDesc}</td>
+    let myHtmlContent = `<td class="recipe__id">${ newID }</td>
+                        <td class="recipe__name">${ recipeName }</td>
+                        <td class="recipe__description">${ recipeDesc }</td>
                         <td class="recipe__action">
-                            <button class="btn btn__edit" onclick="editRecipButton(${trId})">
+                            <button class="btn btn__edit" onclick="editRecipButton(${ trId })">
                                 <i class="far fa-edit fa-1x"></i>
                             </button>
-                            <button class="btn btn__trash" onclick="delRecipButton(${trId})">
+                            <button class="btn btn__trash" onclick="delRecipButton(${ trId })">
                                 <i class="far fa-trash-alt fa-1x"></i>
                             </button>
                         </td>`
 
     let tableRef = document.getElementById("recipe__list");
     let newRow = tableRef.insertRow(tableRef.rows.length);
-    newRow.id = `${trId}`
+    newRow.id = `${ trId }`
     newRow.innerHTML = myHtmlContent;
 }
 
 function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc", weekNr = "999") {
     let scheduleHtmlId = document.getElementsByClassName("schedule__id");
     let newID = scheduleHtmlId.length + 1;
-    let myHtmlContent = `<td class="schedule__id">${newID}</td>
-                                            <td class="schedule__name">${scheduleName}</td>
-                                            <td class="schedule__description">${scheduleDesc}</td>
-                                            <td class="schedule__weekNr">${weekNr}</td>
+    let myHtmlContent = `<td class="schedule__id">${ newID }</td>
+                                            <td class="schedule__name">${ scheduleName }</td>
+                                            <td class="schedule__description">${ scheduleDesc }</td>
+                                            <td class="schedule__weekNr">${ weekNr }</td>
                                             <td class="schedule__action">
-                                                <button class="btn btn__edit" onclick="editScheduleButton(${weekNr})">
+                                                <button class="btn btn__edit" onclick="editScheduleButton(${ weekNr })">
                                                     <i class="far fa-edit fa-1x"></i>
                                                 </button>
                                                 <button class="btn btn__trash">
@@ -110,7 +110,7 @@ function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc",
                                             </td>`
     let tableRef = document.getElementById("schedule__list");
     let newRow = tableRef.insertRow(tableRef.rows.length);
-    newRow.id = `scheduleTrId${weekNr}`;
+    newRow.id = `scheduleTrId${ weekNr }`;
     newRow.innerHTML = myHtmlContent;
 }
 
@@ -139,49 +139,49 @@ function schuldeSlider(weekNR) {
     }
     console.log(currentUser.schedulesList[0])
     let myHtml = `<tr>
-                        <td>${pn[0][0]}</td>
-                        <td>${wt[0][0]}</td>
-                        <td>${sr[0][0]}</td>
-                        <td>${cz[0][0]}</td>
-                        <td>${pt[0][0]}</td>
-                        <td>${sb[0][0]}</td>
-                        <td>${nd[0][0]}</td>
+                        <td>${ pn[0][0] }</td>
+                        <td>${ wt[0][0] }</td>
+                        <td>${ sr[0][0] }</td>
+                        <td>${ cz[0][0] }</td>
+                        <td>${ pt[0][0] }</td>
+                        <td>${ sb[0][0] }</td>
+                        <td>${ nd[0][0] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][1]}</td>
-                        <td>${wt[0][1]}</td>
-                        <td>${sr[0][1]}</td>
-                        <td>${cz[0][1]}</td>
-                        <td>${pt[0][1]}</td>
-                        <td>${sb[0][1]}</td>
-                        <td>${nd[0][1]}</td>
+                        <td>${ pn[0][1] }</td>
+                        <td>${ wt[0][1] }</td>
+                        <td>${ sr[0][1] }</td>
+                        <td>${ cz[0][1] }</td>
+                        <td>${ pt[0][1] }</td>
+                        <td>${ sb[0][1] }</td>
+                        <td>${ nd[0][1] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][2]}</td>
-                        <td>${wt[0][2]}</td>
-                        <td>${sr[0][2]}</td>
-                        <td>${cz[0][2]}</td>
-                        <td>${pt[0][2]}</td>
-                        <td>${sb[0][2]}</td>
-                        <td>${nd[0][2]}</td>
+                        <td>${ pn[0][2] }</td>
+                        <td>${ wt[0][2] }</td>
+                        <td>${ sr[0][2] }</td>
+                        <td>${ cz[0][2] }</td>
+                        <td>${ pt[0][2] }</td>
+                        <td>${ sb[0][2] }</td>
+                        <td>${ nd[0][2] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][3]}</td>
-                        <td>${wt[0][3]}</td>
-                        <td>${sr[0][3]}</td>
-                        <td>${cz[0][3]}</td>
-                        <td>${pt[0][3]}</td>
-                        <td>${sb[0][3]}</td>
-                        <td>${nd[0][3]}</td>
+                        <td>${ pn[0][3] }</td>
+                        <td>${ wt[0][3] }</td>
+                        <td>${ sr[0][3] }</td>
+                        <td>${ cz[0][3] }</td>
+                        <td>${ pt[0][3] }</td>
+                        <td>${ sb[0][3] }</td>
+                        <td>${ nd[0][3] }</td>
                     </tr>
                     <tr>
-                        <td>${pn[0][4]}</td>
-                        <td>${wt[0][4]}</td>
-                        <td>${sr[0][4]}</td>
-                        <td>${cz[0][4]}</td>
-                        <td>${pt[0][4]}</td>
-                        <td>${sb[0][4]}</td>
-                        <td>${nd[0][4]}</td>
+                        <td>${ pn[0][4] }</td>
+                        <td>${ wt[0][4] }</td>
+                        <td>${ sr[0][4] }</td>
+                        <td>${ cz[0][4] }</td>
+                        <td>${ pt[0][4] }</td>
+                        <td>${ sb[0][4] }</td>
+                        <td>${ nd[0][4] }</td>
                     </tr>`
     let tableRef = document.getElementById("scheduleTableTbody");
     tableRef.innerHTML = myHtml;
@@ -208,6 +208,7 @@ const delayscript = function () {
     })
 
     loadHtmlContentFromLocalStorage()
+    recipeQuantity()
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
 };
@@ -343,7 +344,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
     let recipeName = document.getElementById("recipe__name").value;
 
 
-    if(!recipeName){
+    if (!recipeName) {
         alert(`Nie masz wpisanej nazwy przepisu :)`)
     } else {
         //Wylacz contener AddRecipe
@@ -354,7 +355,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
         let currentUser = JSON.parse(localStorage.getItem(userName));
         //Sprawdzenie wersji okna
         let windowVer = document.getElementById("newRecipeTitle").innerText;
-//Pobierz dane z formularza nowego przepisu
+        //Pobierz dane z formularza nowego przepisu
         let recipeName = document.getElementById("recipe__name").value;
         let recipeDesc = document.getElementById("recipe__description").value;
 
@@ -375,12 +376,14 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
 
             lastRecipeId++;
             localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
+            alert(`Dodano nowy przepis`);
+
         } else {
             console.log("Edit recip active")
             currentUser.recipList[recipeIndex].name = recipeName;
-            document.getElementById(`recipeTrId${recipeId}`).children[1].innerHTML = recipeName;
+            document.getElementById(`recipeTrId${ recipeId }`).children[1].innerHTML = recipeName;
             currentUser.recipList[recipeIndex].desc = recipeDesc;
-            document.getElementById(`recipeTrId${recipeId}`).children[2].innerHTML = recipeDesc;
+            document.getElementById(`recipeTrId${ recipeId }`).children[2].innerHTML = recipeDesc;
             currentUser.recipList[recipeIndex].instructions[0] = [];
             for (let i = 0; i < document.getElementById("instructionList").children.length; i++) {
                 currentUser.recipList[recipeIndex].instructions[0].push(document.getElementById("instructionList").children[i].innerText)
@@ -389,10 +392,14 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
             for (let i = 0; i < document.getElementById("ingredientList").children.length; i++) {
                 currentUser.recipList[recipeIndex].ingredients[0].push(document.getElementById("ingredientList").children[i].innerText)
             }
+            alert(`Z edytowano przepis`);
+
         }
         console.log("obiekt uzytkownika: ")
         console.log(currentUser)
         localStorage.setItem(userName, JSON.stringify(currentUser));
+        //Odswiez ilosc przepisow na stronie
+        recipeQuantity();
 
         //wyzeruj dane
         document.getElementById("recipe__name").value = null;
@@ -430,7 +437,7 @@ function editRecipButton(trRecipeId) {
         entry.classList.add("instruction__list")
         entry.appendChild(document.createTextNode(userDB.instructions[0][i]));
         list.appendChild(entry);
-        list.lastElementChild.innerHTML = `${userDB.instructions[0][i]} ${btn}`
+        list.lastElementChild.innerHTML = `${ userDB.instructions[0][i] } ${ btn }`
     }
     for (let i = 0; i < userDB.ingredients[0].length; i++) {
         let btn = "<i class=\"far fa-edit\"  onclick='editIngredientBtn()' ></i><i class=\"fas fa-trash-alt\" onclick='delIngredientBtn()'></i>";
@@ -439,7 +446,7 @@ function editRecipButton(trRecipeId) {
         entry.classList.add("ingredient__list")
         entry.appendChild(document.createTextNode(userDB.ingredients[0][i]));
         list.appendChild(entry);
-        list.lastElementChild.innerHTML = `${userDB.ingredients[0][i]} ${btn}`
+        list.lastElementChild.innerHTML = `${ userDB.ingredients[0][i] } ${ btn }`
     }
 }
 
@@ -508,14 +515,62 @@ function editScheduleButton(weekNr) {
 
 let weekNumbersList = [];
 
+function getScheuldeArray() {
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let arr = []
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    for (let i = 0; i < currentUser.schedulesList.length; i++) {
+        arr.push(currentUser.schedulesList[i].weekNr)
+    }
+    return arr
+}
+
+// console.log(NowaTablicaLiczb)
+let validationWeekNr = 0;
+
+document.getElementById("schedule__nr").addEventListener("change", () => {
+    validationWeekNr = 0;
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+
+    let fieldNrWeek = document.getElementById("schedule__nr");
+    let weekValue = fieldNrWeek.value;
+    let uniqeWeekNr = 0;
+    for (let i = 0; i < currentUser.schedulesList.length; i++) {
+        if (parseInt(currentUser.schedulesList[i].weekNr) === parseInt(weekValue)) {
+            uniqeWeekNr = 1;
+            console.log("nok")
+        }
+    }
+    console.log(uniqeWeekNr)
+    if (weekValue > 0 && weekValue <= 52 && uniqeWeekNr === 0) {
+        fieldNrWeek.style.border = "1px solid black"
+        validationWeekNr = 0;
+    } else {
+        fieldNrWeek.style.border = "1px solid red"
+        validationWeekNr = 1;
+    }
+})
+
 //Event dla przycisku Zapisz i zamknij z obszaru dodaj plan
 document.querySelector(".newSchedule__btn").addEventListener("click", function () {
-    let plaName = document.getElementById("schedule__name").value;
+
+    let plaName = String(document.getElementById("schedule__name").value);
     let nrTygodnia = document.getElementById("schedule__nr").value;
-    if(!plaName){
+
+    if (!plaName) {
         alert(`Brak nazwy planu! :)`)
-    }else if(!nrTygodnia || typeof nrTygodnia === 'number' || nrTygodnia <= 0 || nrTygodnia > 52){
-        alert(`Wpisz poprawny numer tygodnia! :)`)
+
+    } else if (!nrTygodnia) {
+        alert(`Wpisz numer tygodnia! :)`)
+    } else if (validationWeekNr === 1) {
+        alert(`Wpisz poprawny unikatowy numer tygodnia! :)`)
+    } else if (getScheuldeArray().includes(`${ plaName }`)) {
+        alert(`Masz już taki plan! :)`)
+
+
     } else {
         //Wylacz contener addschedule
         planWindow.classList.remove("active");
@@ -553,8 +608,10 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
             //Wyslij nowy plan na liste html
             addScheduleHTML(plaName, plaDesc, nrTygodnia)
             //dodaj nowy plan uzytkownikowi
+            alert(`Dodano nowy plan`)
+
         } else {
-            let htmlContent = document.getElementById(`scheduleTrId${currentUser.schedulesList[scheduleListIndex].weekNr}`);
+            let htmlContent = document.getElementById(`scheduleTrId${ currentUser.schedulesList[scheduleListIndex].weekNr }`);
             htmlContent.children[1].innerHTML = plaName;
             htmlContent.children[2].innerHTML = plaDesc;
             htmlContent.children[3].innerHTML = nrTygodnia;
@@ -565,6 +622,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
             for (let i = 0; i < dayNames.length; i++) {
                 currentUser.schedulesList[scheduleListIndex].scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
             }
+            alert(`Z edytowano plan`)
         }
 
 
@@ -583,6 +641,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
         }
 
         document.getElementById("newScheduleTitle").innerText = "Nowy plan";
+        window.location.reload(true);
     }
 
 
@@ -605,7 +664,7 @@ document.getElementById("instruction__btn").addEventListener("click", function (
         entry.classList.add("instruction__list");
         entry.appendChild(document.createTextNode(instructionField));
         list.appendChild(entry);
-        list.lastElementChild.innerHTML = `${instructionField} ${buttons}`
+        list.lastElementChild.innerHTML = `${ instructionField } ${ buttons }`
     } else {
         //zapis po edycji uzytkownika
         let instructionFieldEdited = document.getElementById("instructionField").value;
@@ -669,7 +728,7 @@ document.getElementById("ingredient__btn").addEventListener("click", function ()
         entry.classList.add("ingredient__list")
         entry.appendChild(document.createTextNode(ingredientField));
         list.appendChild(entry);
-        list.lastElementChild.innerHTML = `${ingredientField} ${buttons}`
+        list.lastElementChild.innerHTML = `${ ingredientField } ${ buttons }`
     } else {
         //zapis po edycji uzytkownika
         let ingredientFieldEdited = document.getElementById("ingredientField").value;
@@ -742,7 +801,7 @@ function delRecipButton(trRecipeId) {
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
-    let deleteRecipe = document.getElementById(`${trRecipeId.id}`);
+    let deleteRecipe = document.getElementById(`${ trRecipeId.id }`);
     //Usun z HTML
     deleteRecipe.parentElement.removeChild(deleteRecipe);
     //Wyciagnij czyste id
@@ -764,52 +823,29 @@ function delRecipButton(trRecipeId) {
 const previousSchedule = document.querySelector('.schedule__previous ')
 const nextSchedule = document.querySelector('.schedule__next')
 
-
-//let activePlan = 0;
-let activePlanPlus = 0;
-let activePlanMinus = 0;
-previousSchedule.addEventListener('click', () => {
-    console.log(activePlanMinus);
+function returnActualWeek() {
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
+    let arrayWeeks = []
+    let newSortedArray = arrayWeeks.sort((a, b) => a - b)
+    for (const item of currentUser.schedulesList) {
 
-    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
-    activePlanMinus--;
-    console.log(activePlanMinus);
-    if (activePlanMinus < 0) {
-        activePlanMinus = currentUser.schedulesList.length - 1;
-    }
-    schuldeSlider(currentUser.schedulesList[activePlanMinus].weekNr)
-    activePlanPlus = activePlanMinus + 1;
+        arrayWeeks.push(item.weekNr)
 
-
-    console.log('działa wstecz')
-
-
-})
-
-
-nextSchedule.addEventListener('click', () => {
-    console.log(activePlanPlus);
-    let userName = document.getElementById("name").innerText;
-    //Zaciagnij dane uzytkownika
-    let currentUser = JSON.parse(localStorage.getItem(userName));
-
-    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
-
-    if (activePlanPlus > currentUser.schedulesList.length - 1) {
-        activePlanPlus = 0;
     }
 
-    schuldeSlider(currentUser.schedulesList[activePlanPlus].weekNr);
-    activePlanPlus++
-    activePlanMinus = activePlanPlus - 1;
 
-    console.log('działa dalej')
-    console.log(activePlanPlus);
+    let counts = newSortedArray
+    goal = currentWeekNumber;
 
-})
+    let closest = counts.reduce(function (prev, curr) {
+        return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+    });
+    arrayWeeks.sort((a, b) => a - b)
+
+    return closest
+}
 
 
 Date.prototype.getWeek = function () {
@@ -821,3 +857,78 @@ Date.prototype.getWeek = function () {
 let today = new Date();
 let currentWeekNumber = today.getWeek();
 document.querySelector(".week_number").innerHTML = currentWeekNumber;
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+
+    currentUser.schedulesList.sort((a, b) => a.weekNr - b.weekNr)
+
+    let arrayWeeks = []
+
+    for (const item of currentUser.schedulesList) {
+
+        arrayWeeks.push(item.weekNr)
+
+    }
+    let newSortedArray = arrayWeeks.sort((a, b) => a - b);
+    let activeSlide = newSortedArray.indexOf(returnActualWeek());
+
+
+    previousSchedule.addEventListener('click', () => {
+
+
+        activeSlide--
+
+        if (activeSlide < 0) {
+            activeSlide = String(newSortedArray.length - 1)
+        }
+
+        schuldeSlider(`${ newSortedArray[activeSlide] }`)
+
+
+        console.log('działa wstecz')
+
+
+    })
+
+
+    nextSchedule.addEventListener('click', () => {
+
+        activeSlide++
+
+        if (activeSlide > newSortedArray.length - 1) {
+            activeSlide = '0'
+        }
+        schuldeSlider(`${ newSortedArray[activeSlide] }`)
+
+
+    })
+
+    schuldeSlider(`${ returnActualWeek() }`)
+})
+
+//Aktualizacji ilosci przepisow na stronie glownej
+function recipeQuantity() {
+    let spanRecipeQuantity = document.getElementById("recipeQuantity");
+    let currentUser = getUserData();
+    if (currentUser.recipList.length === 1) {
+        spanRecipeQuantity.innerText = `${ currentUser.recipList.length } przepis`;
+    } else if (currentUser.recipList.length > 1 && currentUser.recipList.length < 5) {
+        spanRecipeQuantity.innerText = `${ currentUser.recipList.length } przepisy`;
+    } else {
+        spanRecipeQuantity.innerText = `${ currentUser.recipList.length } przepisów`;
+    }
+
+
+}
+
+document.addEventListener('DOMContentLoaded', recipeQuantity)
+
+
+function getUserData() {
+    let userName = document.getElementById("name").innerText;
+    return JSON.parse(localStorage.getItem(userName));
+}
