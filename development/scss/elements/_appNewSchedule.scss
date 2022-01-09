@@ -132,6 +132,7 @@
         tr {
           border-bottom: 1px solid $table-text-color;
           select {
+            font-size: $base-font-size;
             width: 100%;
           }
           th, td {

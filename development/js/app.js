@@ -73,7 +73,7 @@ includeHTML();
 // Dodawanie pozycji w tabeli z przepisami. Podajemy Nazwe przepisu i opis jak wykonac. ID wyciaga samo
 function addRecipe(recipeName = "test name", recipeDesc = "test description", recipeId) {
     let recipeID = document.getElementsByClassName("recipe__id");
-    let newID = recipeID.length + 1;
+    let newID = recipeID.length;
     let trId = "recipeTrId" + recipeId;
     let myHtmlContent = `<td class="recipe__id">${ newID }</td>
                         <td class="recipe__name">${ recipeName }</td>
@@ -93,24 +93,25 @@ function addRecipe(recipeName = "test name", recipeDesc = "test description", re
     newRow.innerHTML = myHtmlContent;
 }
 
-function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc", weekNr = "999") {
+function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc", weekNr = "999", scheduleId) {
     let scheduleHtmlId = document.getElementsByClassName("schedule__id");
-    let newID = scheduleHtmlId.length + 1;
+    //let newID = scheduleHtmlId.length + 1;
+    let newID = scheduleHtmlId.length;
     let myHtmlContent = `<td class="schedule__id">${ newID }</td>
                                             <td class="schedule__name">${ scheduleName }</td>
                                             <td class="schedule__description">${ scheduleDesc }</td>
                                             <td class="schedule__weekNr">${ weekNr }</td>
                                             <td class="schedule__action">
-                                                <button class="btn btn__edit" onclick="editScheduleButton(${ weekNr })">
+                                                <button class="btn btn__edit" onclick="editScheduleButton(${scheduleId})">
                                                     <i class="far fa-edit fa-1x"></i>
                                                 </button>
-                                                <button class="btn btn__trash">
+                                                <button class="btn btn__trash" onclick="delScheduleButton(${scheduleId})">
                                                     <i class="far fa-trash-alt fa-1x"></i>
                                                 </button>
                                             </td>`
     let tableRef = document.getElementById("schedule__list");
     let newRow = tableRef.insertRow(tableRef.rows.length);
-    newRow.id = `scheduleTrId${ weekNr }`;
+    newRow.id = `scheduleTrId${scheduleId}`;
     newRow.innerHTML = myHtmlContent;
 }
 
@@ -287,6 +288,7 @@ class Schedule {
             sb: null,
             nd: null
         }
+        this.id = null;
     }
 }
 
@@ -452,13 +454,13 @@ function editRecipButton(trRecipeId) {
 
 let scheduleListIndex = null;
 
-function editScheduleButton(weekNr) {
+function editScheduleButton(scheduleId) {
     document.getElementById("newScheduleTitle").innerText = "Edytuj plan";
     planWindow.classList.add("active");
     let userName = document.getElementById("name").innerText;
     let currentUser = JSON.parse(localStorage.getItem(userName));
     for (let i = 0; i < currentUser.schedulesList.length; i++) {
-        if (parseInt(currentUser.schedulesList[i].weekNr) === weekNr) {
+        if (parseInt(currentUser.schedulesList[i].id) === scheduleId) {
             scheduleListIndex = i;
         }
     }
@@ -601,17 +603,18 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
                 console.log(newPlan.scheduleObj[dayNames[i]]);
                 newPlan.scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
             }
+            newPlan.id = Date.now();
             //newPlan.scheduleObj.pon = [sniadania[0].value, dSniadania[0].value, zupy[0].value, dDania[0].value, kolacje[0].value]
             currentUser.schedulesList.push(newPlan);
             weekNumbersList.push(nrTygodnia);
             console.log(weekNumbersList);
             //Wyslij nowy plan na liste html
-            addScheduleHTML(plaName, plaDesc, nrTygodnia)
+            addScheduleHTML(plaName, plaDesc, nrTygodnia, newPlan.id)
             //dodaj nowy plan uzytkownikowi
             alert(`Dodano nowy plan`)
 
         } else {
-            let htmlContent = document.getElementById(`scheduleTrId${ currentUser.schedulesList[scheduleListIndex].weekNr }`);
+            let htmlContent = document.getElementById(`scheduleTrId${ currentUser.schedulesList[scheduleListIndex].id }`);
             htmlContent.children[1].innerHTML = plaName;
             htmlContent.children[2].innerHTML = plaDesc;
             htmlContent.children[3].innerHTML = nrTygodnia;
@@ -622,7 +625,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
             for (let i = 0; i < dayNames.length; i++) {
                 currentUser.schedulesList[scheduleListIndex].scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
             }
-            alert(`Z edytowano plan`)
+            alert(`Plan został zmodyfikowany`)
         }
 
 
@@ -788,7 +791,8 @@ function loadHtmlContentFromLocalStorage() {
         }
         //schedules html
         for (let i = 0; i < currentUser.schedulesList.length; i++) {
-            addScheduleHTML(currentUser.schedulesList[i].planName, currentUser.schedulesList[i].planDesc, currentUser.schedulesList[i].weekNr)
+            addScheduleHTML(currentUser.schedulesList[i].planName, currentUser.schedulesList[i].planDesc,
+                currentUser.schedulesList[i].weekNr, currentUser.schedulesList[i].id)
         }
         console.log("Pobrano dane uzytkownika")
         console.log(currentUser);
@@ -796,6 +800,7 @@ function loadHtmlContentFromLocalStorage() {
 }
 
 
+//USUŃ PRZEPIS Z LISTY PLANÓW
 function delRecipButton(trRecipeId) {
     //Pobierz klucz uzytkownika
     let userName = document.getElementById("name").innerText;
@@ -830,12 +835,8 @@ function returnActualWeek() {
     let arrayWeeks = []
     let newSortedArray = arrayWeeks.sort((a, b) => a - b)
     for (const item of currentUser.schedulesList) {
-
         arrayWeeks.push(item.weekNr)
-
     }
-
-
     let counts = newSortedArray
     goal = currentWeekNumber;
 
@@ -878,37 +879,45 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     previousSchedule.addEventListener('click', () => {
-
-
         activeSlide--
-
         if (activeSlide < 0) {
             activeSlide = String(newSortedArray.length - 1)
         }
-
         schuldeSlider(`${ newSortedArray[activeSlide] }`)
-
-
         console.log('działa wstecz')
-
-
     })
 
 
     nextSchedule.addEventListener('click', () => {
-
         activeSlide++
-
         if (activeSlide > newSortedArray.length - 1) {
             activeSlide = '0'
         }
         schuldeSlider(`${ newSortedArray[activeSlide] }`)
-
-
     })
-
     schuldeSlider(`${ returnActualWeek() }`)
 })
+
+//USUŃ PLAN Z TABLICY PLANÓW
+function delScheduleButton(scheduleId) {
+    //Pobierz klucz uzytkownika
+    let userName = document.getElementById("name").innerText;
+    //Zaciagnij dane uzytkownika
+    let currentUser = JSON.parse(localStorage.getItem(userName));
+    let deleteSchedule = document.getElementById(`scheduleTrId${scheduleId}`);
+    //Usun z HTML
+    deleteSchedule.parentElement.removeChild(deleteSchedule);
+    //Szukanie indexu po id
+    for (let i = 0; i < currentUser.schedulesList.length; i++) {
+        if (parseInt(currentUser.schedulesList[i].id) === scheduleId) {
+            scheduleListIndex = i;
+        }
+    }
+    // usuniecie z tablicy elementu o odszukanym index
+    currentUser.schedulesList.splice(scheduleListIndex, 1);
+    // aktualizacja localStorage uzytkownika
+    localStorage.setItem(userName, JSON.stringify(currentUser));
+}
 
 //Aktualizacji ilosci przepisow na stronie glownej
 function recipeQuantity() {
