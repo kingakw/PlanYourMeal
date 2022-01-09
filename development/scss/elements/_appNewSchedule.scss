@@ -93,7 +93,7 @@
     background-color: $bg-color;
     height: 60%;
    /* border: 1px solid red;*/
-    width: 92%;
+    width: 100%;
     font-family: $font-open-sans;
     display: flex;
 
@@ -107,6 +107,7 @@
         color: $primary-color;
 
         tr {
+          width: 100%;
           text-align: center;
           border-top: 1px solid $table-text-color;
           border-bottom: 1px solid $table-text-color;
@@ -114,7 +115,7 @@
 
         th {
           padding: 5px 10px;
-          width: 16.7%;
+          width: 16.6%;
           line-height: 30px;
         /*  border: 1px solid red;*/
           vertical-align: middle;
@@ -129,11 +130,14 @@
 
         tr {
           border-bottom: 1px solid $table-text-color;
-
+          select {
+            width: 100%;
+          }
           th, td {
             padding: 5px;
             /*border: 1px solid red;*/
-            width: 16.7%;
+            width: 16.6%;
+
           }
         }
       }
