@@ -521,6 +521,7 @@ function getScheuldeArray() {
 
 // console.log(NowaTablicaLiczb)
 let validationWeekNr = 0;
+
 document.getElementById("schedule__nr").addEventListener("change", () => {
     validationWeekNr = 0;
     let userName = document.getElementById("name").innerText;
