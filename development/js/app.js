@@ -12,10 +12,11 @@ for (let i = 0; i < menuItems.length; i++) {
         currentSection[0].className = currentSection[0].className.replace(" active", "")
         if (i === 0) {
             document.getElementById("containerPulpit").className += " active";
+
             document.querySelector(".schedules__container").classList.remove("active");
             document.querySelector(".container__addSchedule ").classList.remove("active");
             document.getElementById("containerSchedules").classList.remove("active")
-
+            window.location.reload(true);
 
         } else if (i === 1) {
             document.getElementById("containerRecipes").className += " active";
@@ -105,7 +106,7 @@ function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc",
                                                 <button class="btn btn__edit" onclick="editScheduleButton(${ scheduleId })">
                                                     <i class="far fa-edit fa-1x"></i>
                                                 </button>
-                                                <button class="btn btn__trash" onclick="delScheduleButton(${ scheduleId });resetReload()">
+                                                <button class="btn btn__trash" onclick="delScheduleButton(${ scheduleId })">
                                                     <i class="far fa-trash-alt fa-1x"></i>
                                                 </button>
                                             </td>`
