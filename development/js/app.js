@@ -925,14 +925,17 @@ function delScheduleButton(scheduleId) {
 
 //Aktualizacji ilosci przepisow na stronie glownej
 function recipeQuantity() {
-    let spanRecipeQuantity = document.getElementById("recipeQuantity");
+    let spanRecipeQuantity = document.querySelector(".widget__info__text");
     let currentUser = getUserData();
     if (currentUser.recipList.length === 1) {
-        spanRecipeQuantity.innerText = `${ currentUser.recipList.length } przepis`;
-    } else if (currentUser.recipList.length > 1 && currentUser.recipList.length < 5) {
-        spanRecipeQuantity.innerText = `${ currentUser.recipList.length } przepisy`;
+        spanRecipeQuantity.textContent = `Masz ${ currentUser.recipList.length } przepis, nieźle!`;
+    } else if (currentUser.recipList.length === 0 ) {
+        spanRecipeQuantity.textContent = `Pamietaj, aby dodac przepis!`;
+    }
+    else if (currentUser.recipList.length > 1 && currentUser.recipList.length < 5) {
+        spanRecipeQuantity.textContent = `Masz już ${ currentUser.recipList.length } przepisy, nieźle!`;
     } else {
-        spanRecipeQuantity.innerText = `${ currentUser.recipList.length } przepisów`;
+        spanRecipeQuantity.textContent = `Masz już${ currentUser.recipList.length } przepisów, nieźle!`;
     }
 
 
@@ -943,15 +946,15 @@ function schuldeQuantity() {
     let spanSchuldeQuantity = document.querySelector(".widget__warning__text");
     let currentUser1 = getUserData();
     if (currentUser1.schedulesList.length === 0) {
-        spanSchuldeQuantity.innerText = `Pamiętaj, aby dodać plan!`;
+        spanSchuldeQuantity.textContent = `Pamiętaj, aby dodać plan!`;
     } else if (currentUser1.schedulesList.length === 1) {
-        spanSchuldeQuantity.innerText = `Masz już ${ currentUser1.schedulesList.length } plan. Świetnie!`;
+        spanSchuldeQuantity.textContent = `Masz już ${ currentUser1.schedulesList.length } plan. Świetnie!`;
     }
     else if (currentUser1.schedulesList.length > 1 && currentUser1.schedulesList.length < 5) {
-        spanSchuldeQuantity.innerText = `Masz już ${ currentUser1.schedulesList.length } plany. Świetnie!`;
+        spanSchuldeQuantity.textContent = `Masz już ${ currentUser1.schedulesList.length } plany. Świetnie!`;
     }
     else {
-        spanSchuldeQuantity.innerText = `:Masz już ${ currentUser1.schedulesList.length } planów. Świetnie!`;
+        spanSchuldeQuantity.textContent = `Masz już ${ currentUser1.schedulesList.length } planów. Świetnie!`;
     }
 }
 
