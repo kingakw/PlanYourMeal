@@ -1,9 +1,10 @@
 .recipes__container {
   background: $bg-color;
   width: 100%;
-  height: 100%;
+  height: 84vh;
   padding: 2%;
   z-index: 0;
+  border: 1px dashed $table-text-color;
 
   .btn {
     border: none;
@@ -27,7 +28,8 @@
     display: flex;
     align-content: center;
     justify-content: space-between;
-    border-bottom: 1px solid $secondary-color;
+    border-bottom: 2px solid $table-text-color;
+    padding-bottom: 2px;
 
     .header__title {
       align-self: end;
@@ -39,9 +41,10 @@
   }
 
   .table-scroll {
-    height: 74vh;
+    height: 70vh;
     overflow: auto;
-    margin-top: 20px;
+    margin-top: 10px;
+    padding: 1%;
   }
 
   .table-wrapper table {
@@ -49,8 +52,8 @@
   }
 
   tr {
-    border-bottom: 1px solid $primary-color;
-    border-top: 1px solid $primary-color;
+    border-bottom: 1px solid $table-text-color;
+    border-top: 1px solid $table-text-color;
   }
 
   th {
@@ -58,26 +61,25 @@
     font-weight: 700;
     font-family: $font-open-sans;
     color: $secondary-color;
-    padding: 15px;
+    padding: 15px 7px;
     text-align: left;
   }
 
   td {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
     font-family: $font-open-sans;
-    color: $primary-color;
+    color: $table-text-color;
     padding: 7px;
     text-align: left;
   }
 
   .recipe__id {
-    padding-left: 15px;
-    width: 6%;
+    width: 8%;
   }
 
   .recipe__name {
-    width: 25%;
+    width: 23%;
   }
 
   .recipe__description {
@@ -86,6 +88,7 @@
 
   .recipe__action {
     width: 9%;
+    min-width: 80px;
   }
 
 

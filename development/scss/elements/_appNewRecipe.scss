@@ -1,10 +1,10 @@
 //Kontener główny
 
 .container__recipe {
-  height: 97%;
-  width: 95%;
+  height: 84vh;
+  width: 94%;
   background-color: $bg-color;
-  border: 1px dotted black;
+  border: 1px dashed $table-text-color;
   z-index: 9999;
   display: none;
   //margin: 2% 0% 0% 3%;
@@ -12,7 +12,7 @@
   &.active {
     display: block;
     position: absolute;
-    top: 2%;
+    top: 3vh;
     left: 3%;
 
   }
@@ -32,7 +32,7 @@
       justify-content: space-between;
       align-items: end;
       padding-bottom: 5px;
-      border-bottom: 1px solid $primary-color;
+      border-bottom: 2px solid $table-text-color;
 
       .newRecipe__title {
         color: $button-color;
@@ -58,6 +58,7 @@
 
     .addRecipe__properties {
       width: 100%;
+      margin-bottom: 20px;
 
       .properties {
         display: flex;
@@ -77,14 +78,15 @@
 
         .properties__input {
           margin-left: 10px;
-          width: 700px
+          width: 70%;
+          border: 1px solid $table-text-color;
         }
       }
     }
 
     .addRecipe__basic {
       width: 100%;
-      height: 75%;
+      //height: 75%;
       display: flex;
       justify-content: space-between;
 
@@ -99,7 +101,8 @@
           text-transform: uppercase;
           color: $primary-color;
           font-size: $base-font-size*1.71;
-          border-bottom: 1px solid $primary-color;
+          border-bottom: 2px solid $table-text-color;
+          padding-bottom: 3px;
           margin-bottom: 10px;
         }
 
@@ -108,6 +111,7 @@
 
           .properties__input {
             width: 90%;
+            border: 1px solid $table-text-color;
           }
 
           .add__btn {

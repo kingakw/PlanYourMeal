@@ -13,17 +13,17 @@
 
 //Kontener dodania planu
 .container__addSchedule {
-  height: 97%;
-  width: 95%;
+  height: 84vh;
+  width: 94%;
   padding: 2% 3%;
   background: $bg-color;
-  border: 1px dotted $secondary-color;
+  border: 1px dashed $table-text-color;
   display: none;
 
   &.active {
     display: block;
     position: absolute;
-    top: 2%;
+    top: 3vh;
     left: 3%;
 
   }
@@ -59,29 +59,31 @@
   }
 
   .addSchedule__properties {
-    width: 92%;
+    width: 100%;
   /*   border: 1px solid red;*/
-    padding-top: 10px;
+    //padding-top: 10px;
 
     .properties {
       display: flex;
-      justify-content: space-between;
-      padding-bottom: 14px;
+      justify-content: left;
+      padding: 10px;
       /* width: 100%;*/
 
       .schedule__data {
         font-size: $base-font-size *1.5;
         color: $primary-color;
+        width: 20%;
       }
 
       .properties__input {
-        width: 720px;
-        margin-right: 0;
+        width: 70%;
+        margin-right: 10px;
+        border: 1px solid $table-text-color;
       }
 
       .properties__nr {
-        margin-right: 680px;
         width: 40px;
+        border: 1px solid $table-text-color;
       }
 
     }

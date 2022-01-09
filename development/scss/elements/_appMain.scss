@@ -38,9 +38,10 @@
 
   .section__main {
     position: relative;
-    width: 80vw;
+    width: 100%;
     background-image: url("../../images/appBG.png");
-    padding: 2% 3%;
+    padding: 3vh 3%;
+    height: 90vh;
 
     .box{
       display: none;
