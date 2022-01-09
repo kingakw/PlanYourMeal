@@ -354,7 +354,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
         let currentUser = JSON.parse(localStorage.getItem(userName));
         //Sprawdzenie wersji okna
         let windowVer = document.getElementById("newRecipeTitle").innerText;
-//Pobierz dane z formularza nowego przepisu
+        //Pobierz dane z formularza nowego przepisu
         let recipeName = document.getElementById("recipe__name").value;
         let recipeDesc = document.getElementById("recipe__description").value;
 
@@ -375,6 +375,8 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
 
             lastRecipeId++;
             localStorage.setItem("lastUsedRecipeId", JSON.stringify(lastRecipeId));
+            alert(`Dodano nowy przepis`);
+
         } else {
             console.log("Edit recip active")
             currentUser.recipList[recipeIndex].name = recipeName;
@@ -389,6 +391,8 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
             for (let i = 0; i < document.getElementById("ingredientList").children.length; i++) {
                 currentUser.recipList[recipeIndex].ingredients[0].push(document.getElementById("ingredientList").children[i].innerText)
             }
+            alert(`Z edytowano przepis`);
+
         }
         console.log("obiekt uzytkownika: ")
         console.log(currentUser)
@@ -623,6 +627,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
         console.log("obiekt uzytkownika: ")
         console.log(currentUser)
         localStorage.setItem(userName, JSON.stringify(currentUser));
+        alert(`Dodano nowy plan`)
         //wyzeruj dane
         document.getElementById("schedule__name").value = "";
         document.getElementById("schedule__description").value = "";
