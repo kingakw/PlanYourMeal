@@ -556,7 +556,11 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
     if (!plaName) {
         alert(`Brak nazwy planu! :)`)
 
-    } else if (validationWeekNr === 1) {
+    }else if(!nrTygodnia){
+        alert(`Wpisz numer tygodnia! :)`)
+    }
+
+    else if (validationWeekNr === 1) {
         alert(`Wpisz poprawny unikatowy numer tygodnia! :)`)
     } else if (getScheuldeArray().includes(`${plaName}`)) {
         alert(`Masz już taki plan! :)`)
