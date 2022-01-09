@@ -925,6 +925,9 @@ function recipeQuantity() {
 
 }
 
+document.addEventListener('DOMContentLoaded', recipeQuantity)
+
+
 function getUserData() {
     let userName = document.getElementById("name").innerText;
     return JSON.parse(localStorage.getItem(userName));
