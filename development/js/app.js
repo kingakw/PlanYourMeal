@@ -102,16 +102,16 @@ function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc",
                                             <td class="schedule__description">${ scheduleDesc }</td>
                                             <td class="schedule__weekNr">${ weekNr }</td>
                                             <td class="schedule__action">
-                                                <button class="btn btn__edit" onclick="editScheduleButton(${scheduleId})">
+                                                <button class="btn btn__edit" onclick="editScheduleButton(${ scheduleId })">
                                                     <i class="far fa-edit fa-1x"></i>
                                                 </button>
-                                                <button class="btn btn__trash" onclick="delScheduleButton(${scheduleId})">
+                                                <button class="btn btn__trash" onclick="delScheduleButton(${ scheduleId })">
                                                     <i class="far fa-trash-alt fa-1x"></i>
                                                 </button>
                                             </td>`
     let tableRef = document.getElementById("schedule__list");
     let newRow = tableRef.insertRow(tableRef.rows.length);
-    newRow.id = `scheduleTrId${scheduleId}`;
+    newRow.id = `scheduleTrId${ scheduleId }`;
     newRow.innerHTML = myHtmlContent;
 }
 
@@ -210,6 +210,7 @@ const delayscript = function () {
 
     loadHtmlContentFromLocalStorage()
     recipeQuantity()
+    schuldeQuantity()
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
 };
@@ -402,6 +403,9 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
         localStorage.setItem(userName, JSON.stringify(currentUser));
         //Odswiez ilosc przepisow na stronie
         recipeQuantity();
+
+
+        schuldeQuantity()
 
         //wyzeruj dane
         document.getElementById("recipe__name").value = null;
@@ -904,7 +908,7 @@ function delScheduleButton(scheduleId) {
     let userName = document.getElementById("name").innerText;
     //Zaciagnij dane uzytkownika
     let currentUser = JSON.parse(localStorage.getItem(userName));
-    let deleteSchedule = document.getElementById(`scheduleTrId${scheduleId}`);
+    let deleteSchedule = document.getElementById(`scheduleTrId${ scheduleId }`);
     //Usun z HTML
     deleteSchedule.parentElement.removeChild(deleteSchedule);
     //Szukanie indexu po id
@@ -934,7 +938,25 @@ function recipeQuantity() {
 
 }
 
+//Aktualizacji ilosci planów na stronie glownej
+function schuldeQuantity() {
+    let spanSchuldeQuantity = document.querySelector(".widget__warning__text");
+    let currentUser1 = getUserData();
+    if (currentUser1.schedulesList.length === 0) {
+        spanSchuldeQuantity.innerText = `Pamiętaj, aby dodać plan!`;
+    } else if (currentUser1.schedulesList.length === 1) {
+        spanSchuldeQuantity.innerText = `Masz już ${ currentUser1.schedulesList.length } plan. Świetnie!`;
+    }
+    else if (currentUser1.schedulesList.length > 1 && currentUser1.schedulesList.length < 5) {
+        spanSchuldeQuantity.innerText = `Masz już ${ currentUser1.schedulesList.length } plany. Świetnie!`;
+    }
+    else {
+        spanSchuldeQuantity.innerText = `:Masz już ${ currentUser1.schedulesList.length } planów. Świetnie!`;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', recipeQuantity)
+document.addEventListener('DOMContentLoaded', schuldeQuantity)
 
 
 function getUserData() {
