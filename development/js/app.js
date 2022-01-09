@@ -105,7 +105,7 @@ function addScheduleHTML(scheduleName = "test Name", scheduleDesc = "test desc",
                                                 <button class="btn btn__edit" onclick="editScheduleButton(${ scheduleId })">
                                                     <i class="far fa-edit fa-1x"></i>
                                                 </button>
-                                                <button class="btn btn__trash" onclick="delScheduleButton(${ scheduleId })">
+                                                <button class="btn btn__trash" onclick="delScheduleButton(${ scheduleId });resetReload()">
                                                     <i class="far fa-trash-alt fa-1x"></i>
                                                 </button>
                                             </td>`
@@ -192,6 +192,7 @@ function schuldeSlider(weekNR) {
 //************************************************************
 
 //
+
 
 const delayscript = function () {
     // ------------------- TUTAJ DODAJEMY SKRYPTY DLA ZEWNETRZNYCH HTML Opoznienie potrzebne do zaladowania tych html
@@ -382,7 +383,7 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
             alert(`Dodano nowy przepis`);
 
         } else {
-            console.log("Edit recip active")
+            // console.log("Edit recip active")
             currentUser.recipList[recipeIndex].name = recipeName;
             document.getElementById(`recipeTrId${ recipeId }`).children[1].innerHTML = recipeName;
             currentUser.recipList[recipeIndex].desc = recipeDesc;
@@ -395,11 +396,11 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
             for (let i = 0; i < document.getElementById("ingredientList").children.length; i++) {
                 currentUser.recipList[recipeIndex].ingredients[0].push(document.getElementById("ingredientList").children[i].innerText)
             }
-            alert(`Z edytowano przepis`);
+            alert(`Przepis został zmodyfikowany`);
 
         }
-        console.log("obiekt uzytkownika: ")
-        console.log(currentUser)
+        // console.log("obiekt użytkownika: ")
+        // console.log(currentUser)
         localStorage.setItem(userName, JSON.stringify(currentUser));
         //Odswiez ilosc przepisow na stronie
         recipeQuantity();
@@ -967,3 +968,10 @@ function getUserData() {
     return JSON.parse(localStorage.getItem(userName));
 
 }
+
+
+function resetReload() {
+    window.location.reload(true);
+}
+
+
