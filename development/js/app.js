@@ -208,6 +208,7 @@ const delayscript = function () {
     })
 
     loadHtmlContentFromLocalStorage()
+    recipeQuantity()
 
     // -------------- Koniec miejsca na skrypty zewnetrzne
 };
@@ -397,6 +398,8 @@ document.getElementById("btnNewRecipe").addEventListener("click", function () {
         console.log("obiekt uzytkownika: ")
         console.log(currentUser)
         localStorage.setItem(userName, JSON.stringify(currentUser));
+        //Odswiez ilosc przepisow na stronie
+        recipeQuantity();
 
         //wyzeruj dane
         document.getElementById("recipe__name").value = null;
@@ -607,6 +610,8 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
             //Wyslij nowy plan na liste html
             addScheduleHTML(plaName, plaDesc, nrTygodnia)
             //dodaj nowy plan uzytkownikowi
+            alert(`Dodano nowy plan`)
+
         } else {
             let htmlContent = document.getElementById(`scheduleTrId${currentUser.schedulesList[scheduleListIndex].weekNr}`);
             htmlContent.children[1].innerHTML = plaName;
@@ -619,6 +624,7 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
             for (let i = 0; i < dayNames.length; i++) {
                 currentUser.schedulesList[scheduleListIndex].scheduleObj[dayNames[i]] = [sniadania[i].value, dSniadania[i].value, zupy[i].value, dDania[i].value, kolacje[i].value];
             }
+            alert(`Z edytowano plan`)
         }
 
 
@@ -627,7 +633,6 @@ document.querySelector(".newSchedule__btn").addEventListener("click", function (
         console.log("obiekt uzytkownika: ")
         console.log(currentUser)
         localStorage.setItem(userName, JSON.stringify(currentUser));
-        alert(`Dodano nowy plan`)
         //wyzeruj dane
         document.getElementById("schedule__name").value = "";
         document.getElementById("schedule__description").value = "";
@@ -906,3 +911,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
     schuldeSlider(`${returnActualWeek()}`)
 })
+
+//Aktualizacji ilosci przepisow na stronie glownej
+function recipeQuantity(){
+    let spanRecipeQuantity = document.getElementById("recipeQuantity");
+    let currentUser = getUserData();
+    spanRecipeQuantity.innerText = currentUser.recipList.length;
+}
+
+function getUserData(){
+    let userName = document.getElementById("name").innerText;
+    return JSON.parse(localStorage.getItem(userName));
+}
