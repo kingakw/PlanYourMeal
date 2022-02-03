@@ -13,9 +13,9 @@
   "author": "Michał T",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CodersLab-core/FER_SCRUM_LAB/issues"
+    "url": "https://kingakw.github.io/PlanYourMeal/issues"
   },
-  "homepage": "https://github.com/CodersLab-core/FER_SCRUM_LAB#readme",
+  "homepage": "https://kingakw.github.io/PlanYourMeal/",
   "devDependencies": {
     "browser-sync": "^2.26.0",
     "gulp": "^4.0.2",
