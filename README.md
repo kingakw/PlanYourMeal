@@ -3,18 +3,13 @@ Team project realized during Coders Lab bootcamp in Scrum methodology: CL's conc
 This web app allows user to add, modify and delete their particular cooking recipes as well as whole weekly meal plan.
 The website has several subpages. On the Landing Page there is a button "SPRÓBUJ ZA DARMO". You go forward to the application by clicking it.
 
-# Concept author: Coders Lab tutor:
-Michał Tymuła
-
-# Contributors: Coders Lab students:
-Artur Buja
-Adrina Brzeski
-Matylda Matysiak
-Kinga Wyszkowska
+# Contributors: 
+Coders Lab students:
+Artur Buja, Adrina Brzeski, Matylda Matysiak, Kinga Wyszkowska
 
 # Technologies used
-HTML5, CSS3, Sass
-ECMAScript 6 (Vanilla JS)
+HTML5, CSS3, Sass,
+ECMAScript 6 (Vanilla JS),
 Gulp, GitFlow (with multiple remotes)
 
 ### Live Demo
@@ -24,7 +19,8 @@ MIT License
 
 # Next steps
 The project is still under construction - some must-have functionalities still have to be implemented. .
-To-do list:
+
+# To-do list:
 DRY code & clean files structure
 
 
