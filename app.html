@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Zaplanuj Jedzonko</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/main.css"/>
+
+</head>
+<body>
+<header class="app__header">
+    <div class="logo">
+        <h1>
+            <span id="first">Zaplanuj</span>
+            <span id="second">Jedzonko</span>
+        </h1>
+    </div>
+    <div class="user">
+        <span class="user__text" id="name">Imie</span>
+        <button class="user__avatar" id="userAvatar">
+            <i class="far fa-user-circle fa-2x"></i>
+        </button>
+    </div>
+</header>
+<main class="app__main">
+    <div class="section__menu" id="sectionMenu">
+        <li class="menu__item menu__item--active"><span id="desktop">Pulpit</span> <i
+                class="fas fa-chevron-right fa-1x"></i></li>
+        <li class="menu__item"><span id="recipes">Przepisy</span><i class="fas fa-chevron-right fa-1x"></i></li>
+        <li class="menu__item"><span id="plans">Plany</span><i class="fas fa-chevron-right fa-1x"></i></li>
+    </div>
+
+    <div class="section__main" id="mainSection">
+        <!-- nev user box  -->
+        <section class="newUser__container" id="newUserContainer">
+            <div class="newUser__form">
+                <h2 class="newUser__welcomeTitle">Witaj,</h2>
+                <p class="newUser__welcomeText">wyglada na to że jesteś tutaj pierszy raz!</p>
+                <input type="text" class="newUser__name" id="userName" placeholder="tutaj wpisz jak masz na imię">
+                <button class="newUser__nameSubmit" id="submitUserName">Gotowe!</button>
+                <p class="newUser__endingText">Podaj nam swoje imie, a my zorganizujemy dla Ciebie naszą aplikację :)</p>
+            </div>
+        </section>
+        <!-- pulpit active  -->
+        <section class="box container__pulpit active" id="containerPulpit">
+            <div class="pulpit__wrapper">
+            <!-- widget recipe & plan  -->
+            <div class="widget__container1">
+
+                <div class="widget" id="widget_recipe">
+                    <i class="far fa-plus-square"></i>
+                    <p class="widget__text">dodaj przepis</p>
+                </div>
+
+                <div class="widget" id="widget_plan">
+                    <i class="far fa-plus-square"></i>
+                    <p class="widget__text">dodaj plan</p>
+                </div>
+
+                <!-- widget info & success & warning -->
+
+                <div class="widget__container2">
+                    <div class="widget__info" id="widget_info">
+                        <div class="widget__info__container">
+                            <i class="fas fa-info-circle"></i>
+                            <p class="widget__info__text">Pamiętaj, aby dodać przepis!</p>
+                        </div>
+                        <i class="fas fa-window-close"></i>
+                    </div>
+
+                    <div class="widget__warning" id="widget_warning">
+                        <div class="widget__warning__container">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p class="widget__warning__text">Pamiętaj, aby dodać plan!</p>
+                        </div>
+                        <i class="fas fa-window-close"></i>
+                    </div>
+
+                    <div class="widget__success" id="widget_success">
+                        <div class="widget__success__container">
+                            <i class="fas fa-check-circle"></i>
+                            <p class="widget__success__text">Świetnie że jesteś! Udanego planowania i smaczego! :)</p>
+                        </div>
+                        <i class="fas fa-window-close"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="schedule">
+                <h2 class="schedule__title">Twój plan na <span class="week_number">{nr_tygodnia}</span> tydzień</h2>
+                <table class="schedule__table">
+                    <thead>
+                    <tr>
+                        <th>Poniedziałek</th>
+                        <th>Wtorek</th>
+                        <th>Środa</th>
+                        <th>Czwartek</th>
+                        <th>Piątek</th>
+                        <th>Sobota</th>
+                        <th>Niedziela</th>
+                    </tr>
+                    </thead>
+                    <tbody id="scheduleTableTbody">
+                        <tr>
+                            <td>sniadanie</td>
+                            <td>sniadanie</td>
+                            <td>sniadanie</td>
+                            <td>sniadanie</td>
+                            <td>sniadanie</td>
+                            <td>sniadanie</td>
+                            <td>sniadanie</td>
+                        </tr>
+                        <tr>
+                            <td>drugie sniadanie</td>
+                            <td>drugie sniadanie</td>
+                            <td>drugie sniadanie</td>
+                            <td>drugie sniadanie</td>
+                            <td>drugie sniadanie</td>
+                            <td>drugie sniadanie</td>
+                            <td>drugie sniadanie</td>
+                        </tr>
+                        <tr>
+                            <td>zupa</td>
+                            <td>zupa</td>
+                            <td>zupa</td>
+                            <td>zupa</td>
+                            <td>zupa</td>
+                            <td>zupa</td>
+                            <td>zupa</td>
+                        </tr>
+                        <tr>
+                            <td>drugie danie</td>
+                            <td>drugie danie</td>
+                            <td>drugie danie</td>
+                            <td>drugie danie</td>
+                            <td>drugie danie</td>
+                            <td>drugie danie</td>
+                            <td>drugie danie</td>
+                        </tr>
+                        <tr>
+                            <td>kolacja</td>
+                            <td>kolacja</td>
+                            <td>kolacja</td>
+                            <td>kolacja</td>
+                            <td>kolacja</td>
+                            <td>kolacja</td>
+                            <td>kolacja</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="schedule__change">
+                    <div class="schedule__previous change__box">
+                        <i class="fas fa-angle-double-left fa-lg"></i>
+                        <p>poprzedni</p>
+                    </div>
+                    <div class="schedule__next change__box">
+                        <p>następny</p>
+                        <i class="fas fa-angle-double-right fa-lg"></i>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!--SEKCJA DODAJ PLAN-->
+        <div class="container__addSchedule " id="containerAddSchedule">
+
+            <div class="addSchedule__new">
+                <h3 class="newSchedule__title" id="newScheduleTitle">Nowy plan</h3>
+                <button class="newSchedule__btn">Zapisz i zamknij</button>
+            </div>
+
+            <div class="addSchedule__properties">
+                <div class="properties">
+                    <label class="schedule__data" for="schedule__name">Nazwa planu</label>
+                    <input type="text" id="schedule__name" class="properties__input" placeholder=" ">
+                </div>
+
+                <div class="properties">
+                    <label class="schedule__data" for="schedule__description">Opis planu</label>
+                    <textarea id="schedule__description" class="properties__input" placeholder=" "></textarea>
+                </div>
+
+                <div class="properties">
+                    <label for="schedule__nr" class="schedule__data" id="numerTygodnia">Numer tygodnia</label>
+                    <input type="text" id="schedule__nr" class="properties__nr" placeholder="  ">
+                </div>
+
+            </div>
+
+            <div class="scheduleCard">
+                <table class="schedule__table">
+
+                    <thead>
+                    <tr>
+                        <th>         </th>
+                        <th>ŚNIADANIE</th>
+                        <th>DRUGIE ŚNIADANIE</th>
+                        <th>ZUPA</th>
+                        <th>DRUGIE  DANIE</th>
+                        <th>KOLACJA</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    <tr id="poniedzialek">
+                        <th>PONIEDZIAŁEK</th>
+                        <td><form action="...">
+                            <select name="nazwa" class="sniadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieSnadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="zupa">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieDanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="kolacja">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                    </tr>
+
+                    <tr id="wtorek">
+                        <th>WTOREK</th>
+                        <td><form action="...">
+                            <select name="nazwa" class="sniadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieSnadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="zupa">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieDanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="kolacja">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                    </tr>
+
+                    <tr id="sroda">
+                        <th>ŚRODA</th>
+                        <td><form action="...">
+                            <select name="nazwa" class="sniadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieSnadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="zupa">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieDanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="kolacja">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                    </tr>
+
+                    <tr id="czwartek">
+                        <th>CZWARTEK</th>
+                        <td><form action="...">
+                            <select name="nazwa" class="sniadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieSnadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="zupa">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieDanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="kolacja">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                    </tr>
+
+                    <tr id="piatek">
+                        <th>PIĄTEK</th>
+                        <td><form action="...">
+                            <select name="nazwa" class="sniadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieSnadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="zupa">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieDanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="kolacja">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                    </tr>
+
+                    <tr id="sobota">
+                        <th>SOBOTA</th>
+                        <td><form action="...">
+                            <select name="nazwa" class="sniadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieSnadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="zupa">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieDanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="kolacja">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                    </tr>
+
+                    <tr id="niedziela">
+                        <th>NIEDZIELA</th>
+                        <td><form action="...">
+                            <select name="nazwa" class="sniadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieSnadanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="zupa">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="drugieDanie">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                        <td><form action="...">
+                            <select name="nazwa" class="kolacja">
+                                <option>wybierz danie</option>
+                            </select>
+                        </form></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <!-- add recipe  -->
+        <section class="box" id="containerRecipes">
+
+            <div w3-include-html="recipes.html"></div>
+        </section>
+
+            <!--SEKCJA DODAJ PRZEPIS-->
+            <div class="container__recipe ">
+            <div class="container__addRecipe" id="containerAddRecipe">
+
+                <div class="addRecipe__newRecipe">
+                    <h3 class="newRecipe__title" id="newRecipeTitle">Nowy przepis</h3>
+                    <button class="newRecipe__btn" id="btnNewRecipe">Zapisz i zamknij</button>
+                </div>
+
+                <div class="addRecipe__properties">
+
+                    <div class="properties">
+                        <label class="recipe__data" for="recipe__name">Nazwa przepisu</label>
+                        <input type="text" id="recipe__name" class="properties__input" placeholder=" ">
+                    </div>
+
+                    <div class="properties">
+                        <label class="recipe__data" for="recipe__description">Opis przepisu</label>
+                        <textarea id="recipe__description" class="properties__input" placeholder=" "></textarea>
+
+                    </div>
+
+
+                </div>
+                <div class="addRecipe__basic">
+
+                    <div class="basic__data">
+                        <div class="box__main">
+                            <h3 class="data__title">Instrukcje</h3>
+                            <label>
+                                <textarea class="properties__input" placeholder=" " id="instructionField"></textarea>
+                                <button class="add__btn left-list" id="instruction__btn">
+                                    <i class="fas fa-plus-square fa-2x"></i>
+                                </button>
+                            </label>
+                        </div>
+
+                        <div class="box__list">
+                            <ol id="instructionList">
+                           <!--     <li class="instruction__list"><p> <i class="far fa-edit"></i><i
+                                            class="fas fa-trash-alt"></i></p></li>-->
+                            </ol>
+                        </div>
+
+                    </div>
+
+                    <div class="basic__data">
+                        <div class="box__main">
+                            <h3 class="data__title">Składniki</h3>
+
+                            <label>
+                                <textarea class="properties__input" placeholder=" " id="ingredientField"></textarea>
+                                <button class="add__btn right-list" id="ingredient__btn">
+                                    <i class="fas fa-plus-square fa-2x"></i>
+                                </button>
+                            </label></div>
+
+                        <div class="box__list">
+                            <ol id="ingredientList">
+                            <!--    <li class="ingredient__list"><p> <i class="far fa-edit"></i><i
+                                            class="fas fa-trash-alt"></i></p></li>-->
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+
+
+        <!-- schedule html connection  -->
+<!--        <section class="box container__schedule" id="containerSchedules">-->
+        <section class="box" id="containerSchedules">
+            <div w3-include-html="schedules.html"></div>
+        </section>
+
+    </div>
+</main>
+<script src="js/app.js"></script>
+</body>
+</html>
