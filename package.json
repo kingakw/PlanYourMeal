@@ -8,16 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodersLab-core/FER_SCRUM_LAB.git"
+    "url": "git+https://github.com/kingakw/PlanYourMeal.git"
   },
   "author": "Michał T",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CodersLab-core/FER_SCRUM_LAB/issues"
+    "url": "https://github.com/kingakw/PlanYourMeal"
   },
-  "homepage": "https://github.com/CodersLab-core/FER_SCRUM_LAB#readme",
+  "homepage": "https://github.com//kingakw/PlanYourMeal",
   "devDependencies": {
     "browser-sync": "^2.26.0",
+    "gh-pages": "^3.2.3",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-sass": "^4.0.1",

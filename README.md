@@ -13,12 +13,13 @@ ECMAScript 6 (Vanilla JS),
 Gulp, GitFlow (with multiple remotes)
 
 ### Live Demo
+https://kingakw.github.io/PlanYourMeal/
 
 # License
 MIT License
 
 # Next steps
-The project is still under construction - some must-have functionalities still have to be implemented. .
+The project is still under construction - some must-have functionalities still have to be implemented.
 
 # To-do list:
 DRY code & clean files structure
