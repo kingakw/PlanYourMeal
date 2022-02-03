@@ -5,7 +5,7 @@ logs
 npm-debug.log*
 package-lock.json
 node_modules/
-css/
+development/css/
 ### OSX ###
 .DS_Store
 .AppleDouble
@@ -21,4 +21,4 @@ css/
 
 ### Webstorm ##
 .idea/
-css/
+development/css/

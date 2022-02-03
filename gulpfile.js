@@ -22,17 +22,17 @@ gulp.task("serve", function(cb) {
 // Compile sass into CSS & auto-inject into browsers
 gulp.task("sass", function() {
   return gulp
-    .src("development/scss/**/*.scss")
-    .pipe(sass().on("error", sass.logError))
-    .pipe(sourcemaps.init())
-    .pipe(
-      autoprefixer({
-        browsers: ["last 4 versions"]
-      })
-    )
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest("development/css"))
-    .pipe(browserSync.stream());
+      .src("development/scss/**/*.scss")
+      .pipe(sass().on("error", sass.logError))
+      .pipe(sourcemaps.init())
+      .pipe(
+          autoprefixer({
+            browsers: ["last 4 versions"]
+          })
+      )
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest("development/css"))
+      .pipe(browserSync.stream());
 });
 
 gulp.task("default", gulp.series("serve"));
